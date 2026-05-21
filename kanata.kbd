@@ -363,8 +363,7 @@ Those are all the layers! Three with extra features, and one with practically no
 ;; Since Windows' Start menu shortcut can't be easily changed we use Kanata for it. Set PowerToys' Run (or your preferred launcher) to Win+Space to avoid the awful Start menu.
 
 (platform (win winiov2 wintercept)
-  (defalias lmet (tap-hold-press 0 $ht M-spc lmet)) ;; Tap for M-spc, hold for lmet
-)
+  (defalias lmet (tap-hold-press 0 65535 M-spc lmet )) ;; Tap for M-spc, hold for lmet. Using maximum hold timeout ensures that M-spc is sent only on release, rather than spamming the shortcut repeatedly when the timer expires.
 
 (platform (linux macos)
   (defalias lmet lmet) ;; Meta is left alone on Linux/Mac but still must be defined
