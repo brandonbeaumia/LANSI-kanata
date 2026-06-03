@@ -14,7 +14,6 @@ For a visual tour mimicing most of these comments, see https://configure.zsa.io/
 |#
 
 
-
 ;; ===================================================
 ;;   TOP-LEVEL CONFIG
 ;; ===================================================
@@ -63,7 +62,7 @@ For a visual tour mimicing most of these comments, see https://configure.zsa.io/
 ======================================================
 While completely optional, mirroring really sprinkles a bit of magic into this layout and fixes so many daily keyboarding annoyances with one simple mechanic. If you do not have a back button on your mouse, this will be completely invisible to you. I would recommend investing, though!
 
-If f24 (mouse button) is held, all alphanumeric keys on the left half of the board send their *mirrored* output instead. So f becomes j, d becomes k, etc. Next time you need to Ctrl+Y, Ctrl+O, Ctrl+H, etc, give it a shot. You might be surprised how natural this becomes, even typing short keywords, app launcher searches, or the first few characters of a country for shipping dropdown box auto-completes. It's really lovely to not have to leave the mouse for just a couple key presses, no matter where they are on the keyboard. |#
+If nop0 (mouse back button) is held, all alphanumeric keys on the left half of the board send their *mirrored* output instead. So f becomes j, d becomes k, etc. Next time you need to Ctrl+Y, Ctrl+O, Ctrl+H, etc, give it a shot. You might be surprised how natural this becomes, even typing short keywords, app launcher searches, or the first few characters of a country for shipping dropdown box auto-completes. It's really lovely to not have to leave the mouse for just a couple key presses, no matter where they are on the keyboard. |#
 
 
 
@@ -81,7 +80,7 @@ If f24 (mouse button) is held, all alphanumeric keys on the left half of the boa
   @bspclsft  @zalt   @x     @c       @v      @b       n      m      ,      .      @/alt  @delrsft
   lctl       lctl    lctl   spc      @nmsm   @nmsm    @nmsm
 
-  mlft mrgt mmid @nmsm f24
+  mlft mrgt mmid XX nop0
 )
 #| Summary --
 The base layer is (almost) plain QWERTY. It's easy to grow in to as the extra features should not add latency or interfere with old habits [BESIDES alt-tab. We'll get to that.]
@@ -103,15 +102,19 @@ The Tab key is set to tab when tapped and Ultra (Ctrl+Alt+Meta: like "hyper", ge
     Similar logic applies to combining other modifers with the number and F-keys. This is especially true for Meta+Num and Meta+Shift+Num, which are forced upon you in Windows. An ergonomics consideration here is that Tab is one row higher than your home row, meaning reaching your numbers and even F-keys while holding it remains comfortable.
 
 -- Toggle --
-Tap for app toggling and hold for window toggling (where OS supports it). Using LANSI, this action is easy when both hands are on the keyboard, but impossible otherwise, so I've tried to at least partially accommodate that workflow. It only goes back and forth: no tabbing through a dozen apps. (Use Ultra for that!) It is set to ` for ANSI keyboards and esc for compact keyboards.
+Tap for app toggling and hold for window toggling (where OS supports it). Using LANSI, this action is easy when both hands are on the keyboard, but impossible with just the left hand. I've tried to at least partially accommodate that workflow. It only goes back and forth: no tabbing through a dozen apps. (Use Ultra for that!) It is set to ` for ANSI keyboards and esc for compact keyboards.
 
-    For many people, difficulty alt-tabbing will be the thing that stops them from using LANSI. I implore you to get used to it: alt-tab is far too stateful to be a good interface paradigm. Use Meta+Num or set up Ultra+Alpha to get to your apps; it's a great experience after just a little bit of learning. If you really can't get over this, switching your mouse's Forward button from NumSym to Alt is another option.
+    For many people, difficulty alt-tabbing will be the thing that stops them from using LANSI. I implore you to get used to it: alt-tab is far too stateful to be a good interface paradigm. Use Meta+Num or set up Ultra+Alpha to get to your apps; it's a great experience after just a little bit of learning. If you really can't get over this, switching your mouse's Forward button to Alt is another option.
 
 -- Escape / Extend --
 The Caps Lock key is set to escape when tapped and the Extend layer when held. We'll check that layer out a bit later.
 
+-- Mfwd --
+The mouse forward button is currently undefined. You can swap this with mbck if your mouse grip makes it the more comfortable button. I have considered using the extra button as a layer for FreeCAD shortcuts, but don't want to lose my shortcut memory. You may decide otherwise for your own favorite app [or multiple apps via something like kanata-switcher and a Switch statement for nop1 through nop9!]. If you reconfigure numsym to have a number pad on your left hand, setting it to the numsym layer would be an obvious choice. It could be an alt key so that left-handed alt-tabs are closer to the default experience. Maybe a layer for window management if you feel cramped even after utilizing Ultra. Lots of options here, but I didn't want to bind it just because it's an empty key; maybe you will have a specific use case it can cover.
+
 -- Moving On --
-Hold the right thumb key for NumSym and we'll check out that layer next. |#
+Hold the right thumb key for NumSym and we'll check out that layer next.
+|#
 
 
 
@@ -125,8 +128,8 @@ Hold the right thumb key for NumSym and we'll check out that layer next. |#
 
   @f12      @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @f11 @f12 @f11
   _         @`~     S--    -        [       ]        S-[    S-]    S-=    =      @\|    _    _    _
-  _         @1      @2     @3       @4      @5       6      7      8      9      0      S-;  _
-  _         @!alt   @S-8   @S-4     S-9     S-0      S-,    S-.    _      _      _      _
+  _         1       2      3        4       5        6      7      8      9      0      S-;  _
+  _         @!alt   S-8    S-4      S-9     S-0      S-,    S-.    _      _      _      _
   _         _       _      _        _       _        _
 
   _    _    _    _    _
@@ -136,7 +139,7 @@ Hold the right thumb key for NumSym and we'll check out that layer next. |#
 The NumSym layer handles all programming symbols and data entry: calculator/accounting, times, dates, etc. It's faster to use 8 fingers across home row than 3 or 4 fingers in a numpad arrangement. The symbols needed more regularly are duplicated within the layer to save from Layer+Shift+key stretching during data entry flow.
 
 -- Transparency --
-The semi-colon key is overwritten by a zero, but we often need a colon for time entry so colon replaces the apostrophe. No other symbols, modifiers, or control characters are overwritten from the base layer.
+The semi-colon key is overwritten by a zero, but we often need a colon for time entry so colon moves over just one key and replaces the apostrophe. No other symbols, modifiers, or control characters are overwritten from the base layer.
 
 -- F Keys --
 F-keys cover the number row here for physical layouts that don't feature them (and to prevent stretching even if you have them). The strange looking duplicates are to accomodate 6-column ortholinear boards (Lily58, Voyager, etc): for these, F1 starts on 1 and then wraps around to F12. On a regular board where F-keys are already available on top, switching this top row to their keypad equivalents could be useful for some creative applications.
@@ -145,8 +148,6 @@ F-keys cover the number row here for physical layouts that don't feature them (a
 
 -- Personalization --
 NumSym is a very personal layer, feel free to play around with it if you don't do a lot of data entry. Autoshifted numbers like the top row of the Base layer? Symbols by default that autoshift to numbers? Completely replace the numbers with NUMWORD? This version carefully balances data entry and programming use cases and has a lot of symmetry that makes it easier to learn, but nothing is sacred here!
-
-    If you want your data entry to be one-handed, Numpad could make a lot of sense here: one of the mouse side button mirrors, but the other one is set up to activate this NumSym layer. You wouldn't need to take your hand off the mouse to access all the numbers in a Numpad setup like that.
 
 -- Moving On --
 That's it for the NumSym layer! Let go of the right thumb key and you'll be back in the Base layer. Then hold the Caps Lock key to go to the Extend layer. |#
@@ -211,7 +212,8 @@ The gaming layer returns the keyboard to standard ANSI. Besides Escape/Extend al
 To get out of the Gaming layer and back to Base, you follow the same procedure of Extend+G, but this time you hold G. This ensures that the key works the same regardless of the current state: tap always goes to Gaming, hold always leaves Gaming.
 
 -- Moving On --
-Those are all the layers! Three with extra features, and one with practically nothing. Below you will find implementation details and a few more comments/rationale behind some specific keys. Be aware that the order of definitions seems a little goofy because Kanata relies on definitions existing before their aliases can be used in other commands (like the mirror forks). |#
+Those are all the layers! Three with extra features, and one with practically nothing. Below you will find implementation details and a few more comments/rationale behind some specific keys. Be aware that the order of definitions seems a little odd because Kanata relies on definitions existing before their aliases can be used in other commands (like the mirror forks).
+|#
 
 ;; ===================================================
 ;;   IMPLEMENTATION DETAILS
@@ -225,7 +227,7 @@ Those are all the layers! Three with extra features, and one with practically no
   tt $tap-timeout
   ht $hold-timeout
 
-  ;; slow pinkies on the alt keys
+  ;; slower pinkies on the alt keys
   slow-tap-timeout 150
   slow-hold-timeout 275
   stt $slow-tap-timeout
@@ -258,7 +260,7 @@ Those are all the layers! Three with extra features, and one with practically no
   bspclsft (tap-hold-press $tt $ht bspc lsft)
 
   /alt (tap-hold-press 0 $sht / ralt) ;; even less common than Z, this overload almost never interferes with typing
-  zalt (fork (tap-hold-press 0 $sht z ralt) @/alt (f24)) ;; sometimes annoying at 130+ wpm, but rarely misfires more than 1x/day
+  zalt (fork (tap-hold-press 0 $sht z ralt) @/alt (nop0)) ;; sometimes annoying at 130+ wpm, but rarely misfires more than 1x/day
   ;; With alt in their positions next to shift you can hold shift with your pinky and alt with your ring finger, even without losing your homing key.
 
 
@@ -266,47 +268,41 @@ Those are all the layers! Three with extra features, and one with practically no
 ;; See MIRRORING section near top of config file. This is a busy-looking implementation, but the end result is very simple.
 
   ;; F-key mirrors
-  f1 (fork (tap-hold $tt $ht f1 S-f1) @f10 (f24))
-  f2 (fork (tap-hold $tt $ht f2 S-f2) @f9 (f24))
-  f3 (fork (tap-hold $tt $ht f3 S-f3) @f8 (f24))
-  f4 (fork (tap-hold $tt $ht f4 S-f4) @f7 (f24))
-  f5 (fork (tap-hold $tt $ht f5 S-f5) @f6 (f24))
-  f12 (fork (tap-hold $tt $ht f12 S-f12) @f11 (f24)) ;; f12 is on left half for 6-column boards so needs mirror
+  f1 (fork (tap-hold $tt $ht f1 S-f1) @f10 (nop0))
+  f2 (fork (tap-hold $tt $ht f2 S-f2) @f9 (nop0))
+  f3 (fork (tap-hold $tt $ht f3 S-f3) @f8 (nop0))
+  f4 (fork (tap-hold $tt $ht f4 S-f4) @f7 (nop0))
+  f5 (fork (tap-hold $tt $ht f5 S-f5) @f6 (nop0))
+  f12 (fork (tap-hold $tt $ht f12 S-f12) @f11 (nop0)) ;; f12 is on left half for 6-column boards so needs mirror
 
   ;; Number row mirrors
-  n1 (fork (tap-hold $tt $ht @k1 S-1) @n0 (f24))
-  n2 (fork (tap-hold $tt $ht @k2 S-2) @n9 (f24))
-  n3 (fork (tap-hold $tt $ht @k3 S-3) @n8 (f24))
-  n4 (fork (tap-hold $tt $ht @k4 S-4) @n7 (f24))
-  n5 (fork (tap-hold $tt $ht @k5 S-5) @n6 (f24))
+  n1 (fork (tap-hold $tt $ht @k1 S-1) @n0 (nop0))
+  n2 (fork (tap-hold $tt $ht @k2 S-2) @n9 (nop0))
+  n3 (fork (tap-hold $tt $ht @k3 S-3) @n8 (nop0))
+  n4 (fork (tap-hold $tt $ht @k4 S-4) @n7 (nop0))
+  n5 (fork (tap-hold $tt $ht @k5 S-5) @n6 (nop0))
 
   ;; Alpha mirrors
-  q (fork q p (f24)) w (fork w o (f24)) e (fork e i (f24)) r (fork r u (f24)) t (fork t y (f24))
-  a (fork a ' (f24)) s (fork s l (f24)) d (fork d k (f24)) f (fork f j (f24)) g (fork g h (f24))
-                     x (fork x . (f24)) c (fork c , (f24)) v (fork v m (f24)) b (fork b n (f24)) ;; z already forked via zalt alias
+  q (fork q p (nop0)) w (fork w o (nop0)) e (fork e i (nop0)) r (fork r u (nop0)) t (fork t y (nop0))
+  a (fork a ' (nop0)) s (fork s l (nop0)) d (fork d k (nop0)) f (fork f j (nop0)) g (fork g h (nop0))
+                      x (fork x . (nop0)) c (fork c , (nop0)) v (fork v m (nop0)) b (fork b n (nop0)) ;; z already forked via zalt alias
 
   ;; @tabultra is an exception to standard mirroring. Instead of mirroring, it "reverses" the tab key by changing its tap function to shift-tab. For left-hand-only use, this makes an otherwise impossible shortcut of (leftpinky + leftpinky) an easy (mousethumb + leftpinky). Holding remains Ultra.
-  tabultra (fork (tap-hold-press 0 $ht tab (multi lalt lctl lmet)) (tap-hold-press 0 $ht S-tab (multi lalt lctl lmet)) (f24))
+  tabultra (fork (tap-hold-press 0 $ht tab (multi lalt lctl lmet)) (tap-hold-press 0 $ht S-tab (multi lalt lctl lmet)) (nop0))
 
-  ;; Mirroring bspclsft to delrsft is not recommended, as it makes for too many mouse button toggles when you make a mistake during mirroring. To access del from left hand, use the top-left key (mnemonic of "the opposite backspace"):
-  toggle (fork (tap-hold $tt $ht A-tab A-`) del (f24))
+  ;; Mirroring bspclsft to delrsft is not recommended, as it makes for too many mouse button toggles when you make a mistake during mirroring. To access del from left hand, we instead use the top-left key (mnemonic of "the opposite backspace"):
+  toggle (fork (tap-hold $tt $ht A-tab A-`) del (nop0))
 
 
 
 
 ;; ---------- NUMSYM ----------
-  1 (fork 1 0 (f24)) 2 (fork 2 9 (f24)) 3 (fork 3 8 (f24)) 4 (fork 4 7 (f24)) 5 (fork 5 6 (f24))
-
   !alt (tap-hold 0 $ht S-1 ralt)
   ?alt (tap-hold 0 $ht S-/ ralt)
   
   `~ (tap-hold $tt $ht ` S-`)
   \| (tap-hold $tt $ht \ S-\)
-  ;; grave and backslash autoshift if held down
-  
-  S-8 (fork S-8 . (f24))
-  S-4 (fork S-4 , (f24))
-  ;; the only symbols in numsym that I've experienced actually needing mirrors enabled. If you're in this layer and need all sorts of math you'll likely have both hands on the keyboard.
+  ;; as common pinky symbols, I wanted grave and backslash to autoshift if held down
 
 
 
@@ -345,15 +341,15 @@ Those are all the layers! Three with extra features, and one with practically no
 
 ;; ---------- GAMING ----------
   ;; We removed the tap-holds from this layer but still want mirroring to work.
-  g1 (fork 1 0 (f24))
-  g2 (fork 2 9 (f24))
-  g3 (fork 3 8 (f24))
-  g4 (fork 4 7 (f24))
-  g5 (fork 5 6 (f24))
+  g1 (fork 1 0 (nop0))
+  g2 (fork 2 9 (nop0))
+  g3 (fork 3 8 (nop0))
+  g4 (fork 4 7 (nop0))
+  g5 (fork 5 6 (nop0))
 
 
   g; (tap-hold 0 500 ; (layer-switch base))
-  ;; For keyboards that only have two thumb keys, the Gaming layer needs this workaround. You'll have to replace Caps Lock's Escape/Extend with Control within the gaming layer to have all your modifiers, but this leaves no way to get out of the gaming layer. I've left this alias here as a solution for some specific physical layouts (ZSA Voyager comes to mind), but haven't needed it myself.
+  ;; For keyboards that only have two thumb keys per side, the Gaming layer needs this workaround. You'll have to replace Caps Lock's Escape/Extend with Control within the gaming layer to have all your modifiers, but this leaves no way to get out of the gaming layer. I've left this alias here as a solution for some specific physical layouts (ZSA Voyager comes to mind), but haven't needed it myself.
 )
 
 
@@ -363,8 +359,11 @@ Those are all the layers! Three with extra features, and one with practically no
 ;; Since Windows' Start menu shortcut can't be easily changed we use Kanata for it. Set PowerToys' Run (or your preferred launcher) to Win+Space to avoid the awful Start menu.
 
 (platform (win winiov2 wintercept)
-  (defalias lmet (tap-hold-press 0 65535 M-spc lmet )) ;; Tap for M-spc, hold for lmet. Using maximum hold timeout ensures that M-spc is sent only on release, rather than spamming the shortcut repeatedly when the timer expires.
+  (defalias lmet (tap-hold-press 0 65535 M-spc lmet )) ;; Tap for M-spc, hold for lmet. Using maximum hold timeout ensures that M-spc is sent only on release, rather than spamming the shortcut repeatedly if the timer expires.
+)
 
 (platform (linux macos)
   (defalias lmet lmet) ;; Meta is left alone on Linux/Mac but still must be defined
 )
+
+
