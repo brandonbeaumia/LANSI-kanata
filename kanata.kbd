@@ -91,26 +91,24 @@ Control lands immediately left of the space bar, easily accessible under the thu
     There is only a little bit of thumb tucking on ANSI boards when using these two keys, and laptops are usually even better about it than standard ANSI. These two thumb keys are duplicated across the bottom row to accomodate different physical layouts.
 
 -- Shifts --
-Tap left shift for Backspace and right shift for Delete. We lose the ability to hold Backspace or Delete, but this is easily made up by 1) using the now ultra-comfy Ctrl+Backspace/Delete, or 2) Using the Extend layer to *hold* an arrow and highlight backwards/forwards, then tapping backspace or delete. Backspace is duplicated in its usual much-worse spot in the top-right corner if you have trouble adapting.
+Tap left shift for Backspace and right shift for Delete. We lose the ability to hold Backspace or Delete, but this is easily made up by 1) using the now ultra-comfy Ctrl+Backspace/Delete, or 2) Using the Extend layer to *hold* an arrow and highlight backwards/forwards, then tapping backspace or delete. Backspace is duplicated in its usual much-worse spot in the top-right corner if you have trouble adapting (and because that is not a very useful key anyway).
 
 -- Top Row --
-The number row is not very ergonomic to reach during typing flow so it has been optimized for shortcut use. Tap these keys for their number, and hold them for Shift+Number. In this scenario, overloading with a Hold function does not increase typing latency. Even though they're just shortcut keys, they can get quite a workout when combined with Meta and Ultra for window management. You can, of course, continue to use them for numbers and symbols, but we'll check out the dedicated NumSym layer for that shortly.
+The number row is not very ergonomic to reach during typing flow so it has been optimized for shortcut use. Tap these keys for their number, and hold them for Shift+Number. In this scenario, overloading with a Hold function does not increase typing latency. Even though they're mostly shortcut keys, they can get quite a workout when combined with Meta and Ultra for window management. You can, of course, continue to use them for numbers and symbols, but we'll check out the dedicated NumSym layer for that shortly.
 
 -- Tab / Ultra --
-The Tab key is set to tab when tapped and Ultra (Ctrl+Alt+Meta: like "hyper", get it?...) when held. This key is fundamental to allowing as many shortcuts as possible for workspace and app management. We forego Hyper here because Shift can be added by holding the Num or F-key instead. So Ultra+(Num), Ultra+(holdNum), Ultra+(Fkey), Ultra+(holdFkey), and Ultra+Alpha are all full sets of shortcuts that you can define in your operating system or apps.
+The Tab key is set to tab when tapped and Ultra (Ctrl+Alt+Meta: like "hyper", get it?...) when held. This key is fundamental to allowing as many shortcuts as possible for workspace and app management. We don't use Hyper here because Shift can be added by holding the Num or F-key instead. So Ultra+(Num), Ultra+(holdNum), Ultra+(Fkey), Ultra+(holdFkey), and Ultra+Alpha are all full sets of shortcuts that you can define in your operating system or apps.
 
-    Similar logic applies to combining other modifers with the number and F-keys. This is especially true for Meta+Num and Meta+Shift+Num, which are forced upon you in Windows. An ergonomics consideration here is that Tab is one row higher than your home row, meaning reaching your numbers and even F-keys while holding it remains comfortable.
+    Similar logic applies to combining other modifers with the number and F-keys. This is especially true for Meta+Num and Meta+Shift+Num, which are forced upon you in Windows. An ergonomics consideration here is that Tab is one row higher than your home row, meaning reaching your numbers and even quite a few F-keys while holding it remains comfortable.
 
 -- Toggle --
-Tap for app toggling and hold for window toggling (where OS supports it). Using LANSI, this action is easy when both hands are on the keyboard, but impossible with just the left hand. I've tried to at least partially accommodate that workflow. It only goes back and forth: no tabbing through a dozen apps. (Use Ultra for that!) It is set to ` for ANSI keyboards and esc for compact keyboards.
-
-    For many people, difficulty alt-tabbing will be the thing that stops them from using LANSI. I implore you to get used to it: alt-tab is far too stateful to be a good interface paradigm. Use Meta+Num or set up Ultra+Alpha to get to your apps; it's a great experience after just a little bit of learning. If you really can't get over this, switching your mouse's Forward button to Alt is another option.
+Tap for app toggling and hold for window toggling (where OS supports it). With LANSI, traditional alt-tabbing requires taking your hand off home row when only using your left hand, so this very quick back-and-forth is a nice shortcut. Alt-tab is too stateful to be a good interface, I implore you to get used to Ultra (or at least Meta+Num). VARIANT: for keyboards with additional thumb keys (or ANSI), set your next most comfortable thumb key on the left hand to lalt. 
 
 -- Escape / Extend --
 The Caps Lock key is set to escape when tapped and the Extend layer when held. We'll check that layer out a bit later.
 
 -- Mfwd --
-The mouse forward button is currently undefined. You can swap this with mbck if your mouse grip makes it the more comfortable button. I have considered using the extra button as a layer for FreeCAD shortcuts, but don't want to lose my shortcut memory. You may decide otherwise for your own favorite app [or multiple apps via something like kanata-switcher and a Switch statement for nop1 through nop9!]. If you reconfigure numsym to have a number pad on your left hand, setting it to the numsym layer would be an obvious choice. It could be an alt key so that left-handed alt-tabs are closer to the default experience. Maybe a layer for window management if you feel cramped even after utilizing Ultra. Lots of options here, but I didn't want to bind it just because it's an empty key; maybe you will have a specific use case it can cover.
+The mouse forward button is currently undefined. VARIANT: You can swap this with mbck if your mouse grip makes it the more comfortable button. I have considered using the extra button as a layer for FreeCAD shortcuts, but don't want to lose my shortcut memory. You may decide otherwise for your own favorite app [or multiple apps via something like kanata-switcher and a Switch statement for nop1 through nop9!]. If you reconfigure numsym to have a number pad on your left hand, setting it to the numsym layer would be an obvious choice. It could be an alt key so that left-handed alt-tabs are closer to the default experience. Maybe a layer for window management if you feel cramped even after utilizing Ultra. Lots of options here, but I didn't want to bind it just because it's an empty key; maybe you will have a specific use case it can cover.
 
 -- Moving On --
 Hold the right thumb key for NumSym and we'll check out that layer next.
@@ -139,15 +137,13 @@ Hold the right thumb key for NumSym and we'll check out that layer next.
 The NumSym layer handles all programming symbols and data entry: calculator/accounting, times, dates, etc. It's faster to use 8 fingers across home row than 3 or 4 fingers in a numpad arrangement. The symbols needed more regularly are duplicated within the layer to save from Layer+Shift+key stretching during data entry flow.
 
 -- Transparency --
-The semi-colon key is overwritten by a zero, but we often need a colon for time entry so colon moves over just one key and replaces the apostrophe. No other symbols, modifiers, or control characters are overwritten from the base layer.
+The semi-colon key is overwritten by a zero, but we often need a colon for time entry so the apostrophe is replaced with a colon. No other symbols, modifiers, or control characters are overwritten from the base layer.
 
 -- F Keys --
-F-keys cover the number row here for physical layouts that don't feature them (and to prevent stretching even if you have them). The strange looking duplicates are to accomodate 6-column ortholinear boards (Lily58, Voyager, etc): for these, F1 starts on 1 and then wraps around to F12. On a regular board where F-keys are already available on top, switching this top row to their keypad equivalents could be useful for some creative applications.
-
-    F-keys are still easily combined with any of their common modifiers in this layer, but Meta is a chore. Thankfully, this is a rare combination. However, instead of adding Autoshift to the F keys you could choose to switch them to Autometa if you have a specific need for that. Alternatively, this top row is still wide open in the Extend layer (coming up next) for anything else you might need.
+F-keys cover the number row here for physical layouts that don't feature them (and to prevent stretching even if you have them). The strange looking duplicates are to accomodate 6-column ortholinear boards (Lily58, Voyager, etc): for these, F1 starts on 1 and then wraps around to F12. VARIANT: On a regular board where F-keys are already available on top, switching this top row to their keypad equivalents could be useful for some creative applications.
 
 -- Personalization --
-NumSym is a very personal layer, feel free to play around with it if you don't do a lot of data entry. Autoshifted numbers like the top row of the Base layer? Symbols by default that autoshift to numbers? Completely replace the numbers with NUMWORD? This version carefully balances data entry and programming use cases and has a lot of symmetry that makes it easier to learn, but nothing is sacred here!
+VARIANT: NumSym is a very personal layer, feel free to play around with it if you don't do a lot of data entry. Autoshifted numbers like the top row of the Base layer? Symbols by default that autoshift to numbers? Completely replace the numbers with NUMWORD? This version carefully balances data entry and programming use cases and has a lot of symmetry that makes it easier to learn, but nothing is sacred here!
 
 -- Moving On --
 That's it for the NumSym layer! Let go of the right thumb key and you'll be back in the Base layer. Then hold the Caps Lock key to go to the Extend layer. |#
@@ -163,10 +159,10 @@ That's it for the NumSym layer! Let go of the right thumb key and you'll be back
   @reload   @ef1    @ef2   @ef3     @ef4    @ef5     @ef6   @ef7   @ef8   @ef9   @ef10  @ef11 @ef12
 
   _         _       _      _        _       _        _      _      _      _      _      _    _    _
-  _         XX      XX     @mwu     @rename XX       prev   vold   volu   next   pp     _    _    _
-  _         @accept XX     @mwd     lsft    @gaming  left   down   up     rght   brdn   brup _
-  _         XX      XX     @scsht   @clipb  @caps    home   pgdn   pgup   end    _      _
-  _         lalt    _      @lmet    _       _        _
+  _         @eq     @ew    @mwu     @rename @et      prev   vold   volu   next   pp     _    _    _
+  _         @accept @es    @mwd     @elsft  @gaming  left   down   up     rght   brdn   brup _
+  _         @ez     @ex    @scsht   @clipb  @caps    home   pgdn   pgup   end    _      _
+  _         _       _      @lmet    _       _        _
 
   _    _    _    _    _
 )
@@ -228,10 +224,10 @@ Those are all the layers! Three with extra features, and one with practically no
   ht $hold-timeout
 
   ;; slower pinkies on the alt keys
-  slow-tap-timeout 150
-  slow-hold-timeout 275
-  stt $slow-tap-timeout
-  sht $slow-hold-timeout
+  long-tap-timeout 150
+  long-hold-timeout 275
+  ltt $long-tap-timeout
+  lht $long-hold-timeout
 )
 
 
@@ -241,7 +237,7 @@ Those are all the layers! Three with extra features, and one with practically no
 ;; ---------- LAYER CHANGES ----------
   nmsm (layer-while-held numsym)
   escext (tap-hold-press 0 $ht esc (layer-while-held extend))
-  gaming (tap-hold 0 500 (layer-switch gaming) (layer-switch base))
+  gaming (fork (tap-hold 0 500 (layer-switch gaming) (layer-switch base)) rght (nop0))
 
 
 ;; ---------- BASE TAP-HOLDS (mirrorless defined first) ----------
@@ -259,8 +255,8 @@ Those are all the layers! Three with extra features, and one with practically no
   delrsft (tap-hold-press $tt $ht del rsft)
   bspclsft (tap-hold-press $tt $ht bspc lsft)
 
-  /alt (tap-hold-press 0 $sht / ralt) ;; even less common than Z, this overload almost never interferes with typing
-  zalt (fork (tap-hold-press 0 $sht z ralt) @/alt (nop0)) ;; sometimes annoying at 130+ wpm, but rarely misfires more than 1x/day
+  /alt (tap-hold-press 0 $lht / ralt) ;; even less common than Z, this overload almost never interferes with typing
+  zalt (fork (tap-hold-press 0 $lht z ralt) @/alt (nop0)) ;; sometimes annoying at 130+ wpm, but rarely misfires more than 1x/day
   ;; With alt in their positions next to shift you can hold shift with your pinky and alt with your ring finger, even without losing your homing key.
 
 
@@ -308,35 +304,40 @@ Those are all the layers! Three with extra features, and one with practically no
 
 
 ;; ---------- EXTEND ----------
-  quit A-f4
-  ;; a quick forceful app closer. I fat-fingered this one too many times so have unbound it.
+;; The right hand of the extend layer is directional, so literal mirroring would be quite confusing. For this layer, we combine transposition and mirroring depending on the input. VARIANT: instead of mirroring, set up WASD or ESDF arrows. VARIANT: set up mfwd as left-hand nav layer and leave Extend layer without nop0 forks.
 
-  accept return
+  accept return 
   ;; a left-handed return, great for *A*ccepting the default selections in dialogs without taking my hand off the mouse or hunting down buttons with the cursor.
   
   reload lrld
   ;; for reloading the Kanata config for experimentation.
 
-  mwu (mwheel-up 80 120)
-  mwd (mwheel-down 80 120)
+  mwu (fork (mwheel-up 80 120) volu (nop0))
+  mwd (fork (mwheel-down 80 120) up (nop0))
   ;; Mouse wheel up and down are handy when your hand *isn't* on the mouse: sometimes you only want to scroll the view but not also your input focus. My primary use of this is scrolling a document while inputting some of its data elsewhere.
 
-  clipb (tap-hold 0 $ht S-ins (multi lctl lalt lsft lmet v))
+  clipb (fork (tap-hold 0 $ht S-ins (multi lctl lalt lsft lmet v)) pgdn (nop0))
   ;; Tap for terminal pasting or hold for clipboard app shortcut (CopyQ in my case).
 
-  scsht (tap-hold 0 $ht prtsc S-prtsc)
+  scsht (fork (tap-hold 0 $ht prtsc S-prtsc) pgup (nop0))
   ;; set to your preferred screenshot modes
 
-  rename f2
+  rename (fork f2 vold (nop0))
   ;; I use this a lot so wanted a shorter reach.
   
-  caps (tap-hold 0 $ht (caps-word 1000) caps)
+  caps (fork (tap-hold 0 $ht (caps-word 1000) caps) end (nop0))
   ;; Tap for caps-word and hold for full caps lock.
 
   ef1 XX ef2 XX ef3 XX ef4 XX ef5 XX ef6 XX ef7 XX ef8 XX ef9 XX ef10 XX ef11 XX ef12 XX
-  ;; To work around f-keys not being reliable on Linux for some laptop hardware, you can bind these to relevant hardware functions. Alternatively, it's a full set of shortcuts ready for whatever purpose you need. Extend+fkeys are a bit of a stretch for anything below 5, I do not personally use them.
+  ;; To work around f-keys not being reliable on Linux for some laptop hardware, you can bind these to relevant hardware functions. Alternatively, it's a full set of shortcuts ready for whatever purpose you need. Extend+fkeys are a bit of a stretch for anything above 5, I do not personally use them.
 
-
+  eq (fork XX pp (nop0))
+  ew (fork XX prev (nop0))
+  et (fork XX next (nop0))
+  es (fork XX left (nop0))
+  elsft (fork XX down (nop0))
+  ez XX
+  ex (fork XX home (nop0))
 
 
 ;; ---------- GAMING ----------
