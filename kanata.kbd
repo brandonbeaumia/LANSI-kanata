@@ -378,8 +378,8 @@ Those are all the layers! Three with extra features, and one with practically no
 ;; Since Windows' Start menu shortcut can't be easily changed we use Kanata for it. Set PowerToys' Run (or your preferred launcher) to Win+Space to avoid the awful Start menu.
 
 (platform (win winiov2 wintercept)
-  (defalias lmet (tap-hold-press-timeout 0 100 M-spc lmet lmet))
-  ;; If pressed and released *on its own* within 100ms, sends M-spc. Otherwise sends lmet instantaneously when used as a modifier or sends just lmet when releasing after the 100ms expires.
+  (defalias lmet (tap-hold-press-timeout 0 125 M-spc lmet lmet))
+  ;; If tapped (125ms or less), sends M-spc for PowerToys shortcut. Sends lmet instantaneously when used as a modifier. Sends just lmet when releasing after the 125ms expires. Using timeout variant of tap-hold-press prevents lmet spam upon timer expiration.
 )
 
 (platform (linux macos)
