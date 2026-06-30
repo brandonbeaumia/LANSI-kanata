@@ -1,7 +1,7 @@
 
 
-# dotkbd
-Welcome to my personal Kanata config! This...
+# LANSI
+Welcome to my personal Kanata config! LANSI...
 * is broadly compatible. ANSI, 60%, 75%, 6-column ortholinear...as long as you have a number row it will work great.
 * is easy to learn and grow in to: matches QWERTY and avoids sticky modes.
 * allows responsive 130+ WPM by not overloading alpha keys.
