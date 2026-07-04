@@ -9,13 +9,13 @@ Welcome to the LANSI Kanata configuration! This layout...
 * prioritizes fast and accessible modifier & shortcut combos.
 * allows right-handed shortcuts without leaving the mouse.
 
-The config itself is well-commented and the below diagram is a good overview. For easier digestion, you may visit the [Oryx Configurator tour](https://configure.zsa.io/voyager/layouts/5qRME/latest/0/intro). That layout is extremely similar, though not always updated perfectly in tandem. 
+The config itself is commented with paragraphs of explainers (even for as simple as it is) and the below diagram is a good overview. For easier digestion, you may visit the [Oryx Configurator tour](https://configure.zsa.io/voyager/layouts/5qRME/latest/0/intro). That layout is extremely similar, though not always updated perfectly in tandem. 
 
 ## Diagram
 * White: output when tapped
 * Pink: output when held
 * Blue: output when mirrored via mouse button
 * Red: being held to enable the current layer
-* Blank: base layer: unbound. Other layers: transparent.
+* Base layer blanks: unbound. Other layer blanks: transparent.)
 
-<img width="956" height="1624" alt="lansi" src="https://github.com/user-attachments/assets/6c79b680-e4bd-4d58-bd12-1291c77883b6" />
+<img width="956" height="1232" alt="my_keymap" src="https://github.com/user-attachments/assets/0cc80023-7efa-4770-a4f7-ba3630fd8904" />
