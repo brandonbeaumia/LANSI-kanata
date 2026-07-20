@@ -54,23 +54,6 @@ For a visual tour mimicing most of these comments, see https://configure.zsa.io/
   ;; While we only change the mouse back button, we also have to define the primary clicks so that tap-hold modifiers like shift-click are immediately responsive (despite 'process-unmapped-keys yes').
 )
 
-
-
-
-#|====================================================
-     MIRRORING | GNIRORRIM
-======================================================
-If nop0 (mouse back button) is held, all alphanumeric keys on the left half of the board send their *mirrored* output instead. So f becomes j, d becomes k, etc. Next time you need to Ctrl+Y, Ctrl+O, Ctrl+H, etc, give it a shot. You might be surprised how natural this becomes, even typing short keywords, app launcher searches, or the first few characters of a country for shipping dropdown box auto-completes. It's really lovely to not have to leave the mouse for just a couple key presses, no matter where they are on the keyboard. There are also some non-standard "mirrors" (tab becoming shift-tab, for example) that solve other problems very elegantly.
-
-Mirroring really sprinkles a bit of magic into this layout and fixes so many daily keyboarding annoyances with one simple mechanic that doesn't eliminate your shortcut memory. While using a trackpad on a laptop, the keys to the right of right alt perform the same function.
-
-If you do not have a back button on your mouse, this will be completely invisible to you. I would strongly recommend investing, though. Change mfwd to nop0 instead if that is more comfortable on your mouse; the opposite mouse button remains open if you need a good spot to put another layer.
-
-|#
-
-
-
-
 ;; ===================================================
 ;;   BASE LAYER
 ;; ===================================================
@@ -102,14 +85,13 @@ The number row is not very ergonomic to reach during typing flow so it has been 
 The Tab key is set to tab when tapped and Ultra (Ctrl+Alt+Meta: like "hyper", get it?...) when held. This key is fundamental to allowing as many shortcuts as possible for workspace and app management. We don't use Hyper here because Shift can be added by holding the Num or F-key instead. So Ultra+(Num), Ultra+(holdNum), Ultra+(Fkey), Ultra+(holdFkey), and Ultra+Alpha are all full sets of shortcuts that you can define in your operating system or apps. Tab is one row higher than your home row, meaning reaching your numbers and even quite a few F-keys while holding it remains comfortable.
 
 -- Toggle --
-Tap repeatedly to alt-tab forward, or mirror and tap to alt-tab backward. The window picker UI will stay open for a bit and then time out on your selection after you stop tapping: play with the timing to make it feel right for you.
+Tap repeatedly to alt-tab forward, or mirror [explained later] and tap to alt-tab backward. The window picker UI will stay open for a bit and then time out on your selection after you stop tapping: play with the timing to make it feel right for you.
 
 -- Escape / Extend --
-The Caps Lock key is set to escape when tapped and the Extend layer when held. We'll check that layer out a bit later.
+The Caps Lock key is set to escape when tapped and the Extend layer when held. We'll check out that layer a bit later.
 
 -- Moving On --
-Hold the right thumb key for NumSym and we'll check out that layer next.
-|#
+Hold the right thumb key for the NumSym layer, coming up next! |#
 
 
 
@@ -134,7 +116,7 @@ Hold the right thumb key for NumSym and we'll check out that layer next.
 The NumSym layer handles all programming symbols and data entry: calculator/accounting, times, dates, etc. It's faster to use 8 fingers across home row than 3 or 4 fingers in a numpad arrangement. The symbols needed more regularly are duplicated within the layer to save from Layer+Shift+key stretching during data entry flow.
 
 -- Transparency --
-The semi-colon key is overwritten by a zero, but we often need a colon for time entry so the apostrophe is replaced with a colon. No other symbols, modifiers, or control characters are overwritten from the base layer.
+The semi-colon key is overwritten by a zero, but we often need a colon for time entry so it's moved over one slot and replaces the apostrophe. No other symbols, modifiers, or control characters are overwritten from the base layer.
 
 -- F Keys --
 F-keys cover the number row here for physical layouts that don't feature them (and to prevent stretching). The strange looking duplicates are to accomodate 6-column ortholinear boards (Lily58, Voyager, etc): for these, F1 starts on 1 and then wraps around to F12. VARIANT: On a regular board where F-keys are already available on top, switching this top row to their keypad equivalents could be useful for some creative applications.
@@ -149,17 +131,17 @@ That's it for the NumSym layer! Let go of the right thumb key and you'll be back
 
 
 ;; ===================================================
-;; EXTEND LAYER (Navigation and Media)
+;; EXTEND LAYER (Navigation, Media, Shortcuts)
 ;; ===================================================
 
 (deflayer extend
-  @reload   @ef1    @ef2   @ef3     @ef4    @ef5     @ef6   @ef7   @ef8   @ef9   @ef10  @ef11 @ef12
+  @reload   @ef1    @ef2    @ef3     @ef4    @ef5     @ef6   @ef7   @ef8   @ef9   @ef10  @ef11 @ef12
 
-  _         _       _      _        _       _        _      _      _      _      _      _    _    _
-  _         @eq     @ew    @mwu     @rename @trash   prev   vold   volu   next   pp     _    _    _
-  _         @accept @es    @mwd     @elsft  @gaming  left   down   up     rght   brdn   brup _
-  _         @ez     @ex    @scsht   @clipb  @caps    home   pgdn   pgup   end    _      _
-  _         _       _      @lmet    _       _        _
+  _         XX      XX      XX       XX      XX       XX     XX     XX     XX     XX     _    _   _
+  _         @eq     @ew     @mwu     @rename @trash   prev   vold   volu   next   pp     _    _    _
+  _         @accept @es     @mwd     @elsft  @gaming  left   down   up     rght   brdn   brup _
+  _         @rec    @run    @scsht   @clipb  @caps    home   pgdn   pgup   end    _      _
+  _         _       _       @lmet    _       _        _
 
   _    _    _    _    _
 )
@@ -205,8 +187,31 @@ The gaming layer returns the keyboard to standard ANSI. Besides Escape/Extend al
 To get out of the Gaming layer and back to Base, follow the same procedure of Extend+G, but hold it instead. This ensures that the key works the same regardless of the current state: tap always goes to Gaming, hold always leaves gaming.
 
 -- Moving On --
-Those are all the layers! Three with extra features, and one with practically nothing. Below you will find implementation details and a few more comments/rationale behind some specific keys. Be aware that the order of definitions seems a little odd because Kanata relies on definitions existing before their aliases can be used in other commands (like the mirror forks).
-|#
+Those are all the layers! Three with extra features, and one with practically nothing. One final feature to cover, though...
+
+
+======================================================
+     MIRRORING | GNIRORRIM
+======================================================
+Mirroring really sprinkles a bit of magic into this layout and fixes so many daily keyboarding annoyances with one simple mechanic.
+
+If nop0 (mouse back button) is held, all alphanumeric keys on the left half of the board send their *mirrored* output instead. So f becomes j, d becomes k, etc. Next time you need to Ctrl+Y, Ctrl+O, Ctrl+H, etc, give it a shot. Eventually that turns into short keywords, app launcher searches, or the first few characters of a dropdown box: it's really lovely to not have to leave the mouse for just a couple key presses, no matter where they are on the keyboard. There are also some non-standard "mirrors" (tab becoming shift-tab, for example) that solve other ergonomics issues very elegantly.
+
+If you do not have a back button on your mouse, this will be completely invisible to you. I would strongly recommend investing, though! Change mfwd to nop0 instead if that is more comfortable on your mouse; the opposite mouse button remains open if you need a good spot to put another layer.
+
+While using a trackpad on a laptop, the keys to the right of right alt perform the same nop0 function as the mouse back button.
+
+
+======================================================
+     WRAP-UP
+======================================================
+
+Even if you aren't going to branch from this configuration I really hope you came away with some new ideas for your own layout. Thanks for looking, and toss me a star on Github if you enjoyed the read!
+
+Below you will find implementation details and a few more comments/rationale behind some specific keys. Be aware that the order of definitions seems a little odd because Kanata relies on definitions existing before their aliases can be used in other commands (like the mirror forks). |#
+
+
+
 
 ;; ===================================================
 ;;   IMPLEMENTATION DETAILS
@@ -289,7 +294,7 @@ Those are all the layers! Three with extra features, and one with practically no
   ;; @tabultra is an exception to standard mirroring. Instead of mirroring, it "reverses" the tab key by changing its tap function to shift-tab. For left-hand-only use, this makes an otherwise impossible shortcut of (leftpinky + leftpinky) an easy (mousethumb + leftpinky). Holding remains Ultra.
   tabultra (fork (tap-hold-press 0 $ht tab (multi lalt lctl lmet)) (tap-hold-press 0 $ht S-tab (multi lalt lctl lmet)) (nop0))
 
-  ;; Alt-tab using only the left hand isn't very comfortable, so tap @toggle to A-tab forward or mirror it to go backward. The window picker UI will stay open for the ms duration listed: play with the timing to make it feel right for you.
+  ;; Alt-tab using only the left hand isn't very comfortable, so tap @toggle to Alt-tab (forward) or mirror it to Shift-alt-tab (backward). The window picker UI will stay open for the ms duration listed: play with the timing to make it feel right for you.
   tabforward (macro (hold-for-duration 650 alt) $delay-fix tab)
   tabbackward (macro (hold-for-duration 650 alt) $delay-fix S-tab)
   toggle (fork @tabforward @tabbackward (nop0))
@@ -333,14 +338,20 @@ Those are all the layers! Three with extra features, and one with practically no
   scsht (fork (tap-hold 0 $ht prtsc S-prtsc) pgup (nop0))
   ;; set to your preferred screenshot modes
 
-  clipb (fork (tap-hold 0 $ht S-ins (multi lctl lalt lsft lmet v)) pgdn (nop0))
-  ;; Tap for terminal pasting or hold for clipboard app shortcut (CopyQ in my case).
+  clipb (fork (tap-hold 0 125 S-ins (macro C-A-S-M-v)) pgdn (nop0))
+  ;; Tap for terminal pasting or hold for clipboard app shortcut. The shortcut is wrapped in a macro to prevent it from repeating if held longer.
 
   caps (fork (tap-hold 0 $ht (caps-word 1000) caps) end (nop0))
   ;; Tap for caps-word and hold for full caps lock.
 
   reload lrld
   ;; for reloading the Kanata config for experimentation.
+
+  rec (fork (dynamic-macro-record 0) XX (nop0))
+  ;; start or stop recording a macro
+
+  run (fork (dynamic-macro-play 0) home (nop0))
+  ;; play recorded macro
 
   eq (fork XX pp (nop0))
   ew (fork XX prev (nop0))
