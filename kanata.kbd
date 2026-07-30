@@ -1,17 +1,19 @@
-#|
+;; For comment readability, you may need to turn on word wrap at ~160 characters (or window wrap and shrink your window).
+;; For a visual tour mimicing most of these comments, see https://configure.zsa.io/voyager/layouts/5qRME/latest/0/intro
 
-Welcome to Lean ANSI!
+#| {id: intro}
+
+### Welcome to Lean ANSI!
 
 LANSI is broadly compatible, designed around laptop use. If your keyboard is 4x6/60% or larger this config will work.
 It is easy to parse, learn, and grow in to. It closely matches QWERTY and is built almost exclusively on tap-hold functionality.
-It features latency-free 130+ WPM typing without misfires by avoiding alpha key overloading. Death to home row mods!
+It features ultra-fast latency-free typing without misfires by avoiding alpha key overloading. Death to home row mods!
 It prioritizes fast and accessible modifier & shortcut combos, especially from the left hand for simultaneous mousing.
-It allows right-handed shortcuts without leaving the mouse via keyboard mirroring (sounds scarier than it is!).
-
-For comment readability, you may need to turn on word wrap at ~160 characters (or window wrap and shrink your window).
-For a visual tour mimicing most of these comments, see https://configure.zsa.io/voyager/layouts/5qRME/latest/0/intro
+It allows right-handed shortcuts without leaving the mouse via keyboard mirroring (sounds scarier than it is!). Let's get into it! {layer:base}
 
 |#
+
+;; {play-sequence: intro}
 
 
 ;; ===================================================
@@ -69,31 +71,21 @@ For a visual tour mimicing most of these comments, see https://configure.zsa.io/
 
   mlft mrgt mmid XX nop0
 )
-#| Summary --
-The base layer is (almost) plain QWERTY. It's easy to grow in to as the extra features should not add latency or interfere with old habits.
+;; {id: base-summary} The base layer is (almost) plain QWERTY. It's easy to grow in to as the extra features should not add latency or interfere with old habits. {layer: base}
 
--- Thumb Keys --
-Control lands immediately left of the space bar, easily accessible under the thumb and available for pairing with other keys as effortlessly as possible. The NumSym layer key lands immediately right of the space bar. These two are the only "thumb" keys you will need, as the other modifiers are set up in better places elsewhere in the layout. There is only a little bit of thumb tucking on ANSI boards when using these two keys, and laptops are usually even better about it than standard ANSI.
+;; {id: thumb-keys} In order to meet the goal of ANSI compatibility, only the spacebar and each key immediately to the left and right of it are utlized. Control is immediately left of the space bar and NumSym is immediately to the right. The other modifiers are set up in better places elsewhere in the layout. There is only a little bit of thumb tucking on ANSI boards when using these two keys, and laptops are even better about it than standard ANSI. {layer: base} {highlight: lctl @nmsm}
 
--- Shifts --
-Tap left shift for Backspace and right shift for Delete. We lose the ability to hold Backspace or Delete, but this is easily made up by 1) using the now ultra-comfy Ctrl+Backspace/Delete, or 2) Using the Extend layer to *hold* an arrow and highlight backwards/forwards, then tapping backspace or delete. Backspace is duplicated in its usual much-worse spot in the top-right corner to ease transitioning (and because that is not a very useful key anyway).
+;; {id: shifts} Tap left shift for Backspace and right shift for Delete. We lose the ability to hold Backspace or Delete, but this is easily made up by 1) using the now ultra-comfy Ctrl+Backspace/Delete, or 2) Using the Extend layer to *hold* an arrow and highlight backwards/forwards, then tapping backspace or delete. Backspace is duplicated in its usual much-worse spot in the top-right corner to ease transitioning (and because that is not a very useful key anyway).  {layer: base} {highlight: @bspclsft @delrsft}
 
--- Top Row --
-The number row is not very ergonomic to reach during typing flow so it has been optimized for shortcut use. Tap these keys for their number, and hold them for Shift+Number. In this scenario, overloading with a Hold function does not increase typing latency. They get quite a workout when combined with Meta and Ultra for window management. Combining them with multiple modifiers is also easier as you get shift "for free" when holding them. You can continue to use them for numbers and symbols, but we'll check out the dedicated NumSym layer for that shortly.
+;; {id:top-row} The top row is not very ergonomic to reach during typing flow so it has been optimized for shortcut use. For this reason, it's safe to overload with a Hold function. Tap these keys for their number, and hold them for Shift+Number.  They get quite a workout when combined with Meta and Ultra for window management. Combining them with multiple modifiers is also easier as you get shift "for free" when holding them. You can continue to use them for numbers and symbols, but we'll check out the dedicated NumSym layer for that shortly. {layer: base} {highlight: @n1 @n2 @n3 @n4 @n5 @n6 @n7 @n8 @n9 @n0}
 
--- Tab / Ultra --
-The Tab key is set to tab when tapped and Ultra (Ctrl+Alt+Meta: like "hyper", get it?...) when held. This key is fundamental to allowing as many shortcuts as possible for workspace and app management. We don't use Hyper here because Shift can be added by holding the Num or F-key instead. So Ultra+(Num), Ultra+(holdNum), Ultra+(Fkey), Ultra+(holdFkey), and Ultra+Alpha are all full sets of shortcuts that you can define in your operating system or apps. Tab is one row higher than your home row, meaning reaching your numbers and even quite a few F-keys while holding it remains comfortable.
+;; {id: tab-ultra} The Tab key is set to tab when tapped and Ultra (Ctrl+Alt+Meta: like "hyper", get it?...) when held. This key is fundamental to allowing as many shortcuts as possible for workspace and app management. We don't use Hyper here because Shift can be added by holding the Num or F-key instead. So Ultra+(Num), Ultra+(holdNum), Ultra+(Fkey), Ultra+(holdFkey), and Ultra+Alpha are all full sets of shortcuts that you can define in your operating system or apps. Tab is one row higher than your home row, meaning reaching your numbers and even quite a few F-keys while holding it remains comfortable. {layer: base} {highlight: @tabultra}
 
--- Toggle --
-Tap repeatedly to alt-tab forward, or mirror [explained later] and tap to alt-tab backward. The window picker UI will stay open for a bit and then time out on your selection after you stop tapping: play with the timing to make it feel right for you.
+;; {id:escape-extend} The Caps Lock key is set to escape when tapped and the Extend layer when held. We'll check out that layer a bit later. {layer: base} {highlight: @escext}
 
--- Escape / Extend --
-The Caps Lock key is set to escape when tapped and the Extend layer when held. We'll check out that layer a bit later.
+;; {id: base-outro} Hold the right thumb key for the NumSym layer, coming up next! {layer: base} {highlight: @nmsm}
 
--- Moving On --
-Hold the right thumb key for the NumSym layer, coming up next! |#
-
-
+;; {play-sequence: base-summary, thumb-keys, shifts, alt-keys, top-row, tab-ultra, toggle, escape-extend, base-outro}
 
 
 ;; ===================================================
@@ -112,22 +104,23 @@ Hold the right thumb key for the NumSym layer, coming up next! |#
   _    _    _    _    _
 )
 
-#| Summary --
-The NumSym layer handles all programming symbols and data entry: calculator/accounting, times, dates, etc. It's faster to use 8 fingers across home row than 3 or 4 fingers in a numpad arrangement. The symbols needed more regularly are duplicated within the layer to save from Layer+Shift+key stretching during data entry flow.
+;; {id: numsym-summary} The NumSym layer handles programming, symbols, and also data entry (calculator/accounting, times, dates, etc.) It's faster to use 8 fingers across home row than 3 or 4 fingers in a numpad arrangement. The symbols needed more regularly are duplicated within the layer to prevent stretching during data entry flow. {layer: numsym}
 
--- Transparency --
-The semi-colon key is overwritten by a zero, but we often need a colon for time entry so it's moved over one slot and replaces the apostrophe. No other symbols, modifiers, or control characters are overwritten from the base layer.
+;; {id: colon} The semi-colon key is overwritten by a zero, but we often need a colon for time entry so it's moved over one slot and replaces the apostrophe.{layer: numsym} {highlight: S-;}
 
--- F Keys --
-F-keys cover the number row here for physical layouts that don't feature them (and to prevent stretching). The strange looking duplicates are to accomodate 6-column ortholinear boards (Lily58, Voyager, etc): for these, F1 starts on 1 and then wraps around to F12. VARIANT: On a regular board where F-keys are already available on top, switching this top row to their keypad equivalents could be useful for some creative applications.
+;; {id: numsym-transparency} No other symbols, modifiers, or control characters are overwritten from the base layer. {layer: numsym} {highlight: _} #|
 
--- Personalization --
-This version carefully balances data entry and programming use cases and has a lot of symmetry that makes it easier to learn, but nothing is sacred here! Feel free to play around with it if you don't do a lot of data entry.
+;; {id: f-keys} F-keys cover the number row here for physical layouts that don't feature them (and to prevent stretching). The strange looking duplicates are to accomodate 6-column ortholinear boards (Lily58, Voyager, etc): for these, F1 starts on 1 and then wraps around to F12. VARIANT: On a regular board where F-keys are already available on top, switching this top row to their keypad equivalents could be useful for some creative applications. {layer: numsym} {highlight: @f1 @f2 @f3 @f4 @f5 @f6 @f7 @f8 @f9 @f10 @f11 @f12}
 
--- Moving On --
-That's it for the NumSym layer! Let go of the right thumb key and you'll be back in the Base layer. Then hold the Caps Lock key to go to the Extend layer. |#
+;; {id: numsym-personalization} This version carefully balances data entry and programming use cases and has a lot of symmetry that makes it easier to learn, but nothing is sacred here! Feel free to play around with it if you don't do a lot of data entry.
 
+;; {id: numsym-outro} That's it for the NumSym layer! Let go of the right thumb key and you'll be back in the Base layer.
 
+;; {id: back-to-base} {layer-base}
+
+;; {id: go-to-extend} {layer-base} Now hold the Caps Lock key to go to the Extend layer. {highlight: @escext}
+
+;; {play-sequence: numsym-summary, colon, numsym-transparency, f-keys, numsym-personalization, numsym-outro, back-to-base, go-to-extend}
 
 
 ;; ===================================================
@@ -139,29 +132,26 @@ That's it for the NumSym layer! Let go of the right thumb key and you'll be back
 
   _         XX      XX      XX       XX      XX       XX     XX     XX     XX     XX     _    _   _
   _         @eq     @ew     @mwu     @rename @trash   prev   vold   volu   next   pp     _    _    _
-  _         @accept @es     @mwd     @elsft  @gaming  left   down   up     rght   brdn   brup _
+  _         @accept @minus  @mwd     @elsft  @gaming  left   down   up     rght   brdn   brup _
   _         @rec    @run    @scsht   @clipb  @caps    home   pgdn   pgup   end    _      _
   _         _       _       @lmet    _       _        _
 
   _    _    _    _    _
 )
 
-#| Summary --
-The Extend layer features navigation and media clusters on the right hand, laid out in three matching HJKL rows.
+;; {id: extend-summary} The Extend layer's primary feature is its navigation and media clusters on the right hand, laid out in three matching HJKL rows. {layer: extend}
 
--- Shift Key --
-A very important (and super comfy!) shift key is featured on F, because your left pinky is already busy holding this layer on. Having Control, Shift, and Arrow/Nav keys so easily combined with each other takes text editing to a new level (at least where Vim motions aren't supported).
+;; {id: extend-shift} A very important (and super comfy!) shift key is featured on F, because your left pinky is already busy holding this layer on. Having Control, Shift, and Arrow/Nav keys so easily combined with each other takes text editing to a new level (at least where Vim motions aren't supported). {layer: extend} {highlight: @elsft}
 
--- Meta (finally!) --
-The Meta key is found on the space bar in the Extend layer. For Meta+Alpha and Meta+Num combinations, this is still a very good spot despite being one layer deep. A quick roll of Extend+Meta, then press your character. If you still need to combine it with Control you can use your right thumb for Meta and left thumb for Control, or even catch both keys with the same left thumb. Meta is also vital to pair with arrows for a lot of window managers, so it makes sense for it to exist in the same layer.
+;; {id: meta} The Meta key is found on the space bar in the Extend layer. For Meta+Alpha and Meta+Num combinations, this is still a very good spot despite being one layer deep. A quick roll of Extend+Meta, then press your character. If you still need to combine it with Control you can use your right thumb for Meta and left thumb for Control, or even catch both keys with the same left thumb. Meta is also vital to pair with arrows for a lot of window managers, so it makes sense for it to exist in the same layer. {layer: extend} {highlight: @lmet}
 
--- Personalization --
-Pretty much all the other shortcuts on the left hand here are optional, they're just things that I happen to use a lot or wanted more comfortable access to. You can check out some of the rationale under the -EXTEND- header below.
+;; {id: extend-personalization} Pretty much all the other shortcuts on the left hand here are optional, they're just things that I happen to use a lot or wanted more comfortable access to. You can look at them individually for their rationale. {layer: extend}
 
--- Moving On --
-That's it for the Extend layer! Instead of letting go of the Caps Lock key, tap G instead. This will take us to the Gaming Layer. |#
+;; {id: extend-outro} That's it for the Extend layer! We're already near the end! {layer: extend}
 
+;; {id: to-gaming-layer} Instead of letting go of caps lock, tapping G will bring you to the Gaming layer. {layer: extend} {highlight: @gaming}
 
+;; {play-sequence: extend-summary, extend-shift, meta, extend-personalization, extend-outro, to-gaming-layer}
 
 
 ;; ===================================================
@@ -180,37 +170,32 @@ That's it for the Extend layer! Instead of letting go of the Caps Lock key, tap 
   _    _    _    _    _
 )
 
-#| Summary --
-The gaming layer returns the keyboard to standard ANSI. Besides Escape/Extend all tap-holds are reverted and all modifier keys return to their original positions. This is almost the equivalent of terminating Kanata, but leaves mouse mirroring so you can still double up your game keybinds using this feature. It's also nice for letting other people momentarily use your computer. This needs one small change for boards that only have two thumb keys; you can find that note under the GAMING header near the bottom of the config.
 
--- Exiting --
-To get out of the Gaming layer and back to Base, follow the same procedure of Extend+G, but hold it instead. This ensures that the key works the same regardless of the current state: tap always goes to Gaming, hold always leaves gaming.
+;; {id: gaming-summary} The gaming layer returns the keyboard to (nearly) standard ANSI. Besides Escape/Extend all tap-holds are reverted and all modifier keys return to their original positions. This is almost the equivalent of terminating Kanata, but leaves mouse mirroring so you can still double up your game keybinds using this feature. It's also nice for letting other people momentarily use your computer. This needs one small change for boards that only have two thumb keys; you can find that note under the GAMING header near the bottom of the config. {layer: gaming}
 
--- Moving On --
-Those are all the layers! Three with extra features, and one with practically nothing. One final feature to cover, though...
+;; {id: exit-gaming} To get out of the Gaming layer and back to Base, follow the same procedure of Extend+G, but hold it instead. This ensures that the key works the same regardless of the current state: tap always goes to Gaming, hold always leaves gaming. {layer: extend} {highlight: @gaming @escext}
+
+;; {id: layers-outro} Those are all the layers! Three with extra features, and one with practically nothing. One final feature to cover, though... {layer: base}
+
+;; {play-sequence: gaming-summary, exit-gaming, layers-outro}
 
 
-======================================================
-     MIRRORING | GNIRORRIM
-======================================================
+
+
+#| ### Mirroring {id: mirroring} {layer: base} {highlight: nop0}
+
 Mirroring really sprinkles a bit of magic into this layout and fixes so many daily keyboarding annoyances with one simple mechanic.
 
-If nop0 (mouse back button) is held, all alphanumeric keys on the left half of the board send their *mirrored* output instead. So f becomes j, d becomes k, etc. Next time you need to Ctrl+Y, Ctrl+O, Ctrl+H, etc, give it a shot. Eventually that turns into short keywords, app launcher searches, or the first few characters of a dropdown box: it's really lovely to not have to leave the mouse for just a couple key presses, no matter where they are on the keyboard. There are also some non-standard "mirrors" (tab becoming shift-tab, for example) that solve other ergonomics issues very elegantly.
+If nop0 (mouse back button) is held, all alphanumeric keys on the left half of the board send their *mirrored* output instead. So f becomes j, d becomes k, etc. Next time you need to Ctrl+Y, Ctrl+O, Ctrl+H, etc, give it a shot. Eventually that grows into short keywords, app launcher searches, or the first few characters of a dropdown box: it's really flowy to not have to leave the mouse for just a couple presses, no matter where they are on the keyboard. There are also some non-standard "mirrors" (tab becoming shift-tab, for example) that solve other ergonomics issues.
 
-If you do not have a back button on your mouse, this will be completely invisible to you. I would strongly recommend investing, though! Change mfwd to nop0 instead if that is more comfortable on your mouse; the opposite mouse button remains open if you need a good spot to put another layer.
+If you do not have a back button on your mouse, this will be completely invisible to you. I would strongly recommend investing, though! Change mfwd to nop0 if that is more comfortable on your mouse; the opposite mouse button remains open if you need a good spot to put another layer.
 
-While using a trackpad on a laptop, the keys to the right of right alt perform the same nop0 function as the mouse back button.
-
-
-======================================================
-     WRAP-UP
-======================================================
-
-Even if you aren't going to branch from this configuration I really hope you came away with some new ideas for your own layout. Thanks for looking, and toss me a star on Github if you enjoyed the read!
-
-Below you will find implementation details and a few more comments/rationale behind some specific keys. Be aware that the order of definitions seems a little odd because Kanata relies on definitions existing before their aliases can be used in other commands (like the mirror forks). |#
+While using a trackpad on a laptop, the keys to the right of right alt perform the same nop0 function as the mouse back button. |#
 
 
+;; {id: wrap-up} Wrapping up! I really hope you came away with some new ideas for your own layout, or maybe even decide to branch from this config! Thanks for looking, and toss me a star on Github if you enjoyed the read! {layer: base}
+
+;; {play-sequence: mirroring, wrap-up}
 
 
 ;; ===================================================
@@ -265,7 +250,7 @@ Below you will find implementation details and a few more comments/rationale beh
 
   /alt (tap-hold-press 0 $lht / ralt)
   zalt (fork (tap-hold-press 0 $lht z ralt) @/alt (nop0))
-  ;; With alt in their positions next to shift you can hold shift with your pinky and alt with your ring finger, even without losing your homing key.
+  ;; {id: alt-keys} With alt in their positions next to shift you can hold shift with your pinky and alt with your ring finger, even without losing your homing key. It's also a rarely used alpha key so misfire risk is low. {layer: base} {highlight: @/alt @zalt}
 
 
 ;; ---------- BASE TAP-HOLDS (with mirrors)
@@ -291,10 +276,10 @@ Below you will find implementation details and a few more comments/rationale beh
   a (fork a ' (nop0)) s (fork s l (nop0)) d (fork d k (nop0)) f (fork f j (nop0)) g (fork g h (nop0))
                       x (fork x . (nop0)) c (fork c , (nop0)) v (fork v m (nop0)) b (fork b n (nop0)) ;; z already forked via zalt alias
 
-  ;; @tabultra is an exception to standard mirroring. Instead of mirroring, it "reverses" the tab key by changing its tap function to shift-tab. For left-hand-only use, this makes an otherwise impossible shortcut of (leftpinky + leftpinky) an easy (mousethumb + leftpinky). Holding remains Ultra.
+  ;; {id:mirror-tabultra} @tabultra is an exception to standard mirroring. Instead of mirroring, it "reverses" the tab key by changing its tap function to shift-tab. For left-hand-only use, this makes an otherwise impossible shortcut of (leftpinky + leftpinky) an easy (mousethumb + leftpinky). Holding remains Ultra. {layer: base} {highlight: @tabultra}
   tabultra (fork (tap-hold-press 0 $ht tab (multi lalt lctl lmet)) (tap-hold-press 0 $ht S-tab (multi lalt lctl lmet)) (nop0))
 
-  ;; Alt-tab using only the left hand isn't very comfortable, so tap @toggle to Alt-tab (forward) or mirror it to Shift-alt-tab (backward). The window picker UI will stay open for the ms duration listed: play with the timing to make it feel right for you.
+  ;; {id:toggle} Tap @toggle repeatedly to Alt-tab or mirror it to Shift-alt-tab. The window picker UI will stay open until you stop tapping for the ms duration listed: play with the timing to make it feel right for you. {layer:base} {highlight:@toggle}
   tabforward (macro (hold-for-duration 650 alt) $delay-fix tab)
   tabbackward (macro (hold-for-duration 650 alt) $delay-fix S-tab)
   toggle (fork @tabforward @tabbackward (nop0))
@@ -331,6 +316,9 @@ Below you will find implementation details and a few more comments/rationale beh
   rename (fork f2 vold (nop0))
   ;; I use this a lot so wanted a shorter reach.
 
+  minus (tap-hold $tt $ht (fork - left (nop0)) (macro C-home - S-9 C-end S-0))
+  ;; For flipping the sign of an expression in FreeCAD: tap to insert a minus sign, hold to enclose an entire text field in negative parens.
+
   mwu (fork (mwheel-up 80 120) volu (nop0))
   mwd (fork (mwheel-down 80 120) up (nop0))
   ;; Mouse wheel up and down are handy when your hand *isn't* on the mouse: sometimes you only want to scroll the view but not also your input focus. My primary use of this is scrolling a document while inputting some of its data elsewhere.
@@ -355,9 +343,7 @@ Below you will find implementation details and a few more comments/rationale beh
 
   eq (fork XX pp (nop0))
   ew (fork XX prev (nop0))
-  es (fork XX left (nop0))
-  ez (fork XX XX (nop0))
-  ex (fork XX home (nop0))
+  
   ;; Despite no primary function, we need aliases for these keys in the extend layer so they mirror.
 
   ef1 (fork XX XX (nop0))
