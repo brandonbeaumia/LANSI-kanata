@@ -235,8 +235,10 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 
 (defvirtualkeys
   alt lalt ;; used only for @toggle
-  brake-on  (cmd sh -c "echo slow > /tmp/mouse_brake_fifo")
-  brake-off (cmd sh -c "echo reg > /tmp/mouse_brake_fifo")
+
+  ;; See cursor-speed-daemon.sh at https://github.com/brandonbeaumia/LANSI-kanata/
+  brake-on  (cmd sh -c "echo slow > /tmp/cursor_speed_fifo")
+  brake-off (cmd sh -c "echo reg > /tmp/cursor_speed_fifo")
 )
 
 (defalias
