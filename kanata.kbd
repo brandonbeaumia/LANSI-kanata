@@ -22,10 +22,12 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
 (defcfg
   process-unmapped-keys yes
   delegate-to-first-layer yes
+  danger-enable-cmd yes
 
   ;; Kanata captures everything on Linux by default, so we give it these device names as to ignore the rest.
   linux-dev-names-include (
-    "ELAN0735:00 04F3:316C Mouse" ;; no side buttons to configure, but trackpad included for responsive shift-clicks
+    ;; "ELAN0735:00 04F3:316C Mouse" ;; dummy device?: no input...
+    ;; "ELAN0735:00 04F3:316C Touchpad" ;; https://github.com/jtroo/kanata/issues/2138: consumes cursor...
     "AT Translated Set 2 keyboard"
     "Logitech G305"
     "Razer Razer DeathAdder Essential"
@@ -50,10 +52,9 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
   tab       q       w      e        r       t        y      u      i      o      p      [    ]    \
   caps      a       s      d        f       g        h      j      k      l      ;      '    ret
   lsft      z       x      c        v       b        n      m      ,      .      /      rsft
-  lctl      lmet    lalt   spc      ralt    rmet     rctl
+  lctl      lmet    lalt   spc      ralt    comp     rctl
 
   mlft mrgt mmid mfwd mbck
-  ;; While we only change the mouse back button, we also have to define the primary clicks so that tap-hold modifiers like shift-click are immediately responsive (despite 'process-unmapped-keys yes').
 )
 
 ;; ===================================================
@@ -61,15 +62,15 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
 ;; ===================================================
 
 (deflayer base 
-  @toggle    @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @f11 @f12
+  @toggle   @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @f11 @f12
 
-  @toggle    @n1     @n2    @n3      @n4     @n5      @n6    @n7    @n8    @n9    @n0    @-   @=   bspc
-  @tabultra  @q      @w     @e       @r      @t       y      u      i      o      p      ret  XX   XX
-  @escext    @a      @s     @d       @f      @g       h      j      k      l      ;      '    ret
-  @bspclsft  @zalt   @x     @c       @v      @b       n      m      ,      .      @/alt  @delrsft
-  XX         XX      lctl   spc      @nmsm   nop0     nop0
+  @toggle   @n1     @n2    @n3      @n4     @n5      @n6    @n7    @n8    @n9    @n0    @-   @=   bspc
+  @tabultra @q      @w     @e       @r      @t       y      u      i      o      p      ret  XX   XX
+  @escext   @a      @s     @d       @f      @g       h      j      k      l      ;      '    ret
+  @bspclsft @zalt   @x     @c       @v      @b       n      m      ,      .      @/alt  @delrsft
+  @brake    mmid    lctl   spc      @nmsm   nop0     nop0
 
-  mlft mrgt mmid XX nop0
+  mlft mrgt mmid _    nop0
 )
 ;; {id: base-summary} The base layer is (almost) plain QWERTY. It's easy to grow in to as the extra features should not add latency or interfere with old habits. {layer: base}
 
@@ -97,7 +98,7 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
 
   @f12      @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @f11 @f12 @f11
   _         @`~     S--    -        [       ]        S-[    S-]    @+±    @=≈    @\|    _    _    _
-  _         1       2      3        4       5        6      7      8      9      0      S-;  _
+  _         1       2      3        4       5        6      7      8      9      0      @:•  _
   _         @!alt   @*°    S-4      S-9     S-0      S-,    S-.    _      _      _      _
   _         _       _      _        _       _        _
 
@@ -128,13 +129,13 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
 ;; ===================================================
 
 (deflayer extend
-  @reload   @ef1    @ef2    @ef3     @ef4    @ef5     @ef6   @ef7   @ef8   @ef9   @ef10  @ef11 @ef12
+  @reload   @ef1    @ef2   @ef3     @ef4    @ef5     @ef6   @ef7   @ef8   @ef9   @ef10  @ef11 @ef12
 
-  _         XX      XX      XX       XX      XX       XX     XX     XX     XX     XX     _    _   _
-  _         @eq     @ew     @mwu     @rename @trash   prev   vold   volu   next   pp     _    _    _
-  _         @accept @minus  @mwd     @elsft  @gaming  left   down   up     rght   brdn   brup _
-  _         @rec    @run    @scsht   @clipb  @caps    home   pgdn   pgup   end    _      _
-  _         _       _       @lmet    _       _        _
+  _         XX      XX     XX       XX      XX       XX     XX     XX     XX     XX     _    _    _
+  _         @eq     @ew    @whlup   @rename @trash   prev   vold   volu   next   pp     _    _    _
+  _         @accept @minus @whldn   @elsft  @gaming  left   down   up     rght   brdn   brup _
+  _         @rec    @run   @scsht   @clipb  @caps    home   pgdn   pgup   end    _      _
+  _         _       _      @lmet    _       _        _
 
   _    _    _    _    _
 )
@@ -216,23 +217,29 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   ltt $long-tap-timeout
   lht $long-hold-timeout
 
+  ;; scroll speed settings
+  mw-initial-v 10
+  mw-maximum-v 50
+  mw-accel 1.15
+  mw-decel 0.93
+
   ;; required for some macros to ensure modifiers fire first
   delay-fix 5
+
+)
+
+
+(defalias
+  brake (multi (on-press tap-vkey brake-on) (on-release tap-vkey brake-off))
 )
 
 (defvirtualkeys
   alt lalt ;; used only for @toggle
+  brake-on  (cmd sh -c "echo slow > /tmp/mouse_brake_fifo")
+  brake-off (cmd sh -c "echo reg > /tmp/mouse_brake_fifo")
 )
 
 (defalias
-
-
-;; ---------- LAYER CHANGES ----------
-  nmsm (layer-while-held numsym)
-  escext (tap-hold-press 0 $ht esc (layer-while-held extend))
-  gaming (fork (tap-hold 0 500 (layer-switch gaming) (layer-switch base)) rght (nop0))
-
-
 ;; ---------- BASE TAP-HOLDS (mirrorless defined first) ----------
 
   f6 (tap-hold $tt $ht f6 S-f6)   f7 (tap-hold $tt $ht f7  S-f7)    f8 (tap-hold $tt $ht f8  S-f8)
@@ -286,6 +293,9 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 
 
 ;; ---------- NUMSYM ----------
+
+  nmsm (layer-while-held numsym)
+
   !alt (tap-hold 0 $ht S-1 ralt)  
   ?alt (tap-hold 0 $ht S-/ ralt)
   
@@ -298,30 +308,33 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   =≈ (tap-hold $tt $ht = (unicode ≈))
   ;; Some additional math symbols.
 
+  :• (tap-hold $tt $ht S-; (unicode •))
+  ;; GIMP doesn't support outline formatting in text, so the bullet character comes up semi-regularly.
 
 ;; ---------- EXTEND ----------
-;; The right hand of the extend layer is directional, so exact mirroring would be confusing. Instead, directions always stay natural (left key is left, right key is right).
 
-  ;; Ordered from most to least used
+  escext (tap-hold-press 0 $ht esc (layer-while-held extend))
+
+  ;; The right hand of the extend layer is directional, so exact mirroring would be confusing. Instead, directions always stay natural (left key is left, right key is right). This list is ordered generally from most to least used.
 
   elsft (fork lsft down (nop0))
   ;; required for LANSI to function properly
 
   accept return 
-  ;; a left-handed return, great for *A*ccepting the default selections in dialogs without taking my hand off the mouse or hunting down buttons with the cursor.
+  ;; a left-handed return, great for *A*ccepting the default selections in dialogs without taking your hand off the mouse or hunting down buttons with the cursor.
 
   trash (fork del next (nop0))
   ;; Makes del available on the left hand.
 
   rename (fork f2 vold (nop0))
-  ;; I use this a lot so wanted a shorter reach.
+  ;; Shorter reach for an often-used shortcut.
+
+  whlup (fork (mwheel-accel-up $mw-initial-v $mw-maximum-v $mw-accel $mw-decel) volu (nop0))
+  whldn (fork (mwheel-accel-down $mw-initial-v $mw-maximum-v $mw-accel $mw-decel) vold (nop0))
+  ;; Sometimes you only want to scroll the view without changing your input focus. Useful for scrolling a document while inputting some of its data elsewhere.
 
   minus (tap-hold $tt $ht (fork - left (nop0)) (macro C-home - S-9 C-end S-0))
   ;; For flipping the sign of an expression in FreeCAD: tap to insert a minus sign, hold to enclose an entire text field in negative parens.
-
-  mwu (fork (mwheel-up 80 120) volu (nop0))
-  mwd (fork (mwheel-down 80 120) up (nop0))
-  ;; Mouse wheel up and down are handy when your hand *isn't* on the mouse: sometimes you only want to scroll the view but not also your input focus. My primary use of this is scrolling a document while inputting some of its data elsewhere.
 
   scsht (fork (tap-hold 0 $ht prtsc S-prtsc) pgup (nop0))
   ;; set to your preferred screenshot modes
@@ -359,6 +372,8 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 
 
 ;; ---------- GAMING ----------
+  gaming (fork (tap-hold 0 500 (layer-switch gaming) (layer-switch base)) rght (nop0))
+
   ;; We removed the tap-holds from this layer but still want mirroring to work.
   g1 (fork 1 0 (nop0))
   g2 (fork 2 9 (nop0))
@@ -368,18 +383,15 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 
   g; (tap-hold 0 500 ; (layer-switch base))
   ;; For keyboards that only have two thumb keys per side, the Gaming layer needs this workaround. You'll have to replace Caps Lock's Escape/Extend with Control within the gaming layer to have all your modifiers, but this leaves no way to get out of the gaming layer. I've left this alias here as a solution for some specific physical layouts (ZSA Voyager comes to mind), but haven't needed it myself.
-)
 
+)
 
 ;; ---------- WINDOWS META FIX ----------
 ;; Since Windows' Start menu shortcut can't be easily changed we use Kanata for it. Set PowerToys' Run (or your preferred launcher) to Win+Space to avoid the awful Start menu.
 
-(platform (win winiov2 wintercept)
-  (defalias lmet (tap-hold-press-timeout 0 125 M-spc lmet lmet))
+(platform (win winiov2 wintercept) (defalias lmet (tap-hold-press-timeout 0 $hold-timeout M-spc lmet lmet)))
   ;; If tapped (125ms or less), sends M-spc for PowerToys shortcut. Sends lmet instantaneously when used as a modifier. Sends just lmet when releasing after the 125ms expires. Using timeout variant of tap-hold-press prevents lmet spam upon timer expiration.
-)
 
-(platform (linux macos)
-  (defalias lmet lmet)
+(platform (linux macos) (defalias lmet lmet))
   ;; Meta is left alone on Linux/Mac but still must be defined
-)
+
