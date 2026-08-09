@@ -23,6 +23,8 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
   process-unmapped-keys yes
   delegate-to-first-layer yes
   danger-enable-cmd yes
+  movemouse-smooth-diagonals yes
+  movemouse-inherit-accel-state yes
 
   ;; Kanata captures everything on Linux by default, so we give it these device names as to ignore the rest.
   linux-dev-names-include (
@@ -68,7 +70,7 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
   @tabultra @q      @w     @e       @r      @t       y      u      i      o      p      ret  XX   XX
   @escext   @a      @s     @d       @f      @g       h      j      k      l      ;      '    ret
   @bspclsft @zalt   @x     @c       @v      @b       n      m      ,      .      @/alt  @delrsft
-  @brake    mmid    lctl   spc      @nmsm   nop0     nop0
+  XX        mmid    lctl   spc      @nmsm   nop0     nop0
 
   mlft mrgt mmid _    nop0
 )
@@ -135,7 +137,7 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
   _         @eq     @ew    @whlup   @rename @trash   prev   vold   volu   next   pp     _    _    _
   _         @accept @minus @whldn   @elsft  @gaming  left   down   up     rght   brdn   brup _
   _         @rec    @run   @scsht   @clipb  @caps    home   pgdn   pgup   end    _      _
-  _         _       _      @lmet    _       _        _
+  _         _       _      @lmet    @mouse  _        _
 
   _    _    _    _    _
 )
@@ -148,11 +150,39 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
 
 ;; {id: extend-personalization} Pretty much all the other shortcuts on the left hand here are optional, they're just things that I happen to use a lot or wanted more comfortable access to. You can look at them individually for their rationale. {layer: extend}
 
-;; {id: extend-outro} That's it for the Extend layer! We're already near the end! {layer: extend}
+;; {id: extend-outro} That's it for the Extend layer! {layer: extend}
 
-;; {id: to-gaming-layer} Instead of letting go of caps lock, tapping G will bring you to the Gaming layer. {layer: extend} {highlight: @gaming}
+;; {id: to-mouse-layer} Instead of letting go of caps lock, hold numsym key to activate the Mouse layer. You can then safely let go of caps lock. {layer: extend} {highlight: @mouse}
 
 ;; {play-sequence: extend-summary, extend-shift, meta, extend-personalization, extend-outro, to-gaming-layer}
+
+
+
+(deflayer mouse
+  _         _       _      _        _       _        _      _      _      _      _      _    _
+
+  _         _       _      _        _       _        _      _      _      _      _      _    _    _
+  _         _       @msup  _        _       _        _      _      mmid   mmid   _      _    _    _
+  _         @msleft @msdown @msright _       _        _      mlft   mrgt   @slow  @scrl  _    _
+  _         _       _      _        _       _        _      _      _      _      _      _
+  _         _       _      _        _       _        _
+
+  _    _    _    _    _
+)
+
+(deflayermap scroll w @whlup a @whllft s @whldn d @whlrgt)
+
+;; {id: mouse-summary}  The mouse layer allows you to do some quick mousing without taking your hands off the keyboard.
+
+;; {id: wasd} Mouse directions are on the WASD keys. {layer: mouse} {highlight: @msup @msleft @msdown @msright}
+
+;; {id: clicks} Mouse clicks are on the right hand, lined up with a regular mouse.
+
+;; {id: slow} Hold L to dramatically slow down the cursor for when you near your target. {layer: mouse} {highlight: @slow}
+
+;; {id: scroll} Hold the semi-colon key while in the mouse layer to change WASD from mousing to scrolling. {layer: mouse} {highlight: @scrl}
+
+;; {id: end-mouse} Just like every other layer, to leave this one just let go. {layer: mouse}
 
 
 ;; ===================================================
@@ -166,19 +196,22 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
   tab       _       _      _        _       _        _      _      _      _      _      _    _    _
   _         _       _      _        _       _        _      _      _      _      _      _    _
   lsft      _       _      _        _       _        _      _      _      _      _      _
-  lctl      lmet    lalt   _        _       _        _
+  lctl      lmet    lalt   _        ralt    comp     rctl
 
   _    _    _    _    _
 )
 
+;; {id: go-to-gaming} To get to our last layer, hold Extend... {layer:base} {highlight: @escext}
+
+;; {id: go-to-gaming-2} and then tap G. {layer:extend} {highlight: @gaming}
 
 ;; {id: gaming-summary} The gaming layer returns the keyboard to (nearly) standard ANSI. Besides Escape/Extend all tap-holds are reverted and all modifier keys return to their original positions. This is almost the equivalent of terminating Kanata, but leaves mouse mirroring so you can still double up your game keybinds using this feature. It's also nice for letting other people momentarily use your computer. This needs one small change for boards that only have two thumb keys; you can find that note under the GAMING header near the bottom of the config. {layer: gaming}
 
 ;; {id: exit-gaming} To get out of the Gaming layer and back to Base, follow the same procedure of Extend+G, but hold it instead. This ensures that the key works the same regardless of the current state: tap always goes to Gaming, hold always leaves gaming. {layer: extend} {highlight: @gaming @escext}
 
-;; {id: layers-outro} Those are all the layers! Three with extra features, and one with practically nothing. One final feature to cover, though... {layer: base}
+;; {id: layers-outro} Those are all the layers! Four with extra features, and one with practically nothing. One final feature to cover, though... {layer: base}
 
-;; {play-sequence: gaming-summary, exit-gaming, layers-outro}
+;; {play-sequence: go-to-gaming, go-to-gaming-2, gaming-summary, exit-gaming, layers-outro}
 
 
 
@@ -223,22 +256,30 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   mw-accel 1.15
   mw-decel 0.93
 
+  mouse-move-interval 16
+  mouse-accel-time 650
+  mouse-speed-min 1
+  mouse-speed-max 40
+
   ;; required for some macros to ensure modifiers fire first
   delay-fix 5
 
 )
 
 
-(defalias
-  brake (multi (on-press tap-vkey brake-on) (on-release tap-vkey brake-off))
-)
+;; (defalias
+;;  brake (multi (on-press tap-vkey brake-on) (on-release tap-vkey brake-off))
+;; )
 
 (defvirtualkeys
   alt lalt ;; used only for @toggle
 
   ;; See cursor-speed-daemon.sh at https://github.com/brandonbeaumia/LANSI-kanata/
-  brake-on  (cmd sh -c "echo slow > /tmp/cursor_speed_fifo")
-  brake-off (cmd sh -c "echo reg > /tmp/cursor_speed_fifo")
+  ;; brake-on  (cmd sh -c "echo slow > /tmp/cursor_speed_fifo")
+  ;; brake-off (cmd sh -c "echo reg > /tmp/cursor_speed_fifo")
+
+  vert-movement-flag XX
+  hori-movement-flag XX
 )
 
 (defalias
@@ -331,6 +372,8 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   rename (fork f2 vold (nop0))
   ;; Shorter reach for an often-used shortcut.
 
+  whllft (mwheel-accel-left $mw-initial-v $mw-maximum-v $mw-accel $mw-decel)
+  whlrgt (mwheel-accel-right $mw-initial-v $mw-maximum-v $mw-accel $mw-decel)
   whlup (fork (mwheel-accel-up $mw-initial-v $mw-maximum-v $mw-accel $mw-decel) volu (nop0))
   whldn (fork (mwheel-accel-down $mw-initial-v $mw-maximum-v $mw-accel $mw-decel) vold (nop0))
   ;; Sometimes you only want to scroll the view without changing your input focus. Useful for scrolling a document while inputting some of its data elsewhere.
@@ -373,6 +416,40 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   ;; To work around f-keys not being reliable on Linux for some laptop hardware, you can bind these to relevant hardware functions. Alternatively, it's a full set of shortcuts ready for whatever purpose you need.
 
 
+;; ---------- MOUSE -----------
+  mouse (tap-hold 0 $ht spc (layer-while-held mouse))
+  scrl (layer-while-held scroll)
+  slow (movemouse-speed 20)
+
+  ;; Diagonal route velocities are *sqrt(2); this logic adjusts diagonal speed to match cardinal directions.
+  vert (multi (on-press press-vkey vert-movement-flag) (on-release release-vkey vert-movement-flag))
+  hori (multi (on-press press-vkey hori-movement-flag) (on-release release-vkey hori-movement-flag))
+
+  mouse-up (multi @vert (movemouse-accel-up $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+  mouse-down (multi @vert (movemouse-accel-down $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+  mouse-left (multi @hori (movemouse-accel-left $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+  mouse-right (multi @hori (movemouse-accel-right $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+
+  msup (switch 
+    ((input virtual hori-movement-flag)) (multi (movemouse-speed 71) @mouse-up) break
+    () @mouse-up break
+  )
+
+  msdown (switch
+    ((input virtual hori-movement-flag)) (multi (movemouse-speed 71) @mouse-down) break
+    () @mouse-down break
+  )
+
+  msleft (switch
+    ((input virtual vert-movement-flag)) (multi (movemouse-speed 71) @mouse-left) break
+    () @mouse-left break
+  )
+  
+  msright (switch
+    ((input virtual vert-movement-flag)) (multi (movemouse-speed 71) @mouse-right) break
+    () @mouse-right break
+  )
+
 ;; ---------- GAMING ----------
   gaming (fork (tap-hold 0 500 (layer-switch gaming) (layer-switch base)) rght (nop0))
 
@@ -396,4 +473,3 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 
 (platform (linux macos) (defalias lmet lmet))
   ;; Meta is left alone on Linux/Mac but still must be defined
-
