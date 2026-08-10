@@ -391,10 +391,10 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 
 (defvar ;; ------------ MOUSE -----------
   ;; cursor speed settings
-  mouse-move-interval 16
-  mouse-accel-time 650
+  mouse-move-interval 5
+  mouse-accel-time 210
   mouse-speed-min 1
-  mouse-speed-max 40
+  mouse-speed-max 12
 
   ;; scroll speed settings
   mw-initial-v 10
