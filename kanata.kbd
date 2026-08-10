@@ -5,11 +5,13 @@
 
 ### Welcome to Lean ANSI!
 
-LANSI is broadly compatible, designed around laptop use. If your keyboard is 4x6/60% or larger this config will work.
+LANSI is broadly compatible, designed around laptop use. If your keyboard is at least 4x6/60% (has a number row) this config will work.
 It is easy to parse, learn, and grow in to. It closely matches QWERTY and is built almost exclusively on tap-hold functionality.
 It features ultra-fast latency-free typing without misfires by avoiding alpha key overloading. Death to home row mods!
 It prioritizes fast and accessible modifier & shortcut combos, especially from the left hand for simultaneous mousing.
-It allows right-handed shortcuts without leaving the mouse via keyboard mirroring (sounds scarier than it is!). Let's get into it! {layer:base}
+It allows right-handed shortcuts without leaving the mouse via keyboard mirroring (sounds scarier than it is!).
+
+Let's get into it! {layer:base}
 
 |#
 
@@ -22,14 +24,13 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
 (defcfg
   process-unmapped-keys yes
   delegate-to-first-layer yes
-  danger-enable-cmd yes
   movemouse-smooth-diagonals yes
   movemouse-inherit-accel-state yes
 
   ;; Kanata captures everything on Linux by default, so we give it these device names as to ignore the rest.
   linux-dev-names-include (
     ;; "ELAN0735:00 04F3:316C Mouse" ;; dummy device?: no input...
-    ;; "ELAN0735:00 04F3:316C Touchpad" ;; https://github.com/jtroo/kanata/issues/2138: consumes cursor...
+    ;; "ELAN0735:00 04F3:316C Touchpad" ;; https://github.com/jtroo/kanata/issues/2138: consumes cursor
     "AT Translated Set 2 keyboard"
     "Logitech G305"
     "Razer Razer DeathAdder Essential"
@@ -47,7 +48,7 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
 ;; ===================================================
 
 (defsrc
-  ;; Function row defined to add a couple extra features if present, but not at all necessary for this layout.
+  ;; In case you have a larger keyboard, the function row is defined to add some features to those keys.
   esc       f1      f2     f3       f4      f5       f6     f7     f8     f9     f10    f11  f12
 
   `         1       2      3        4       5        6      7      8      9      0      -    =    bspc
@@ -72,7 +73,7 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
   @bspclsft @zalt   @x     @c       @v      @b       n      m      ,      .      @/alt  @delrsft
   XX        mmid    lctl   spc      @nmsm   nop0     nop0
 
-  mlft mrgt mmid _    nop0
+  mlft mrgt mmid _ nop0
 )
 ;; {id: base-summary} The base layer is (almost) plain QWERTY. It's easy to grow in to as the extra features should not add latency or interfere with old habits. {layer: base}
 
@@ -100,7 +101,7 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
 
   @f12      @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @f11 @f12 @f11
   _         @`~     S--    -        [       ]        S-[    S-]    @+±    @=≈    @\|    _    _    _
-  _         1       2      3        4       5        6      7      8      9      0      @:•  _
+  _    1       2      3        4       5        6      7      8      9      0      @:•  _
   _         @!alt   @*°    S-4      S-9     S-0      S-,    S-.    _      _      _      _
   _         _       _      _        _       _        _
 
@@ -154,7 +155,7 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
 
 ;; {id: to-mouse-layer} Instead of letting go of caps lock, hold numsym key to activate the Mouse layer. You can then safely let go of caps lock. {layer: extend} {highlight: @mouse}
 
-;; {play-sequence: extend-summary, extend-shift, meta, extend-personalization, extend-outro, to-gaming-layer}
+;; {play-sequence: extend-summary, extend-shift, meta, extend-personalization, extend-outro, to-mouse-layer}
 
 
 
@@ -174,7 +175,7 @@ It allows right-handed shortcuts without leaving the mouse via keyboard mirrorin
 
 ;; {id: mouse-summary}  The mouse layer allows you to do some quick mousing without taking your hands off the keyboard.
 
-;; {id: wasd} Mouse directions are on the WASD keys. {layer: mouse} {highlight: @msup @msleft @msdown @msright}
+;; {id: wasd} Mouse directions are on the WASD keys. This leaves your regular Ctrl and Shift fingers available. {layer: mouse} {highlight: @msup @msleft @msdown @msright}
 
 ;; {id: clicks} Mouse clicks are on the right hand, lined up with a regular mouse.
 
@@ -250,40 +251,11 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   ltt $long-tap-timeout
   lht $long-hold-timeout
 
-  ;; scroll speed settings
-  mw-initial-v 10
-  mw-maximum-v 50
-  mw-accel 1.15
-  mw-decel 0.93
-
-  mouse-move-interval 16
-  mouse-accel-time 650
-  mouse-speed-min 1
-  mouse-speed-max 40
-
   ;; required for some macros to ensure modifiers fire first
   delay-fix 5
-
 )
 
-
-;; (defalias
-;;  brake (multi (on-press tap-vkey brake-on) (on-release tap-vkey brake-off))
-;; )
-
-(defvirtualkeys
-  alt lalt ;; used only for @toggle
-
-  ;; See cursor-speed-daemon.sh at https://github.com/brandonbeaumia/LANSI-kanata/
-  ;; brake-on  (cmd sh -c "echo slow > /tmp/cursor_speed_fifo")
-  ;; brake-off (cmd sh -c "echo reg > /tmp/cursor_speed_fifo")
-
-  vert-movement-flag XX
-  hori-movement-flag XX
-)
-
-(defalias
-;; ---------- BASE TAP-HOLDS (mirrorless defined first) ----------
+(defalias ;; ---------- BASE TAP-HOLDS (mirrorless defined first) ----------
 
   f6 (tap-hold $tt $ht f6 S-f6)   f7 (tap-hold $tt $ht f7  S-f7)    f8 (tap-hold $tt $ht f8  S-f8)
   f9 (tap-hold $tt $ht f9 S-f9)  f10 (tap-hold $tt $ht f10 S-f10)  f11 (tap-hold $tt $ht f11 S-f11)
@@ -301,10 +273,10 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   /alt (tap-hold-press 0 $lht / ralt)
   zalt (fork (tap-hold-press 0 $lht z ralt) @/alt (nop0))
   ;; {id: alt-keys} With alt in their positions next to shift you can hold shift with your pinky and alt with your ring finger, even without losing your homing key. It's also a rarely used alpha key so misfire risk is low. {layer: base} {highlight: @/alt @zalt}
+)
 
-
-;; ---------- BASE TAP-HOLDS (with mirrors)
-;; See MIRRORING section near top of config file. This is a busy-looking implementation, but the end result is very simple.
+(defalias ;; ---------- BASE TAP-HOLDS (with mirrors)
+  ;; See MIRRORING section near top of config file. This is a busy-looking implementation, but the end result is very simple.
 
   ;; F-key mirrors
   f1 (fork (tap-hold $tt $ht f1 S-f1) @f10 (nop0))
@@ -333,9 +305,9 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   tabforward (macro (hold-for-duration 650 alt) $delay-fix tab)
   tabbackward (macro (hold-for-duration 650 alt) $delay-fix S-tab)
   toggle (fork @tabforward @tabbackward (nop0))
+)
 
-
-;; ---------- NUMSYM ----------
+(defalias ;; ---------- NUMSYM ----------
 
   nmsm (layer-while-held numsym)
 
@@ -353,8 +325,11 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 
   :• (tap-hold $tt $ht S-; (unicode •))
   ;; GIMP doesn't support outline formatting in text, so the bullet character comes up semi-regularly.
+)
 
-;; ---------- EXTEND ----------
+(defvirtualkeys alt lalt) ;; used only for @toggle
+
+(defalias ;; ---------- EXTEND ----------
 
   escext (tap-hold-press 0 $ht esc (layer-while-held extend))
 
@@ -379,7 +354,7 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   ;; Sometimes you only want to scroll the view without changing your input focus. Useful for scrolling a document while inputting some of its data elsewhere.
 
   minus (tap-hold $tt $ht (fork - left (nop0)) (macro C-home - S-9 C-end S-0))
-  ;; For flipping the sign of an expression in FreeCAD: tap to insert a minus sign, hold to enclose an entire text field in negative parens.
+  ;; For flipping the sign of an expression in CAD: tap to insert a minus sign, hold to enclose an entire text field in negative parens.
 
   scsht (fork (tap-hold 0 $ht prtsc S-prtsc) pgup (nop0))
   ;; set to your preferred screenshot modes
@@ -401,22 +376,34 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 
   eq (fork XX pp (nop0))
   ew (fork XX prev (nop0))
-  
   ;; Despite no primary function, we need aliases for these keys in the extend layer so they mirror.
 
-  ef1 (fork XX XX (nop0))
-  ef2 (fork XX XX (nop0))
-  ef3 (fork XX XX (nop0))
-  ef4 (fork XX XX (nop0))
-  ef5 (fork XX XX (nop0))
-  ef6 (fork XX XX (nop0))
-  ef12 (fork XX XX (nop0))
-
-  ef7 XX ef8 XX ef9 XX ef10 XX ef11 XX
+  ef1 (fork XX XX (nop0)) ef2 (fork XX XX (nop0)) ef3 (fork XX XX (nop0)) ef4 (fork XX XX (nop0))
+  ef5 (fork XX XX (nop0)) ef6 (fork XX XX (nop0)) ef7 XX                  ef8 XX
+  ef9 XX                 ef10 XX                 ef11 XX                 ef12 (fork XX XX (nop0))  
   ;; To work around f-keys not being reliable on Linux for some laptop hardware, you can bind these to relevant hardware functions. Alternatively, it's a full set of shortcuts ready for whatever purpose you need.
+)
 
+(defvirtualkeys ;; ---- MOUSE -----------
+  vert-movement-flag XX
+  hori-movement-flag XX
+)
 
-;; ---------- MOUSE -----------
+(defvar ;; ------------ MOUSE -----------
+  ;; cursor speed settings
+  mouse-move-interval 16
+  mouse-accel-time 650
+  mouse-speed-min 1
+  mouse-speed-max 40
+
+  ;; scroll speed settings
+  mw-initial-v 10
+  mw-maximum-v 50
+  mw-accel 1.15
+  mw-decel 0.93
+)
+
+(defalias ;; ---------- MOUSE -----------
   mouse (tap-hold 0 $ht spc (layer-while-held mouse))
   scrl (layer-while-held scroll)
   slow (movemouse-speed 20)
@@ -449,8 +436,9 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
     ((input virtual vert-movement-flag)) (multi (movemouse-speed 71) @mouse-right) break
     () @mouse-right break
   )
+)
 
-;; ---------- GAMING ----------
+(defalias ;; ---------- GAMING ----------
   gaming (fork (tap-hold 0 500 (layer-switch gaming) (layer-switch base)) rght (nop0))
 
   ;; We removed the tap-holds from this layer but still want mirroring to work.
@@ -462,8 +450,8 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 
   g; (tap-hold 0 500 ; (layer-switch base))
   ;; For keyboards that only have two thumb keys per side, the Gaming layer needs this workaround. You'll have to replace Caps Lock's Escape/Extend with Control within the gaming layer to have all your modifiers, but this leaves no way to get out of the gaming layer. I've left this alias here as a solution for some specific physical layouts (ZSA Voyager comes to mind), but haven't needed it myself.
-
 )
+
 
 ;; ---------- WINDOWS META FIX ----------
 ;; Since Windows' Start menu shortcut can't be easily changed we use Kanata for it. Set PowerToys' Run (or your preferred launcher) to Win+Space to avoid the awful Start menu.
