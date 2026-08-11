@@ -1,7 +1,7 @@
-layout: {qmk_keyboard: generic/tkl_ansi}
+layout: {qmk_keyboard: generic/75_ansi}
 layers:
   base:
-  - {t: alt-tab}
+  - {t: A-tab, s: S-A-tab}
   - {t: f1, h: S-f1, s: f10}
   - {t: f2, h: S-f2, s: f9}
   - {t: f3, h: S-f3, s: f8}
@@ -17,7 +17,7 @@ layers:
   - ''
   - ''
   - ''
-  - {t: S-alt-tab}
+  - {t: A-tab, s: S-A-tab}
   - {t: '1', h: S-1, s: '0'}
   - {t: '2', h: S-2, s: '9'}
   - {t: '3', h: S-3, s: '8'}
@@ -32,9 +32,7 @@ layers:
   - {t: '=', h: S-=}
   - bspc
   - ''
-  - ''
-  - ''
-  - {t: tab, h: C+A+M, s: S-tab}
+  - {t: tab, h: ultra, s: S-tab}
   - {t: q, s: p}
   - {t: w, s: o}
   - {t: e, s: i}
@@ -45,9 +43,7 @@ layers:
   - i
   - o
   - p
-  - ret
-  - ''
-  - ''
+  - return
   - ''
   - ''
   - ''
@@ -63,7 +59,8 @@ layers:
   - l
   - ;
   - ''''
-  - ret
+  - return
+  - ''
   - {t: bspc, h: lsft}
   - {t: z, h: ralt, s: /}
   - {t: x, s: .}
@@ -78,30 +75,30 @@ layers:
   - {t: del, h: rsft}
   - ''
   - ''
-  - mmid
+  - ''
+  - ''
   - lctl
   - spc
   - numsym
   - ''
-  - nop0
-  - (switch ((base-layer base)) (layer-switch mouse) break ((base-layer mouse)) (layer-switch base) break)
+  - ''
   - ''
   - ''
   - ''
   numsym:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
   - ''
   - ''
   - ''
@@ -120,9 +117,7 @@ layers:
   - {t: f12, h: S-f12, s: f11}
   - {t: f11, h: S-f11}
   - ''
-  - ''
-  - ''
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
   - {t: '`', h: S-`}
   - S--
   - '-'
@@ -133,13 +128,11 @@ layers:
   - {t: S-=, h: ±}
   - {t: '=', h: ≈}
   - {t: \, h: S-\}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
   - ''
-  - ''
-  - ''
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
   - '1'
   - '2'
   - '3'
@@ -151,8 +144,9 @@ layers:
   - '9'
   - '0'
   - {t: S-;, h: •}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
+  - ''
+  - {t: t, type: trans}
   - {t: S-1, h: ralt}
   - {t: S-8, h: °}
   - S-4
@@ -160,19 +154,19 @@ layers:
   - S-0
   - S-,
   - S-.
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
   - ''
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - ''
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
   - {type: held}
   - ''
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - ''
   - ''
   - ''
   - ''
@@ -193,7 +187,7 @@ layers:
   - ''
   - ''
   - ''
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
   - ''
   - ''
   - ''
@@ -204,16 +198,14 @@ layers:
   - ''
   - ''
   - ''
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
   - ''
-  - ''
-  - ''
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
   - {s: pp}
   - {s: prev}
-  - {t: (🡑)}
+  - {t: (🡑), s: volu}
   - {t: f2, s: vold}
   - {t: del, s: next}
   - prev
@@ -221,17 +213,15 @@ layers:
   - volu
   - next
   - pp
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - ''
-  - ''
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
   - ''
   - {type: held}
   - return
-  - {t: negify, s: left}
-  - {t: (🡓), s: vold}
-  - {t: SHIFT, s: down}
+  - {t: '-', h: macro C-home  -  S-9  C-end  S-0, s: left}
+  - {t: (🡑), s: vold}
+  - {t: lsft, s: down}
   - {t: gaming, h: base, s: rght}
   - left
   - down
@@ -239,133 +229,131 @@ layers:
   - rght
   - brdn
   - brup
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - rec macro
-  - {t: play macro, s: home}
+  - {t: t, type: trans}
+  - ''
+  - {t: t, type: trans}
+  - (dynamic-macro-record 0)
+  - {t: (dynamic-macro-play 0), s: home}
   - {t: prtsc, h: S-prtsc, s: pgup}
-  - {t: S-ins, h: C-A-S-M-v, s: pgdn}
-  - {t: caps-word, h: caps, s: end}
+  - {t: S-ins, h: macro C-A-S-M-v, s: pgdn}
+  - {t: (caps-word 1000), h: caps, s: end}
   - home
   - pgdn
   - pgup
   - end
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
   - ''
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - meta
-  - (mouse layer)
   - ''
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - '@lmet'
+  - toggle-mouse
+  - ''
+  - ''
   - ''
   - ''
   - ''
   mouse:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - ''
   - ''
   - ''
-  - {t: ▽, type: trans}
-  - {t: (↓)}
-  - {t: (↑)}
-  - {t: (↓)}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - ''
   - ''
   - ''
-  - {t: ▽, type: trans}
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - {t: t, type: trans}
+  - {t: (🡓), s: vold}
+  - {t: (🡑), s: volu}
+  - {t: (🡓), s: vold}
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - {t: t, type: trans}
+  - ''
+  - {t: t, type: trans}
   - (🡐)
   - 🖯🡑
   - (🡒)
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - Mid🖯
-  - Mid🖯
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - ''
+  - ''
+  - ''
+  - mid🖯
+  - mid🖯
+  - ''
+  - ''
+  - {t: t, type: trans}
   - ''
   - ''
   - ''
   - base+extend
-  - 🡐🖯
+  - 🖯🡐
   - 🖯🡓
   - 🖯🡒
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - Left🖯
-  - Rght🖯
-  - Slow🖯
-  - Fast🖯
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: (↓)}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - ''
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: base, h: toggle}
-  - {t: base, h: toggle}
   - ''
-  - {t: base, h: toggle}
-  - {t: ▽, type: trans}
+  - ''
+  - L🖯
+  - R🖯
+  - slow🖯
+  - fast🖯
+  - ''
+  - {t: t, type: trans}
+  - ''
+  - {t: t, type: trans}
+  - lalt
+  - {t: (🡓), s: vold}
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ralt
+  - {t: t, type: trans}
+  - ''
+  - ''
+  - ''
+  - ''
+  - lctl
+  - lmet
+  - ''
+  - ''
+  - ''
   - ''
   - ''
   - ''
   gaming:
   - esc
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
   - ''
   - ''
   - ''
@@ -380,63 +368,60 @@ layers:
   - '8'
   - '9'
   - '0'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - ''
-  - ''
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
   - ''
   - tab
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
   - ''
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
   - ''
-  - ''
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - lsft
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - {t: t, type: trans}
+  - ''
   - ''
   - lctl
   - lmet
   - lalt
-  - {t: ▽, type: trans}
+  - {t: t, type: trans}
   - ralt
   - ''
-  - menu
-  - rctl
+  - ''
   - ''
   - ''
   - ''
