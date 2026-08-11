@@ -16,6 +16,7 @@ The config itself is commented with paragraphs of explainers (even for as simple
 * Pink: output when held
 * Blue: output when mirrored via mouse button
 * Red: being held to enable the current layer
-* Base layer blanks: unbound. Other layer blanks: transparent.)
+* Blanks: transparent (falls through to base layer)
+* Dark: no action
 
-<img width="1082" height="1680" alt="LANSI-svg" src="https://github.com/user-attachments/assets/1899f056-c4e1-4dc1-b778-0b3cbdb459dc" />
+<img width="956" height="2016" alt="lansi" src="https://github.com/user-attachments/assets/69ef248c-c7c6-4a1f-9fc3-01c0ea73e2c5" />
