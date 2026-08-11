@@ -55,7 +55,7 @@ Let's get into it! {layer:base}
   tab       q       w      e        r       t        y      u      i      o      p      [    ]    \
   caps      a       s      d        f       g        h      j      k      l      ;      '    ret
   lsft      z       x      c        v       b        n      m      ,      .      /      rsft
-  lctl      lmet    lalt   spc      ralt    comp     rctl
+  lctl      lmet    lalt   spc      ralt    menu     rctl
 
   mlft mrgt mmid mfwd mbck
 )
@@ -71,9 +71,9 @@ Let's get into it! {layer:base}
   @tabultra @q      @w     @e       @r      @t       y      u      i      o      p      ret  XX   XX
   @escext   @a      @s     @d       @f      @g       h      j      k      l      ;      '    ret
   @bspclsft @zalt   @x     @c       @v      @b       n      m      ,      .      @/alt  @delrsft
-  XX        mmid    lctl   spc      @nmsm   nop0     nop0
+  XX        mmid    lctl   spc      @nmsm   nop0     @toggle-mouse
 
-  mlft mrgt mmid _ nop0
+  mlft mrgt mmid _    nop0
 )
 ;; {id: base-summary} The base layer is (almost) plain QWERTY. It's easy to grow in to as the extra features should not add latency or interfere with old habits. {layer: base}
 
@@ -101,7 +101,7 @@ Let's get into it! {layer:base}
 
   @f12      @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @f11 @f12 @f11
   _         @`~     S--    -        [       ]        S-[    S-]    @+±    @=≈    @\|    _    _    _
-  _    1       2      3        4       5        6      7      8      9      0      @:•  _
+  _         1       2      3        4       5        6      7      8      9      0      @:•  _
   _         @!alt   @*°    S-4      S-9     S-0      S-,    S-.    _      _      _      _
   _         _       _      _        _       _        _
 
@@ -136,9 +136,9 @@ Let's get into it! {layer:base}
 
   _         XX      XX     XX       XX      XX       XX     XX     XX     XX     XX     _    _    _
   _         @eq     @ew    @whlup   @rename @trash   prev   vold   volu   next   pp     _    _    _
-  _         @accept @minus @whldn   @elsft  @gaming  left   down   up     rght   brdn   brup _
+  @mouseext @accept @minus @whldn   @elsft  @gaming  left   down   up     rght   brdn   brup _
   _         @rec    @run   @scsht   @clipb  @caps    home   pgdn   pgup   end    _      _
-  _         _       _      @lmet    @mouse  _        _
+  _         _       _      @lmet    @toggle-mouse  _        _
 
   _    _    _    _    _
 )
@@ -160,18 +160,16 @@ Let's get into it! {layer:base}
 
 
 (deflayer mouse
-  _         _       _      _        _       _        _      _      _      _      _      _    _
+  _         _       _       _        _       _        _      _      _      _      _      _    _
 
-  _         _       _      _        _       _        _      _      _      _      _      _    _    _
-  _         _       @msup  _        _       _        _      _      mmid   mmid   _      _    _    _
-  _         @msleft @msdown @msright _       _        _      mlft   mrgt   @slow  @scrl  _    _
-  _         _       _      _        _       _        _      _      _      _      _      _
-  _         _       _      _        _       _        _
+  _         @whldn  @whlup  @whldn   _       _        _      _      _      _      _      _    _    _
+  _         @whllft @msup   @whlrgt  _       _        _      mmid   mmid   _      _      _    _    _
+  _         @msleft @msdown @msright _       _        _      mlft   mrgt   @slow  @fast  _    _
+  _         _       @whldn  _        _       _        _      _      _      _      _      _
+  _         _       _       @base    @base   @base    _
 
   _    _    _    _    _
 )
-
-(deflayermap scroll w @whlup a @whllft s @whldn d @whlrgt)
 
 ;; {id: mouse-summary}  The mouse layer allows you to do some quick mousing without taking your hands off the keyboard.
 
@@ -179,9 +177,11 @@ Let's get into it! {layer:base}
 
 ;; {id: clicks} Mouse clicks are on the right hand, lined up with a regular mouse.
 
+;; {id: scrolling} Scrolling lines up in a T similar to WASD, but requires wheel-down to be at the bottom.
+
 ;; {id: slow} Hold L to dramatically slow down the cursor for when you near your target. {layer: mouse} {highlight: @slow}
 
-;; {id: scroll} Hold the semi-colon key while in the mouse layer to change WASD from mousing to scrolling. {layer: mouse} {highlight: @scrl}
+
 
 ;; {id: end-mouse} Just like every other layer, to leave this one just let go. {layer: mouse}
 
@@ -197,7 +197,7 @@ Let's get into it! {layer:base}
   tab       _       _      _        _       _        _      _      _      _      _      _    _    _
   _         _       _      _        _       _        _      _      _      _      _      _    _
   lsft      _       _      _        _       _        _      _      _      _      _      _
-  lctl      lmet    lalt   _        ralt    comp     rctl
+  lctl      lmet    lalt   _        ralt    menu     rctl
 
   _    _    _    _    _
 )
@@ -255,7 +255,8 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   delay-fix 5
 )
 
-(defalias ;; ---------- BASE TAP-HOLDS (mirrorless defined first) ----------
+(defalias ;; ---------- BASE (mirrorless defined first) ----------
+  base (layer-switch base)
 
   f6 (tap-hold $tt $ht f6 S-f6)   f7 (tap-hold $tt $ht f7  S-f7)    f8 (tap-hold $tt $ht f8  S-f8)
   f9 (tap-hold $tt $ht f9 S-f9)  f10 (tap-hold $tt $ht f10 S-f10)  f11 (tap-hold $tt $ht f11 S-f11)
@@ -275,7 +276,7 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   ;; {id: alt-keys} With alt in their positions next to shift you can hold shift with your pinky and alt with your ring finger, even without losing your homing key. It's also a rarely used alpha key so misfire risk is low. {layer: base} {highlight: @/alt @zalt}
 )
 
-(defalias ;; ---------- BASE TAP-HOLDS (with mirrors)
+(defalias ;; ---------- BASE (with mirrors)
   ;; See MIRRORING section near top of config file. This is a busy-looking implementation, but the end result is very simple.
 
   ;; F-key mirrors
@@ -392,9 +393,9 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 (defvar ;; ------------ MOUSE -----------
   ;; cursor speed settings
   mouse-move-interval 5
-  mouse-accel-time 210
+  mouse-accel-time 220
   mouse-speed-min 1
-  mouse-speed-max 12
+  mouse-speed-max 8 
 
   ;; scroll speed settings
   mw-initial-v 10
@@ -404,10 +405,16 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 )
 
 (defalias ;; ---------- MOUSE -----------
-  mouse (tap-hold 0 $ht spc (layer-while-held mouse))
-  scrl (layer-while-held scroll)
-  slow (movemouse-speed 20)
+  toggle-mouse (switch
+    ((base-layer base)) (layer-switch mouse) break
+    ((base-layer mouse)) (layer-switch base) break
+  )
 
+  mouseext (multi (layer-switch base) (layer-while-held extend))
+  ;; Switching to Extend while in the mousing layer also cancels mousing layer.
+
+  slow (movemouse-speed 30)
+  fast (movemouse-speed 180)
   ;; Diagonal route velocities are *sqrt(2); this logic adjusts diagonal speed to match cardinal directions.
   vert (multi (on-press press-vkey vert-movement-flag) (on-release release-vkey vert-movement-flag))
   hori (multi (on-press press-vkey hori-movement-flag) (on-release release-vkey hori-movement-flag))
