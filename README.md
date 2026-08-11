@@ -18,4 +18,4 @@ The config itself is commented with paragraphs of explainers (even for as simple
 * Red: being held to enable the current layer
 * Base layer blanks: unbound. Other layer blanks: transparent.)
 
-<img width="956" height="1232" alt="my_keymap" src="https://github.com/user-attachments/assets/0cc80023-7efa-4770-a4f7-ba3630fd8904" />
+<img width="1082" height="1680" alt="LANSI-svg" src="https://github.com/user-attachments/assets/1899f056-c4e1-4dc1-b778-0b3cbdb459dc" />
