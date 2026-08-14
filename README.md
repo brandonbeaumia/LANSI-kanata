@@ -16,7 +16,7 @@ The config itself is commented with paragraphs of explainers (even for as simple
 * Pink: output when held
 * Blue: output when mirrored via mouse button
 * Red: being held to enable the current layer
-* Blanks: transparent (falls through to base layer)
-* Dark: no action
+* Darker: transparent (falls through to base layer)
+* Very Dark: no action
 
 <img width="956" height="2016" alt="8-14" src="https://github.com/user-attachments/assets/3e9af0e5-405f-4452-94ff-e98f66aec12c" />
