@@ -61,7 +61,7 @@ layers:
   - ''''
   - enter
   - ''
-  - {t: ⌫, h: shift}
+  - {t: backspace, h: shift}
   - {t: z, h: ralt, s: /}
   - {t: x, s: .}
   - {t: c, s: ','}
