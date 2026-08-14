@@ -2,7 +2,7 @@
 
 # LANSI
 Welcome to the LANSI Kanata configuration! This layout...
-* is broadly compatible. ANSI, 60%, 75%, 6-column ortholinear...as long as you have a number row it will work great.
+* is broadly compatible: ANSI, 60%, 75%, 6-column ortholinear? As long as you have a number row, it will work great.
 * is easy to learn and grow in to: matches QWERTY and avoids sticky modes.
 * allows responsive 130+ WPM by not overloading alpha keys.
 * has good data entry characteristics via a home row number layer.
