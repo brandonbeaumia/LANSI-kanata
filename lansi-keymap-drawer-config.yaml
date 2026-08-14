@@ -28,10 +28,13 @@ draw_config:
     rel_h: 12.0
     rx: 4.0
     ry: 4.0
-  svg_extra_style: "text.hold {fill: #F3BFEF}\ntext.tap {fill: #F7FFF7}\ntext.shifted\
-    \ {fill: #72BBE2 }\ntext.trans {display: none}\nrect.key.trans {fill: #2a2e38}\
-    \ \ng.key:not(.held):not(:has(text:not(:empty))) rect.key {\n      fill: #1a1a1a;\n\
-    \      stroke: #333333;\n      opacity: 0.3;\n    }"
+  svg_extra_style: |-
+    text.hold {fill: #F3BFEF}
+    text.tap {fill: #F7FFF7}
+    text.shifted {fill: #72BBE2 }
+    text.trans {display: none}
+    rect.key.trans {fill: #2a2e38}
+    g.key:not(.held):not(:has(text:not(:empty))) rect.key {fill: #1a1a1a; stroke: #333333; opacity: 0.3;}
   footer_text: Created with <a href="https://github.com/caksoylar/keymap-drawer">keymap-drawer</a>
   shrink_wide_legends: 7
   style_layer_activators: true
