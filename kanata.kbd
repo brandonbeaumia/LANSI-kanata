@@ -1,3 +1,4 @@
+
 ;; For comment readability, you may need to turn on word wrap at ~160 characters (or window wrap and shrink your window).
 ;; For a visual tour mimicing most of these comments, see https://configure.zsa.io/voyager/layouts/5qRME/latest/0/intro
 
@@ -32,13 +33,11 @@ Let's get into it! {layer:base}
     ;; "ELAN0735:00 04F3:316C Mouse" ;; dummy device?: no input...
     ;; "ELAN0735:00 04F3:316C Touchpad" ;; https://github.com/jtroo/kanata/issues/2138: consumes cursor
     "AT Translated Set 2 keyboard"
+    "ZMK Project Lily58 Keyboard"
+    "Lily58 Keyboard"
+    "Razer Orochi V2"
     "Logitech G305"
     "Razer Razer DeathAdder Essential"
-    "Razer Razer DeathAdder Essential Keyboard"
-    "ZMK Project Lily58 Mouse"
-    "ZMK Project Lily58 Keyboard"
-    "Lily58 Mouse"
-    "Lily58 Keyboard"
   )
 )
 
@@ -53,9 +52,9 @@ Let's get into it! {layer:base}
 
   `         1       2      3        4       5        6      7      8      9      0      -    =    bspc
   tab       q       w      e        r       t        y      u      i      o      p      [    ]    \
-  caps      a       s      d        f       g        h      j      k      l      ;      '    ret
+  caps      a       s      d        f       g        h      j      k      l      ;      '    enter
   lsft      z       x      c        v       b        n      m      ,      .      /      rsft
-  lctl      lmet    lalt   spc      ralt    menu     rctl
+  lctl      lmet    lalt   spc      ralt
 
   mlft mrgt mmid mfwd mbck
 )
@@ -67,11 +66,11 @@ Let's get into it! {layer:base}
 (deflayer base 
   @toggle   @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @f11 @f12
 
-  @toggle   @n1     @n2    @n3      @n4     @n5      @n6    @n7    @n8    @n9    @n0    @-   @=   bspc
-  @tabultra @q      @w     @e       @r      @t       y      u      i      o      p      ret  XX   XX
-  @escext   @a      @s     @d       @f      @g       h      j      k      l      ;      '    ret
+  @toggle   @n1     @n2    @n3      @n4     @n5      @n6    @n7    @n8    @n9    @n0    @-    @=   bspc
+  @tabultra @q      @w     @e       @r      @t       y      u      i      o      p      enter XX   XX
+  @escext   @a      @s     @d       @f      @g       h      j      k      l      ;      '     enter
   @bspclsft @zalt   @x     @c       @v      @b       n      m      ,      .      @/alt  @delrsft
-  XX        mmid    lctl   spc      @nmsm   nop0     @toggle-mouse
+  XX        mmid    lctl   spc      @nmsm
 
   mlft mrgt mmid _    nop0
 )
@@ -100,10 +99,10 @@ Let's get into it! {layer:base}
   _         _       _      _        _       _        _      _      _      _      _      _    _
 
   @f12      @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @f11 @f12 @f11
-  _         @`~     S--    -        [       ]        S-[    S-]    @+±    @=≈    @\|    _    _    _
+  _         @`~     S--    -        [       ]        S-[    S-]    @+±    @=≈    @\|    _    XX   XX
   _         1       2      3        4       5        6      7      8      9      0      @:•  _
-  _         @!alt   @*°    S-4      S-9     S-0      S-,    S-.    _      _      _      _
-  _         _       _      _        _       _        _
+  _         @!alt   @*°    S-4      S-9     S-0      S-,    S-.    ,      .      @/alt  _
+  _         _       _      _        _
 
   _    _    _    _    _
 )
@@ -134,11 +133,11 @@ Let's get into it! {layer:base}
 (deflayer extend
   @reload   @ef1    @ef2   @ef3     @ef4    @ef5     @ef6   @ef7   @ef8   @ef9   @ef10  @ef11 @ef12
 
-  _         XX      XX     XX       XX      XX       XX     XX     XX     XX     XX     _    _    _
-  _         @eq     @ew    @whlup   @rename @trash   prev   vold   volu   next   pp     _    _    _
-  @mouseext @accept @minus @whldn   @elsft  @gaming  left   down   up     rght   brdn   brup _
-  _         @rec    @run   @scsht   @clipb  @caps    home   pgdn   pgup   end    _      _
-  _         _       _      @lmet    @toggle-mouse  _        _
+  @reload   XX      XX     XX       XX      XX       XX     XX     XX     XX     XX     XX   XX   XX
+  @reload   @eq     @ew    @whlup   @rename @trash   prev   vold   volu   next   pp     _    XX   XX
+  _         @accept @minus @whldn   @elsft  @gaming  left   down   up     rght   brdn   brup _
+  _         @rec    @run   @scsht   @clipb  @caps    home   pgdn   pgup   end    ralt   _
+  _         lalt    lctl   @lmet    @mouse
 
   _    _    _    _    _
 )
@@ -153,37 +152,37 @@ Let's get into it! {layer:base}
 
 ;; {id: extend-outro} That's it for the Extend layer! {layer: extend}
 
-;; {id: to-mouse-layer} Instead of letting go of caps lock, hold numsym key to activate the Mouse layer. You can then safely let go of caps lock. {layer: extend} {highlight: @mouse}
+;; {id: to-mouse-layer} Instead of letting go of caps lock, tap OR hold the right alt key to activate the Mouse layer. You can then safely let go of caps lock. {layer: extend} {highlight: @mouse}
 
 ;; {play-sequence: extend-summary, extend-shift, meta, extend-personalization, extend-outro, to-mouse-layer}
 
 
 
 (deflayer mouse
-  _         _       _       _        _       _        _      _      _      _      _      _    _
+  XX        XX      XX     XX       XX        XX       XX     XX     XX     XX     XX     XX   XX
 
-  _         @whldn  @whlup  @whldn   _       _        _      _      _      _      _      _    _    _
-  _         @whllft @msup   @whlrgt  _       _        _      mmid   mmid   _      _      _    _    _
-  _         @msleft @msdown @msright _       _        _      mlft   mrgt   @slow  @fast  _    _
-  _         _       @whldn  _        _       _        _      _      _      _      _      _
-  _         _       _       @base    @base   @base    _
+  _         XX      @whldn  @whlup  @whldn   XX     XX     XX     XX     XX     XX     XX   XX   XX
+  _         XX      @whllft @msup   @whlrgt  XX     XX     mmid   mmid   XX     XX     XX   XX   XX
+  @msexit   XX      @msleft @msdown @msright XX     XX     mlft   mrgt   @slow  @fast  XX   XX
+  _         lalt    XX      @whldn  XX       XX     XX     XX     XX     XX     ralt   rsft
+  XX        XX      lctl   lmet     @msnmsm
 
   _    _    _    _    _
 )
 
 ;; {id: mouse-summary}  The mouse layer allows you to do some quick mousing without taking your hands off the keyboard.
 
-;; {id: wasd} Mouse directions are on the WASD keys. This leaves your regular Ctrl and Shift fingers available. {layer: mouse} {highlight: @msup @msleft @msdown @msright}
+;; {id: wasd} Mouse directions are on the ESDF keys. WASD may be more comfortable depending on your hand size. For either option, this leaves your regular Ctrl and Shift fingers available. {layer: mouse} {highlight: @msup @msleft @msdown @msright}
 
 ;; {id: clicks} Mouse clicks are on the right hand, lined up with a regular mouse.
 
-;; {id: scrolling} Scrolling lines up in a T similar to WASD, but requires wheel-down to be at the bottom.
+;; {id: scrolling} Scrolling lines up in a T similar to WASD, but requires wheel-down below.
 
-;; {id: slow} Hold L to dramatically slow down the cursor for when you near your target. {layer: mouse} {highlight: @slow}
+;; {id: slow} Hold L to slow down the cursor for when you near your target, and ; to throw your cursor across the screen. Combining them is also a medium-slow speed. {layer: mouse} {highlight: @slow @fast}
 
+;; {id: end-mouse} If you entered this mouse layer by tapping the layer key (right alt), you can exit it by tapping right alt again. If you entered this layer by holding right alt, just let go to return to the base layer. If you're ever unsure if you're still in this mousing layer, don't hesitate to tap right alt: there's no danger of input regardless of current mode. {layer: mouse} {highlight: @msnmsm}
 
-
-;; {id: end-mouse} Just like every other layer, to leave this one just let go. {layer: mouse}
+;; {id: end-mouse-addendum} Tapping caps lock normally outputs Esc, but in this mouse layer the Esc is consumed by the canceling of the layer. {layer: mouse} {highlight: @msexit}
 
 
 ;; ===================================================
@@ -194,10 +193,10 @@ Let's get into it! {layer:base}
   esc       _       _      _        _       _        _      _      _      _      _      _    _
 
   `         @g1     @g2    @g3      @g4     @g5      6      7      8      9      0      _    _    _
-  tab       _       _      _        _       _        _      _      _      _      _      _    _    _
+  tab       _       _      _        _       _        _      _      _      _      _      _    XX    XX
   _         _       _      _        _       _        _      _      _      _      _      _    _
   lsft      _       _      _        _       _        _      _      _      _      _      _
-  lctl      lmet    lalt   _        ralt    menu     rctl
+  lctl      lmet    lalt   _        ralt
 
   _    _    _    _    _
 )
@@ -312,8 +311,7 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 
   nmsm (layer-while-held numsym)
 
-  !alt (tap-hold 0 $ht S-1 ralt)  
-  ?alt (tap-hold 0 $ht S-/ ralt)
+  !alt (tap-hold 0 $ht S-1 ralt)
   
   `~ (tap-hold $tt $ht ` S-`)
   \| (tap-hold $tt $ht \ S-\)
@@ -339,7 +337,7 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   elsft (fork lsft down (nop0))
   ;; required for LANSI to function properly
 
-  accept return 
+  accept enter
   ;; a left-handed return, great for *A*ccepting the default selections in dialogs without taking your hand off the mouse or hunting down buttons with the cursor.
 
   trash (fork del next (nop0))
@@ -348,10 +346,11 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   rename (fork f2 vold (nop0))
   ;; Shorter reach for an often-used shortcut.
 
-  whllft (mwheel-accel-left $mw-initial-v $mw-maximum-v $mw-accel $mw-decel)
-  whlrgt (mwheel-accel-right $mw-initial-v $mw-maximum-v $mw-accel $mw-decel)
-  whlup (fork (mwheel-accel-up $mw-initial-v $mw-maximum-v $mw-accel $mw-decel) volu (nop0))
-  whldn (fork (mwheel-accel-down $mw-initial-v $mw-maximum-v $mw-accel $mw-decel) vold (nop0))
+  ;; wheel-accel variants cause crashing on Windows. Non-accel variant until fixed (and similar anyway)
+  whllft (mwheel-left $mw-interval $mw-distance)
+  whlrgt (mwheel-right $mw-interval $mw-distance)
+  whlup (fork (mwheel-up $mw-interval $mw-distance) volu (nop0))
+  whldn (fork (mwheel-down $mw-interval $mw-distance) vold (nop0))
   ;; Sometimes you only want to scroll the view without changing your input focus. Useful for scrolling a document while inputting some of its data elsewhere.
 
   minus (tap-hold $tt $ht (fork - left (nop0)) (macro C-home - S-9 C-end S-0))
@@ -385,36 +384,36 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
   ;; To work around f-keys not being reliable on Linux for some laptop hardware, you can bind these to relevant hardware functions. Alternatively, it's a full set of shortcuts ready for whatever purpose you need.
 )
 
+(defvar ;; ------------ MOUSE -----------
+  ;; cursor speed settings
+  mouse-move-interval 5 mouse-accel-time 220 mouse-speed-min 1 mouse-speed-max 8
+
+  ;; accel scroll speed settings
+  mwa-initial-v 10 mwa-maximum-v 50 mwa-accel 1.15 mwa-decel 0.93
+
+  ;; static scroll speed settings
+  mw-interval 5 mw-distance 15
+)
+
 (defvirtualkeys ;; ---- MOUSE -----------
   vert-movement-flag XX
   hori-movement-flag XX
 )
 
-(defvar ;; ------------ MOUSE -----------
-  ;; cursor speed settings
-  mouse-move-interval 5
-  mouse-accel-time 220
-  mouse-speed-min 1
-  mouse-speed-max 8 
+(defalias ;; ---------- MOUSE ----------
+  mouse (tap-hold 0 $ht (layer-switch mouse) (layer-while-held mouse))
+  ;; Tap to toggle mouse layer until exited, or hold for temporary mouse layer
+  msexit (multi (layer-switch base) (layer-while-held extend))
+  ;; Exclude the usual Esc tap behavior from @escext: it feels natural for exiting the layer to "consume" this Esc if just tapped.
+  msnmsm (tap-hold 0 $ht (layer-switch base) (layer-while-held numsym))
+  ;; Tapping cancels mouse, holding goes to symbols and leaves mouse active when you release. Always safe to *tap* even if you don't remember if you are in the mousing layer.
 
-  ;; scroll speed settings
-  mw-initial-v 10
-  mw-maximum-v 50
-  mw-accel 1.15
-  mw-decel 0.93
-)
-
-(defalias ;; ---------- MOUSE -----------
-  toggle-mouse (switch
-    ((base-layer base)) (layer-switch mouse) break
-    ((base-layer mouse)) (layer-switch base) break
-  )
-
-  mouseext (multi (layer-switch base) (layer-while-held extend))
-  ;; Switching to Extend while in the mousing layer also cancels mousing layer.
-
-  slow (movemouse-speed 30)
-  fast (movemouse-speed 180)
+  slow (movemouse-speed 10)
+  ;; Less fatiguing than mouse precision 
+  fast (movemouse-speed 280)
+  ;; For throwing your cursor to the edge of a screen, or onto another one.
+  ;; (Combining fast and slow results in 28% speed)
+  
   ;; Diagonal route velocities are *sqrt(2); this logic adjusts diagonal speed to match cardinal directions.
   vert (multi (on-press press-vkey vert-movement-flag) (on-release release-vkey vert-movement-flag))
   hori (multi (on-press press-vkey hori-movement-flag) (on-release release-vkey hori-movement-flag))
@@ -438,7 +437,7 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
     ((input virtual vert-movement-flag)) (multi (movemouse-speed 71) @mouse-left) break
     () @mouse-left break
   )
-  
+
   msright (switch
     ((input virtual vert-movement-flag)) (multi (movemouse-speed 71) @mouse-right) break
     () @mouse-right break
