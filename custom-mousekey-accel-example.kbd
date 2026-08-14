@@ -1,0 +1,38 @@
+(defvirtualkeys
+  first-gear (movemouse-speed 100)
+  second-gear (movemouse-speed 200)
+  third-gear (movemouse-speed 300)
+)
+
+(defalias
+  accelerate 
+  (switch
+    ;; Ensure only one @accelerate can run at a time so diagonals don't double-accel
+    ((input virtual first-gear)) () break
+    ((input virtual second-gear)) () break
+    ((input virtual third-gear)) () break
+
+    
+    () (multi
+      ;; Change speed using macro as timing mechanism (cancels when released)
+      (macro-release-cancel
+          (on-press press-vkey first-gear) 300 (on-press release-vkey first-gear)
+          (on-press press-vkey second-gear) 300 (on-press release-vkey second-gear)
+          (on-press press-vkey third-gear) 65535
+      )
+
+      ;; Cancel all gears when releasing, since macro will always end with a vkey enabled
+      (on-release release-vkey first-gear)
+      (on-release release-vkey second-gear)
+      (on-release release-vkey third-gear)
+    )
+    break
+  )
+
+  msright (multi @accelerate (movemouse-right 10 15))
+  msup (multi @accelerate (movemouse-up 10 15))
+  msdown (multi @accelerate (movemouse-down 10 15))
+  msleft (multi @accelerate (movemouse-left 10 15))
+)
+
+;; I think the macro could just as easily work on vkeys that are  movemouse-$dir, but then the config lines quadruple because you need one of these blocks for each direction. I think? If it's something you think you'd actually want to try I could set that up later and confirm, but it's already a lot of complexity!
