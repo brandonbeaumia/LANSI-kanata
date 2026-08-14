@@ -61,7 +61,7 @@ layers:
   - ''''
   - enter
   - ''
-  - {t: backspace, h: shift}
+  - {t: ⌫, h: shift}
   - {t: z, h: ralt, s: /}
   - {t: x, s: .}
   - {t: c, s: ','}
@@ -274,9 +274,9 @@ layers:
   - ''
   - {t: ▽, type: trans}
   - ''
-  - {t: (🡓), s: 🕩}
-  - {t: (🡑), s: 🕪}
-  - {t: (🡓), s: 🕩}
+  - {t: (🡓)}
+  - {t: (🡑)}
+  - {t: (🡓)}
   - ''
   - ''
   - ''
@@ -319,7 +319,7 @@ layers:
   - {t: ▽, type: trans}
   - lalt
   - ''
-  - {t: (🡓), s: 🕩}
+  - {t: (🡓)}
   - ''
   - ''
   - ''
