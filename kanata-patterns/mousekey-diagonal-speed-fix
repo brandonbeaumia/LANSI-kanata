@@ -1,0 +1,41 @@
+;; Diagonal route velocities are *sqrt(2); this logic adjusts diagonal speed to match cardinal directions by multiplying by .71
+;; `movemouse-inherit-accel-state yes` must be set in defcfg
+
+(defvar
+  mouse-move-interval 5 mouse-accel-time 220 mouse-speed-min 1 mouse-speed-max 7
+)
+
+(defvirtualkeys
+  vert-movement-flag XX
+  hori-movement-flag XX
+)
+
+(defalias
+  vert (multi (on-press press-vkey vert-movement-flag) (on-release release-vkey vert-movement-flag))
+  hori (multi (on-press press-vkey hori-movement-flag) (on-release release-vkey hori-movement-flag))
+
+  mouse-up (multi @vert (movemouse-accel-up $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+  mouse-down (multi @vert (movemouse-accel-down $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+  mouse-left (multi @hori (movemouse-accel-left $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+  mouse-right (multi @hori (movemouse-accel-right $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+
+  msup (switch 
+    ((input virtual hori-movement-flag)) (multi (movemouse-speed 71) @mouse-up) break
+    () @mouse-up break
+  )
+
+  msdown (switch
+    ((input virtual hori-movement-flag)) (multi (movemouse-speed 71) @mouse-down) break
+    () @mouse-down break
+  )
+
+  msleft (switch
+    ((input virtual vert-movement-flag)) (multi (movemouse-speed 71) @mouse-left) break
+    () @mouse-left break
+  )
+
+  msright (switch
+    ((input virtual vert-movement-flag)) (multi (movemouse-speed 71) @mouse-right) break
+    () @mouse-right break
+  )
+)
