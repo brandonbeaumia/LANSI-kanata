@@ -1,0 +1,27 @@
+;; Example use-case: in mouse mode, have a fast and slow toggle. Prevent them from stacking multiple copies of themselves and prevent them from stacking with each other.
+
+(defvirtualkeys
+  fast (movemouse-speed 280)
+  slow (movemouse-speed 10)
+)
+
+(defalias
+  slow (multi
+          (on-press release-vkey fast) ;; always cancel fast
+          (switch
+            ((not (input virtual slow))) (on-press press-vkey slow) break
+            ;; if not pressed, press. This prevents stacking of vkeys (see kanata issue 2171)
+            
+            ((input virtual slow)) (on-press release-vkey slow) break
+            ;; if pressed, release
+          )
+        )
+  
+  fast (multi
+          (on-press release-vkey slow)
+          (switch
+            ((not (input virtual fast))) (on-press press-vkey fast) break
+            ((input virtual fast)) (on-press release-vkey fast) break
+          )
+        )
+)
