@@ -1,3 +1,5 @@
+;; Toggle through mouse-speeds on a timer that cancels upon release. This lets you set custom speeds for each "gear."
+
 (defvirtualkeys
   first-gear (movemouse-speed 100)
   second-gear (movemouse-speed 200)
@@ -34,5 +36,3 @@
   msdown (multi @accelerate (movemouse-down 10 15))
   msleft (multi @accelerate (movemouse-left 10 15))
 )
-
-;; I think the macro could just as easily work on vkeys that are  movemouse-$dir, but then the config lines quadruple because you need one of these blocks for each direction. I think? If it's something you think you'd actually want to try I could set that up later and confirm, but it's already a lot of complexity!
