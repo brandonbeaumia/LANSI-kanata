@@ -1,0 +1,13 @@
+;; For custom repeat speeds or other actions that don't repeat properly via holding:
+
+(deftemplate custom-repeat (action delay interval)
+  (multi 
+    (macro $action) ;; wrap in macro to prevent repeating
+    (tap-hold 0 $delay
+        XX ;; do nothing on tap because we already did it
+        (macro-repeat $action $interval) ;; begin repeating action every $interval ms after initial $delay timer
+    )
+  )
+)
+
+(defalias very-fast-a (t! custom-repeat a 150 5)
