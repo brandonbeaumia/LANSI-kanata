@@ -1,0 +1,52 @@
+Per discussion at https://github.com/jtroo/kanata/discussions/2154
+
+(deftemplate hrm-chords-left (signal lmet lalt lctl lsft)
+  ;; Pass in your "intent signal" (likely space bar), and
+  ;; Pass in each character you want to chord with that intent signal for that modifier.
+  ;; (t! hrm-chords-left spc a s d f) is a good place to start.
+  ($signal $lmet                  ) (t! hrm lmet) $hrm-chord-timeout all-released ()
+  ($signal       $lalt            ) (t! hrm lalt) $hrm-chord-timeout all-released ()
+  ($signal             $lctl      ) (t! hrm lctl) $hrm-chord-timeout all-released ()
+  ($signal                   $lsft) (t! hrm lsft) $hrm-chord-timeout all-released ()
+
+  ($signal $lmet $lalt            ) (multi (t! hrm lmet) (t! hrm lalt)) $hrm-chord-timeout all-released ()
+  ($signal $lmet       $lctl      ) (multi (t! hrm lmet) (t! hrm lctl)) $hrm-chord-timeout all-released ()
+  ($signal $lmet             $lsft) (multi (t! hrm lmet) (t! hrm lsft)) $hrm-chord-timeout all-released ()
+  ($signal       $lalt $lctl      ) (multi (t! hrm lalt) (t! hrm lctl)) $hrm-chord-timeout all-released ()
+  ($signal       $lalt       $lsft) (multi (t! hrm lalt) (t! hrm lsft)) $hrm-chord-timeout all-released ()
+  ($signal             $lctl $lsft) (multi (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
+
+  ($signal $lmet $lalt $lctl      ) (multi (t! hrm lmet) (t! hrm lalt) (t! hrm lctl)) $hrm-chord-timeout all-released ()
+  ($signal $lmet $lalt       $lsft) (multi (t! hrm lmet) (t! hrm lalt) (t! hrm lsft)) $hrm-chord-timeout all-released ()
+  ($signal $lmet       $lctl $lsft) (multi (t! hrm lmet) (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
+  ($signal       $lalt $lctl $lsft) (multi (t! hrm lalt) (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
+
+  ($signal $lmet $lalt $lctl $lsft) (multi (t! hrm lmet) (t! hrm lalt) (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
+)
+
+(deftemplate hrm-chords-right (signal rsft rctl ralt rmet)
+  ;; Pass in your "intent signal" (likely space bar), and
+  ;; Pass in each character you want to chord with that intent signal for that modifier.
+  ;; (t! hrm-chords-right spc j k l ;) is a good place to start.
+  ($signal $rsft                  ) (t! hrm rsft) $hrm-chord-timeout all-released ()
+  ($signal       $rctl            ) (t! hrm rctl) $hrm-chord-timeout all-released ()
+  ($signal             $ralt      ) (t! hrm ralt) $hrm-chord-timeout all-released ()
+  ($signal                   $rmet) (t! hrm rmet) $hrm-chord-timeout all-released ()
+
+  ($signal $rsft $rctl            ) (multi (t! hrm rsft) (t! hrm rctl)) $hrm-chord-timeout all-released ()
+  ($signal $rsft       $ralt      ) (multi (t! hrm rsft) (t! hrm ralt)) $hrm-chord-timeout all-released ()
+  ($signal $rsft             $rmet) (multi (t! hrm rsft) (t! hrm rmet)) $hrm-chord-timeout all-released ()
+  ($signal       $rctl $ralt      ) (multi (t! hrm rctl) (t! hrm ralt)) $hrm-chord-timeout all-released ()
+  ($signal       $rctl       $rmet) (multi (t! hrm rctl) (t! hrm rmet)) $hrm-chord-timeout all-released ()
+  ($signal             $ralt $rmet) (multi (t! hrm ralt) (t! hrm rmet)) $hrm-chord-timeout all-released ()
+
+  ($signal $rsft $rctl $ralt      ) (multi (t! hrm rsft) (t! hrm rctl) (t! hrm ralt)) $hrm-chord-timeout all-released ()
+  ($signal $rsft $rctl       $rmet) (multi (t! hrm rsft) (t! hrm rctl) (t! hrm rmet)) $hrm-chord-timeout all-released ()
+  ($signal $rsft       $ralt $rmet) (multi (t! hrm rsft) (t! hrm ralt) (t! hrm rmet)) $hrm-chord-timeout all-released ()
+  ($signal       $rctl $ralt $rmet) (multi (t! hrm rctl) (t! hrm ralt) (t! hrm rmet)) $hrm-chord-timeout all-released ()
+)
+
+(defchordsv2
+  (t! hrm-chords-left spc a s d f)
+  (t! hrm-chords-right spc j k l ;)
+)
