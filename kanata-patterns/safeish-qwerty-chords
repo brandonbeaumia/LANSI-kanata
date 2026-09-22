@@ -1,0 +1,21 @@
+;; Pretty safe QWERTY chords (all index finger inner column combos, all punctuation, some rare bigrams)
+ 
+ (q w) XX $hrm-chord-timeout all-released ()
+ (r t) XX $hrm-chord-timeout all-released ()
+
+ (f g) XX $hrm-chord-timeout all-released ()
+ 
+ (z x) XX $hrm-chord-timeout all-released ()
+ (x c) XX $hrm-chord-timeout all-released ()
+ (c v) XX $hrm-chord-timeout all-released ()
+ (v b) XX $hrm-chord-timeout all-released ()
+
+ (y u) XX $hrm-chord-timeout all-released ()
+ (p [) XX $hrm-chord-timeout all-released ()
+ (h j) XX $hrm-chord-timeout all-released ()
+ (j k) XX $hrm-chord-timeout all-released ()
+ (l ;) XX $hrm-chord-timeout all-released ()
+ (; ') XX $hrm-chord-timeout all-released ()
+
+ (n m) XX $hrm-chord-timeout all-released ()
+ (m ,) XX $hrm-chord-timeout all-released ()
