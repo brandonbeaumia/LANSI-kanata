@@ -1,16 +1,16 @@
 ;; Because layers do not produce input by themselves, these actions have no percveivable input latency. This makes them ideal to stack onto one key. Here is the actual use case for me:
 
 (defalias
-  three-layers
+  fun-numsym
   (tap-hold-press 0 150 
     (tap-dance 150
       (
-        (one-shot-press 1000 (layer-while-held func)) ;; Tap for one-shot function layer (almost always single tap shortcuts).
-        (layer-while-held func) ;; DoubleTap+Hold for a *held* function layer, if you want to eliminate timing pressure.
+        (one-shot-press 1000 (layer-while-held func)) ;; Tap for one-shot function layer (Fkeys are almost always single tap shortcuts).
+        (layer-while-held func) ;; tap+tapHold for a *held* function layer, Same layer but eliminates timing pressure.
         ;; These could be two different layers if you aren't worried about having the first one available in a slower/safer mode.
       )
     )
-    (layer-while-held numsym) ;; Hold for numsym layer (commonly sequenced and used within flowy typing like the shift key).
+    (layer-while-held numsym) ;; Hold for numsym layer (commonly multiple chars in a row and used within flowy typing like the shift key).
   )
 
 ;; And here's a sample going up to 4 layers on as few as 2 taps:
