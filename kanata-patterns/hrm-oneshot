@@ -4,9 +4,9 @@
   (tap-hold-release-timeout $tt $ht
     $char ;; if tapped, output char
     $mod ;; if held and another key is pressed+released, $mod that key
-    (tap-hold-release 0 65353 ;; if held until $ht (200ms) timeout...
-      (one-shot $os-timeout $mod) ;; and no keys are pressed before mod is released: begin one-shot timeout when released
-      (one-shot $os-timeout $mod) ;; or, if a key is pressed and released, apply the $mod as normal.
+    (tap-hold-order 0 ;; if held until $ht (200ms) timeout...
+      (one-shot 1000 $mod) ;; and no keys are pressed before mod is released: begin one-shot timeout when released
+      (one-shot 1000 $mod) ;; or, if a key is pressed and released, apply the $mod as normal.
       ;; but even though we just want a regular mod if we activate the hold, we importantly use one-shot for it ensure we do not consume any other simultaneous one-shots
     )
   )
