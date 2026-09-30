@@ -55,12 +55,12 @@
     () @mouse-down break
   )
 
-  msleft (switch
+  mslft (switch
     ((input virtual vert-movement?)) (multi (movemouse-speed 71) @mouse-left) break
     () @mouse-left break
   )
 
-  msright (switch
+  msrght (switch
     ((input virtual vert-movement?)) (multi (movemouse-speed 71) @mouse-right) break
     () @mouse-right break
   )

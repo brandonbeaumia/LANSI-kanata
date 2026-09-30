@@ -182,7 +182,7 @@ Let's get into it!
 
   _         XX      XX     XX       XX      XX       XX     XX     XX     XX     XX     XX   XX   XX
   _         XX      XX     @msup    @whlup  XX       XX     mmid   mmid   XX     XX     XX   XX   XX
-  _         @whllft @msleft @msdown  @msright @whlrgt  XX     mlft   mrgt   @slow  @fast  XX   XX
+  _         @whllft @mslft @msdown  @msrght @whlrgt  XX     mlft   mrgt   @slow  @fast  XX   XX
   _         lalt    XX     XX       @whldn  XX       XX     XX     XX     XX     ralt   rsft
   XX        XX      lctl   lmet     @msnmsm
 
@@ -193,11 +193,11 @@ Let's get into it!
 
 ;; {id: mouse-summary}  The mouse layer allows you to do some quick mousing without taking your hands off the keyboard.
 
-;; {id: wasd} Mouse directions are on the ESDF keys. WASD may be more comfortable depending on your hand size. For either option, this leaves your regular Ctrl and Shift fingers available. {layer: mouse} {highlight: @msup @msleft @msdown @msright}
+;; {id: wasd} Mouse directions are on the ESDF keys. WASD may be more comfortable depending on your hand size. For either option, this leaves your regular Ctrl and Shift fingers available. {layer: mouse} {highlight: @msup @mslft @msdown @msrght}
 
 ;; {id: clicks} Mouse clicks are on the right hand, lined up with a regular mouse.
 
-;; {id: scrolling} Scrolling lines up in a T similar to WASD, but requires wheel-down below.
+;; {id: scrolling} Scrolling sideways is to the side, and scrolling up and down are on the index finger's up/down. 
 
 ;; {id: slow} Hold L to slow down the cursor for when you near your target, and ; to throw your cursor across the screen. Combining them is also a medium-slow speed. {layer: mouse} {highlight: @slow @fast}
 

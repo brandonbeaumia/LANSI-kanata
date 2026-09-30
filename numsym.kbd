@@ -29,7 +29,7 @@
   `~ (t! reg-mir (t! t-hsft ` S-`) @|\)
   _ (t! reg-mir S-- @=≈)
   - (t! reg-mir - @+±)
-  { (t! reg-mir { @})
+  { (t! reg-mir S-[ @})
   [ (t! reg-mir [ @])
   &alt (t! reg-mir (tap-hold 0 $ht S-7 ralt) @/alt)
   *^ (t! reg-mir (t! t-hsft S-8 S-6) @.>)
