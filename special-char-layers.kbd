@@ -1,0 +1,71 @@
+#| Special typing layers are how we output any character that is not on a US ANSI board.
+
+My only use case is holding the A key to type arrows that communicate key sequences like a↓ j↓ j↑ a↑. Other options include layers for...
+  diacritics
+  status/signal icons
+  mathematical notation
+  typesetting characters
+  super/sub-scripts
+  units/currencies
+|#
+
+;; To prevent delay, special-typing-layer keys always output their alpha character immediately. This checks if the layer-entering character needs to be deleted before outputting the special character(s). Use this template when your special input is not meant to complete a word.
+(deftemplate backspaced (layer-key action)
+  (switch
+    ((key-history $layer-key 1)) (macro bspc $action) break
+    () $action break
+  )
+)
+
+;; Any shortcuts that complete a word you want to be able apply Shift to the shift character instead of just deleting it.
+(deftemplate unmod2 (char1 char2) (unmod $char1) (unmod $char2))
+(deftemplate unmod3 (char1 char2 char3) (unmod $char1) (unmod $char2) (unmod $char3))
+(deftemplate unmod4 (char1 char2 char3 char4) (unmod $char1) (unmod $char2) (unmod $char3) (unmod $char4))
+(deftemplate unmod5 (char1 char2 char3 char4 char5) (unmod $char1) (unmod $char2) (unmod $char3) (unmod $char4) (unmod $char5))
+(deftemplate unmod6 (char1 char2 char3 char4 char5 char6) (unmod $char1) (unmod $char2) (unmod $char3) (unmod $char4) (unmod $char5) (unmod $char6))
+;; Start your macro with (release-key $layer-letter) if you use one of these unmod templates and repeat your $layer-letter as one of the $chars, e.g.
+;; (deflayermap (t) p (macro (release-key t) (unmod3 h a t)) ;; holding T for layer, so we must forcefully release it before the macro can "tap" it.
+
+(deflayermap (y) _ _)
+(deflayermap (u) _ _)
+(deflayermap (i) _ _)
+(deflayermap (o) _ _)
+(deflayermap (p) _ _)
+
+(deflayermap (h) _ _)
+(deflayermap (j) _ _)
+(deflayermap (k) _ _)
+(deflayermap (l) _ _)
+(deflayermap (;) _ _)
+(deflayermap (') _ _)
+
+(deflayermap (n) _ _)
+(deflayermap (m) _ _)
+(deflayermap (.) _ _)
+(deflayermap (,) _ _)
+;; no / as that is already alt
+
+(deflayermap (q) _ _)
+(deflayermap (w) _ _)
+(deflayermap (e) _ _)
+(deflayermap (r) _ _)
+(deflayermap (t) _ _)
+
+(deflayermap a ;; arrows
+  spc spc
+  h (t! backspaced a (unicode ←))
+  j (t! backspaced a (unicode ↓))
+  k (t! backspaced a (unicode ↑))
+  l (t! backspaced a (unicode →))
+)
+
+(deflayermap (s) _ _)
+(deflayermap (d) _ _)
+(deflayermap (f) _ _)
+(deflayermap (g) _ _)
+
+;; no Z as that is already alt 
+(deflayermap (x) _ _)
+(deflayermap (c) _ _)
+(deflayermap (v) _ _)
+(deflayermap (b) _ _)
