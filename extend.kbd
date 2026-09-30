@@ -1,0 +1,47 @@
+(defalias ;; extend
+
+  ;; The right hand of the extend layer is directional, so exact mirroring would be confusing. Instead, horizontal directions always stay natural (left key is left, right key is right).
+  escext (tap-hold-press 0 $ht esc (layer-while-held extend))
+  elsft (t! reg-mir lsft down)
+  elctl (t! reg-mir lctl up)
+  ealt (t! reg-mir lalt left)
+  endalt (tap-hold-press 0 150 end ralt)
+
+  accept enter
+  ;; a left-handed return, great for *A*ccepting the default selections in dialogs without taking your hand off the mouse or hunting down buttons with the cursor.
+
+  trash (t! reg-mir del next)
+  ;; Makes del available on the left hand.
+
+  rename (t! reg-mir f2 vold)
+  ;; Easier left-handed option for an often-used Fkey.
+
+  minus (tap-hold $tt $lht (t! reg-mir - left) (macro C-home - S-9 C-end S-0))
+  ;; For flipping the sign of an expression in CAD: tap to insert a minus sign, hold to enclose an entire text field in negative parens. Matches location of - in the numsym layer (accessible via mouse forward button), but this character is common enough for kebab-case and even English that making it a tap-hold in that layer would sacrifice its responsiveness. If you don't use CAD, probably no need for this!
+
+  scsht (t! reg-mir (tap-hold 0 $ht prtsc S-prtsc) pgup)
+  ;; set to your preferred screenshot modes
+
+  clipb (t! reg-mir (tap-hold 0 125 S-ins (macro C-A-S-M-v)) pgdn)
+  ;; Tap for terminal pasting or hold for clipboard app shortcut. The shortcut is wrapped in a macro to prevent it from repeating if held longer.
+
+  caps (t! reg-mir caps end)
+  ;; B for BOLD!
+
+  rec (t! reg-mir (dynamic-macro-record 0) ralt)
+  ;; start or stop recording a macro
+
+  run (t! reg-mir (dynamic-macro-play 0) home)
+  ;; play recorded macro
+
+  eq (t! reg-mir XX pp)
+  ew (t! reg-mir XX prev)
+  ;; Despite no primary function, we need aliases for these keys in the extend layer so they mirror.
+
+  ;; To work around f-keys not being reliable on Linux for newer laptop hardware, you can bind these to relevant hardware functions. Alternatively, it's a full set of shortcuts ready for whatever purpose you need.
+  ef1 (t! reg-mir XX XX) ef2 (t! reg-mir XX XX) ef3 (t! reg-mir XX XX) ef4 (t! reg-mir XX XX)
+  ef5 (t! reg-mir XX XX) ef6 (t! reg-mir XX XX) ef7 XX                 ef8 XX
+  ef9 XX                ef10 XX                ef11 XX                ef12 (t! reg-mir XX XX)
+
+  gaming (tap-hold 0 500 (layer-switch gaming) (layer-switch base))
+)

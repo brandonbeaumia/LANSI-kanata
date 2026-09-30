@@ -1,0 +1,42 @@
+(deflayermap (allow-chords))
+(defalias ;; numsym
+  func-numsym
+    (multi
+      (layer-while-held allow-chords)
+      (tap-hold-press 0 $ht 
+        (tap-dance 150
+          (
+            (one-shot-press 1000 (layer-while-held func)) ;; tap for one-shot func layer
+            (layer-while-held func) ;; doubletap+Hold for non-timed func layer
+          )
+        )
+        (layer-while-held numsym) ;; hold for numsym layer
+      )
+    )
+
+  1 (t! reg-mir 1 0) 2 (t! reg-mir 2 9) 3 (t! reg-mir 3 8) 4 (t! reg-mir 4 7) 5 (t! reg-mir 5 6)
+
+  ] ]
+  } S-]
+  +± (tap-hold $tt $ht S-= (unicode ±))
+  =≈ (tap-hold $tt $ht = (unicode ≈))
+  |\ (t! t-hsft \ S-\)
+  # S-3
+  rgtP S-0
+  ,< (tap-hold 0 $lht , S-,)
+  .> (tap-hold 0 $lht . S-.)
+
+  `~ (t! reg-mir (t! t-hsft ` S-`) @|\)
+  _ (t! reg-mir S-- @=≈)
+  - (t! reg-mir - @+±)
+  { (t! reg-mir { @})
+  [ (t! reg-mir [ @])
+  &alt (t! reg-mir (tap-hold 0 $ht S-7 ralt) @/alt)
+  *^ (t! reg-mir (t! t-hsft S-8 S-6) @.>)
+  /% (t! reg-mir (t! t-hsft / S-5) @,<)
+  lftP (t! reg-mir S-9 @rgtP)
+
+  :• (tap-hold $tt $ht S-; (unicode •))
+
+  spcmet (tap-hold-order 0 0 spc lmet)
+)

@@ -19,118 +19,17 @@ Let's get into it!
 
 ;; {play-sequence: intro}
 
+
+
+
 ;; ===================================================
 ;;   TOP-LEVEL CONFIG
 ;; ===================================================
-(defcfg
-  ;; some boilerplate'ish stuff:
-  process-unmapped-keys yes
-  delegate-to-first-layer yes
-  movemouse-smooth-diagonals yes
-  movemouse-inherit-accel-state yes
-  concurrent-tap-hold yes
 
-  ;; Because we only chord on keys of ,./ (which virtually never roll), we can process chords all the time. If you add riskier chords (alpha pairs, for example), divide 12000 (milliseconds in a minute) by the lowest end of your WPM for this value:
-  chords-v2-min-idle 5
-
-  ;; Kanata captures too much on Linux by default, so we give it these device names as to ignore the rest:
-  linux-dev-names-include (
-    "AT Translated Set 2 keyboard"
-    "Razer Orochi V2"
-    "Touchpad Thumbkeys Keyboard" ;; https://github.com/brandonbeaumia/touchpad-thumbkeys - adds two thumb keys to the top of your touchpad.
-  )
-)
-
-(defvar
-  ;; regular timeouts
-  tap-timeout 150
-  hold-timeout 150
-  tt $tap-timeout
-  ht $hold-timeout
-
-  ;; longer timeouts (for rare keys or slow pinkies)
-  long-tap-timeout 200
-  long-hold-timeout 200
-  ltt $long-tap-timeout
-  lht $long-hold-timeout
-
-  ;; This is how long it takes for Kanata to give up on waiting for a different key that might match your chord. It is therefore also the INPUT DELAY of the first keytap of any chorded keys that don't happen inside a typing streak (typing streak being defined by your `chords-v2-min-idle` variable in defcfg):
-  chord-timeout 36
-  hrm-chord-timeout 36
-
-  ;; required for some macros to ensure modifiers fire first
-  delay-fix 5
-  df $delay-fix
-)
-
-(defvirtualkeys
-  mirror? XX ;; flag used to check if a key should be mirrored.
-)
-
-;; Template to define mirrors within a (defalias) block
-(deftemplate mirror (left-key left-action right-key right-action)
-  $right-key $right-action
-  
-  $left-key
-  (switch
-    ((input virtual mirror?)) $right-action break
-    () $left-action break
-  )
-)
-
-;; Template to define mirrors within a (deflayermap) block
-(deftemplate reg-mir (left-action right-action)
-  (switch
-    ((input virtual mirror?)) $right-action break
-    () $left-action break
-  )
-)
-
-(deftemplate special-typing-layer (char layer)
-  (multi
-    $char
-    (tap-hold-release-timeout 0 500 ;; tap-repress set to 0 since default holding works to repeat as normal
-      XX ;; we already output $char so don't do it again
-      (layer-while-held $layer) ;; if other key is pressed+released, output from that layer instead
-      XX ;; if timeout of 500ms, (about when your $char begins repeating by default in most OSs)
-      ;; then we no longer consider switching layers
-    )
-  )
-)
-
-;; 'tap-hold-shift' - sets a key to char on press, or different char on hold/shift.
-
-(deftemplate slower-t-hsft (tap hold-or-shift)
-  (fork (tap-hold $ltt $lht $tap $hold-or-shift) $hold-or-shift (lsft rsft))
-)
-(deftemplate t-hsft (tap hold-or-shift)
-  (fork (tap-hold $tt $ht $tap $hold-or-shift) $hold-or-shift (lsft rsft))
-)
-
-;; For filling in (deflayermap) blocks so that `_ XX` doesn't disable mouse buttons
-(deftemplate mouse-buttons ()
-  mlft mlft   mmid mmid   mrgt mrgt
-  mfwd @func-numsym
-  mbck @mirror
-)
+(include global.kbd)
 
 
 
-;; Despite putting a laptop-sized keyboard into (defsrc), this layout is compatible with keyboards as small as 3x6 (Corne-like). Keys outside that internal 3x6 grid are set up as slightly more convenient duplicates if you're comfortable stretching for them.
-
-(defsrc
-  esc       f1      f2     f3       f4      f5       f6     f7     f8     f9     f10    f11  f12
-
-  `         1       2      3        4       5        6      7      8      9      0      -    =    bspc
-  tab       q       w      e        r       t        y      u      i      o      p      [    ]    \
-  caps      a       s      d        f       g        h      j      k      l      ;      '    enter
-  lsft      z       x      c        v       b        n      m      ,      .      /      rsft
-  lctl      lmet    lalt   spc      ralt
-
-  mlft mmid mrgt mfwd mbck
-
-  muhenkan henkan
-)
 
 ;; ===================================================
 ;;   BASE LAYER
@@ -140,9 +39,9 @@ Let's get into it!
   XX        @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @rf11 @rf12
 
   XX        @n1     @n2    @n3      @n4     @n5      @n6    @n7    @n8    @n9    @n0    @nr- @nr= bspc
-  @tabultra @q      @w     @e       @r      @t       y      u      i      o     p     enter XX   XX
+  @tabultra @q      @w     @e       @r      @t       y      u      i      o      p      enter XX   XX
   @escext   @a      @s     @d       @f      @g       h      j      k      l      ;      '    enter
-  @bspclsft @zalt   @x     @c       @v      @b       n      m      ,      @.alt    @/alt  @delrsft
+  @bspclsft @zalt   @x     @c       @v      @b       n      m      ,      @.alt  @/alt  @delrsft
   XX        mmid    lctl   spc      @func-numsym
 
   mlft mmid mrgt @func-numsym @mirror
@@ -166,172 +65,22 @@ Let's get into it!
 
 ;; {play-sequence: base-summary, thumb-keys, shifts, alt-keys, top-row, toggle, escape-extend, base-outro}
 
-(defvirtualkeys
-  !? (fork S-1 S-/ (lsft rsft))
-  at S-2
-)
+(include base.kbd)
 
-;; Per discussion at https://github.com/jtroo/kanata/discussions/2154
 
-(deftemplate hrm (mod)
-  (one-shot-press 500 $mod)
-)
 
-(deftemplate hrm-chords-left (signal lmet lalt lctl lsft)
-  ;; Pass in your "intent signal" (likely space bar), and
-  ;; Pass in each character you want to chord with that intent signal for that modifier.
-  ;; (t! hrm-chords-left spc a s d f) is a good place to start.
-  ($signal $lmet                  ) (t! hrm lmet) $hrm-chord-timeout all-released ()
-  ($signal       $lalt            ) (t! hrm lalt) $hrm-chord-timeout all-released ()
-  ($signal             $lctl      ) (t! hrm lctl) $hrm-chord-timeout all-released ()
-  ($signal                   $lsft) (t! hrm lsft) $hrm-chord-timeout all-released ()
 
-  ($signal $lmet $lalt            ) (multi (t! hrm lmet) (t! hrm lalt)) $hrm-chord-timeout all-released ()
-  ($signal $lmet       $lctl      ) (multi (t! hrm lmet) (t! hrm lctl)) $hrm-chord-timeout all-released ()
-  ($signal $lmet             $lsft) (multi (t! hrm lmet) (t! hrm lsft)) $hrm-chord-timeout all-released ()
-  ($signal       $lalt $lctl      ) (multi (t! hrm lalt) (t! hrm lctl)) $hrm-chord-timeout all-released ()
-  ($signal       $lalt       $lsft) (multi (t! hrm lalt) (t! hrm lsft)) $hrm-chord-timeout all-released ()
-  ($signal             $lctl $lsft) (multi (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
+;; ===================================================
+;;   NUMSYM LAYER
+;; ===================================================
 
-  ($signal $lmet $lalt $lctl      ) (multi (t! hrm lmet) (t! hrm lalt) (t! hrm lctl)) $hrm-chord-timeout all-released ()
-  ($signal $lmet $lalt       $lsft) (multi (t! hrm lmet) (t! hrm lalt) (t! hrm lsft)) $hrm-chord-timeout all-released ()
-  ($signal $lmet       $lctl $lsft) (multi (t! hrm lmet) (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
-  ($signal       $lalt $lctl $lsft) (multi (t! hrm lalt) (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
-
-  ($signal $lmet $lalt $lctl $lsft) (multi (t! hrm lmet) (t! hrm lalt) (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
-)
-
-(deftemplate hrm-chords-right (signal rsft rctl ralt rmet)
-  ;; Pass in your "intent signal" (likely space bar), and
-  ;; Pass in each character you want to chord with that intent signal for that modifier.
-  ;; (t! hrm-chords-right spc j k l ;) is a good place to start.
-  ($signal $rsft                  ) (t! hrm rsft) $hrm-chord-timeout all-released ()
-  ($signal       $rctl            ) (t! hrm rctl) $hrm-chord-timeout all-released ()
-  ($signal             $ralt      ) (t! hrm ralt) $hrm-chord-timeout all-released ()
-  ($signal                   $rmet) (t! hrm rmet) $hrm-chord-timeout all-released ()
-
-  ($signal $rsft $rctl            ) (multi (t! hrm rsft) (t! hrm rctl)) $hrm-chord-timeout all-released ()
-  ($signal $rsft       $ralt      ) (multi (t! hrm rsft) (t! hrm ralt)) $hrm-chord-timeout all-released ()
-  ($signal $rsft             $rmet) (multi (t! hrm rsft) (t! hrm rmet)) $hrm-chord-timeout all-released ()
-  ($signal       $rctl $ralt      ) (multi (t! hrm rctl) (t! hrm ralt)) $hrm-chord-timeout all-released ()
-  ($signal       $rctl       $rmet) (multi (t! hrm rctl) (t! hrm rmet)) $hrm-chord-timeout all-released ()
-  ($signal             $ralt $rmet) (multi (t! hrm ralt) (t! hrm rmet)) $hrm-chord-timeout all-released ()
-
-  ($signal $rsft $rctl $ralt      ) (multi (t! hrm rsft) (t! hrm rctl) (t! hrm ralt)) $hrm-chord-timeout all-released ()
-  ($signal $rsft $rctl       $rmet) (multi (t! hrm rsft) (t! hrm rctl) (t! hrm rmet)) $hrm-chord-timeout all-released ()
-  ($signal $rsft       $ralt $rmet) (multi (t! hrm rsft) (t! hrm ralt) (t! hrm rmet)) $hrm-chord-timeout all-released ()
-  ($signal       $rctl $ralt $rmet) (multi (t! hrm rctl) (t! hrm ralt) (t! hrm rmet)) $hrm-chord-timeout all-released ()
-)
-
-(defchordsv2
-  (t! hrm-chords-left spc a s d f)
-  (t! hrm-chords-right spc j k l ;)
-  
-  ;; vkeys required here so that our lsft "hold" action is activated when tapping the chord (see https://jtroo.github.io/config.html#chordsv2-processing-order)
-  (, .) (multi (on-press press-vkey !?) (on-release release-vkey !?)) $chord-timeout all-released (ultra extend mouse func)
-  (w e) (multi (on-press press-vkey at) (on-release release-vkey at)) $chord-timeout all-released (base ultra extend mouse func)
-)
-
-(defalias ;; base
-
-  ;; Tap for Fkey, hold for Alt+Fkey:
-  f6 (tap-hold $ltt $lht f6 A-f6)
-  f7 (tap-hold $ltt $lht f7 A-f7)
-  f8 (tap-hold $ltt $lht f8 A-f8)
-  f9 (tap-hold $ltt $lht f9 A-f9)
-  f10 (tap-hold $ltt $ht f10 A-f10)
-
-  ;; Mirroring works differently depending on where the F key is, so we define the left and right-handed versions separately:
-  rf11 (tap-hold $ltt $lht f11 A-f11)
-  rf12 (tap-hold $tt $lht f12 A-f12)
-  lf11 (t! reg-mir @rf11 @rf12)
-  lf12 @rf12
-  
-  f1 (t! reg-mir (tap-hold $ltt $lht f1 A-f1) @f10)
-  f2 (t! reg-mir (tap-hold $ltt $lht f2 A-f2) @f9)
-  f3 (t! reg-mir (tap-hold $ltt $lht f3 A-f3) @f8)
-  f4 (t! reg-mir (tap-hold $ltt $lht f4 A-f4) @f7)
-  f5 (t! reg-mir (tap-hold $ltt $lht f5 A-f5) @f6)
-  f12 (t! reg-mir (tap-hold $ltt $lht f12 A-f12) @lf12)
-
-  ;; Number row
-  n6 (tap-hold 0 $ht 6 S-6) n7 (tap-hold 0 $ht 7 S-7) n8 (tap-hold 0 $ht 8 S-8)
-  n9 (tap-hold 0 $ht 9 S-9) n0 (tap-hold 0 $ht 0 S-0) nr- (tap-hold 0 $ht -   S--) nr= (tap-hold 0 $ht =   S-=)
-  n1 (t! reg-mir (tap-hold 0 $ht 1 S-1) @n0) n2 (t! reg-mir (tap-hold 0 $ht 2 S-2) @n7) n3 (t! reg-mir (tap-hold 0 $ht 3 S-3) @n8)
-  n4 (t! reg-mir (tap-hold 0 $ht 4 S-4) @n7) n5 (t! reg-mir (tap-hold 0 $ht 5 S-5) @n6)
-
-  ;; Alpha with special typing layers
-  y (t! special-typing-layer y y)
-  u (t! special-typing-layer u u)
-  i (t! special-typing-layer i i)
-  o (t! special-typing-layer o o)
-  p (t! special-typing-layer p p)
-  h (t! special-typing-layer h h)
-  j (t! special-typing-layer j j)
-  k (t! special-typing-layer k k)
-  l (t! special-typing-layer l l)
-  ; (t! special-typing-layer ; ;)
-  ' (t! special-typing-layer ' ')
-  n (t! special-typing-layer n n)
-  m (t! special-typing-layer m m)
-  , (t! special-typing-layer , ,)
-  . (t! special-typing-layer . .)
-  
-  ;; Alpha with special typing layers *and* mirrors
-  qtype (t! special-typing-layer q q)
-  q (t! reg-mir @qtype @p)
-  wtype (t! special-typing-layer w w)
-  w (t! reg-mir @wtype @o)
-  etype (t! special-typing-layer e e)
-  e (t! reg-mir @etype @i)
-  rtype (t! special-typing-layer r r)
-  r (t! reg-mir @rtype @u)
-  ttype (t! special-typing-layer t t)
-  t (t! reg-mir @ttype @y)
-  atype (t! special-typing-layer a a)
-  a (t! reg-mir @atype @;)
-  stype (t! special-typing-layer s s)
-  s (t! reg-mir @stype @l)
-  dtype (t! special-typing-layer d d)
-  d (t! reg-mir @dtype @k)
-  ftype (t! special-typing-layer f f)
-  f (t! reg-mir @ftype @j)
-  gtype (t! special-typing-layer g g)
-  g (t! reg-mir @gtype @h)
-  ;; z already mirrored via zalt alias
-  xtype (t! special-typing-layer x x)
-  x (t! reg-mir @xtype .)
-  ctype (t! special-typing-layer c c)
-  c (t! reg-mir @ctype ,)
-  vtype (t! special-typing-layer v v)
-  v (t! reg-mir @vtype m)
-  btype (t! special-typing-layer b b)
-  b (t! reg-mir @btype n)
-
-  ;; Modifiers
-  bspclsft (tap-hold-press 0 $ht (macro bspc) lsft) ;; see https://github.com/jtroo/kanata/discussions/733 for reason this is in a macro
-  delrsft (tap-hold-press 0 $ht (macro del) rsft) ;; see https://github.com/jtroo/kanata/discussions/733 for reason this is in a macro
-  /alt (tap-hold-release $lht $lht / ralt)
-  .alt (tap-hold-release $lht $lht . ralt) ;; redundant for future ergonomic reasons (explained at end of tour)
-  zalt (t! reg-mir (tap-hold-release $lht $lht z ralt) @/alt)
-
-  ;; Mouse mirroring button
-  mirror (multi (one-shot-pause-processing 1000) (on-press press-vkey mirror?) (on-release release-vkey mirror?)) ;; pause one-shots so we don't consume them
-
-  ;; {id:mirror-tab} Tab is an exception to standard mirroring. Instead of mirroring, it "reverses" the tab key by changing its tap function to shift-tab. For left-hand-only use, this makes an otherwise impossible shortcut of (leftpinky + leftpinky) an easy (mousethumb + leftpinky). Holding remains Ultra. {layer: base} {highlight: @tabultra}
-  tabultra (t! reg-mir (tap-hold-press 0 $ht tab (layer-while-held ultra)) (tap-hold-press 0 $ht S-tab (layer-while-held ultra)))
-)
-
-(deflayermap (base-with-chords))
-(deflayermap (muhenkan))
-(deflayermap (henkan))
 (deflayer numsym
   _         _       _      _        _       _        _      _      _      _      _      _    _
 
   @f12      @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @rf11 @rf12 _
   _         @`~     @_     @-       @{      [        ]      @}     @+±    @=≈    @|\    @:•  XX   XX
   _         @1      @2     @3       @4      @5       6      7      8      9      0      _    _
-  _         @&alt   @*^    @/%      @lftP   S-4      @#     @rgtP  @,<   @.>   _      _
+  _         @&alt   @*^    @/%      @lftP   S-4      @#     @rgtP  @,<    @.>    _      _
   _         _       _      @spcmet  _
 
   _    _    _    _    _
@@ -355,47 +104,14 @@ Let's get into it!
 
 ;; {play-sequence: numsym-summary, colon, numsym-transparency, f-keys, numsym-personalization, numsym-outro, back-to-base}
 
-(defalias ;; numsym
-  func-numsym
-    (multi
-      (layer-while-held base-with-chords)
-      (tap-hold-press 0 $ht 
-        (tap-dance 150
-          (
-            (one-shot-press 1000 (layer-while-held func)) ;; tap for one-shot func layer
-            (layer-while-held func) ;; doubletap+Hold for non-timed func layer
-          )
-        )
-        (layer-while-held numsym) ;; hold for numsym layer
-      )
-    )
+(include numsym.kbd)
 
-  1 (t! reg-mir 1 0) 2 (t! reg-mir 2 9) 3 (t! reg-mir 3 8) 4 (t! reg-mir 4 7) 5 (t! reg-mir 5 6)
 
-  ] ]
-  } S-]
-  +± (tap-hold $tt $ht S-= (unicode ±))
-  =≈ (tap-hold $tt $ht = (unicode ≈))
-  |\ (t! t-hsft \ S-\)
-  # S-3
-  rgtP S-0
-  ,< (tap-hold 0 $lht , S-,)
-  .> (tap-hold 0 $lht . S-.)
 
-  `~ (t! reg-mir (t! t-hsft ` S-`) @|\)
-  _ (t! reg-mir S-- @=≈)
-  - (t! reg-mir - @+±)
-  { (t! reg-mir { @})
-  [ (t! reg-mir [ @])
-  &alt (t! reg-mir (tap-hold 0 $ht S-7 ralt) @/alt)
-  *^ (t! reg-mir (t! t-hsft S-8 S-6) @.>)
-  /% (t! reg-mir (t! t-hsft / S-5) @,<)
-  lftP (t! reg-mir S-9 @rgtP)
 
-  :• (tap-hold $tt $ht S-; (unicode •))
-
-  spcmet (tap-hold-order 0 0 spc lmet)
-)
+;; ===================================================
+;;   FKEY LAYER
+;; ===================================================
 
 (deflayermap (func)
   a @f1    s @f2    d @f3    f @f4    g @f5    h @f6    j @f7    k @f8    l @f9    ; @f10
@@ -418,13 +134,21 @@ Let's get into it!
 
 ;; {play-sequence: go-to-func, func-summary, go-to-base, go-to-extend}
 
+
+
+
+
+;; ===================================================
+;;   EXTEND LAYER
+;; ===================================================
+
 (deflayer extend
   lrld      @ef1    @ef2   @ef3     @ef4    @ef5     @ef6   @ef7   @ef8   @ef9   @ef10  @ef11 @ef12
 
   lrld      XX      XX     XX       XX      XX       XX     XX     XX     XX     XX     XX   XX   _
   lrld      @eq     @ew    @minus   @rename @trash   prev   vold   volu   next   pp     XX   XX   XX
   _         @accept @ealt  @elctl   @elsft  @gaming  left   down   up     rght   brdn   brup _
-  _         @rec    @run   @scsht   @clipb  @bold    home   pgdn   pgup   end    ralt   _
+  _         @rec    @run   @scsht   @clipb  @caps    home   pgdn   pgup   end    ralt   _
   _         lalt    _      @lmet    @mouse
 
   _    _    _    _    _
@@ -446,53 +170,12 @@ Let's get into it!
 
 ;; {play-sequence: extend-summary, extend-hrms, meta, extend-personalization, extend-outro, to-mouse-layer}
 
-(defalias ;; extend
+(include extend.kbd)
 
-  ;; The right hand of the extend layer is directional, so exact mirroring would be confusing. Instead, horizontal directions always stay natural (left key is left, right key is right).
-  escext (tap-hold-press 0 $ht esc (layer-while-held extend))
-  elsft (t! reg-mir lsft down)
-  elctl (t! reg-mir lctl up)
-  ealt (t! reg-mir lalt left)
-  endalt (tap-hold-press 0 150 end ralt)
 
-  accept enter
-  ;; a left-handed return, great for *A*ccepting the default selections in dialogs without taking your hand off the mouse or hunting down buttons with the cursor.
-
-  trash (t! reg-mir del next)
-  ;; Makes del available on the left hand.
-
-  rename (t! reg-mir f2 vold)
-  ;; Easier left-handed option for an often-used Fkey.
-
-  minus (tap-hold $tt $lht (t! reg-mir - left) (macro C-home - S-9 C-end S-0))
-  ;; For flipping the sign of an expression in CAD: tap to insert a minus sign, hold to enclose an entire text field in negative parens. Matches location of - in the numsym layer (accessible via mouse forward button), but this character is common enough for kebab-case and even English that making it a tap-hold in that layer would sacrifice its responsiveness. If you don't use CAD, probably no need for this!
-
-  scsht (t! reg-mir (tap-hold 0 $ht prtsc S-prtsc) pgup)
-  ;; set to your preferred screenshot modes
-
-  clipb (t! reg-mir (tap-hold 0 125 S-ins (macro C-A-S-M-v)) pgdn)
-  ;; Tap for terminal pasting or hold for clipboard app shortcut. The shortcut is wrapped in a macro to prevent it from repeating if held longer.
-
-  bold (t! reg-mir caps end)
-  ;; B for bold (caps lock).
-
-  rec (t! reg-mir (dynamic-macro-record 0) ralt)
-  ;; start or stop recording a macro
-
-  run (t! reg-mir (dynamic-macro-play 0) home)
-  ;; play recorded macro
-
-  eq (t! reg-mir XX pp)
-  ew (t! reg-mir XX prev)
-  ;; Despite no primary function, we need aliases for these keys in the extend layer so they mirror.
-
-  ;; To work around f-keys not being reliable on Linux for newer laptop hardware, you can bind these to relevant hardware functions. Alternatively, it's a full set of shortcuts ready for whatever purpose you need.
-  ef1 (t! reg-mir XX XX) ef2 (t! reg-mir XX XX) ef3 (t! reg-mir XX XX) ef4 (t! reg-mir XX XX)
-  ef5 (t! reg-mir XX XX) ef6 (t! reg-mir XX XX) ef7 XX                 ef8 XX
-  ef9 XX                ef10 XX                ef11 XX                ef12 (t! reg-mir XX XX)
-
-  gaming (tap-hold 0 500 (layer-switch gaming) (layer-switch base))
-)
+;; ===================================================
+;;   MOUSE LAYER
+;; ===================================================
 
 (deflayer mouse
   XX        XX      XX     XX       XX      XX       XX     XX     XX     XX     XX     XX   XX
@@ -522,75 +205,13 @@ Let's get into it!
 
 ;; {id: end-mouse-addendum} Tapping caps lock normally outputs Esc, but in this mouse layer the Esc is consumed by the canceling of the layer. {layer: mouse} {highlight: @msexit}
 
-(defvar ;; mouse
-  ;; cursor speed settings
-  mouse-move-interval 5 mouse-accel-time 220 mouse-speed-min 1 mouse-speed-max 8
-
-  ;; accel scroll speed settings
-  mwa-initial-v 10 mwa-maximum-v 50 mwa-accel 1.15 mwa-decel 0.93
-
-  ;; static scroll speed settings
-  mw-interval 5 mw-distance 15
-)
-
-(defvirtualkeys ;; mouse
-  vert-movement? XX
-  hori-movement? XX
-)
-
-(defalias ;; mouse
-  mouse (tap-hold 0 $ht (layer-switch mouse) (layer-while-held mouse))
-  ;; Tap to toggle mouse layer until exited, or hold for temporary mouse layer
-  msexit (multi (layer-switch base) (layer-while-held extend))
-  ;; Exclude the usual Esc tap behavior from @escext: it feels natural for exiting the layer to "consume" this Esc if just tapped.
-  msnmsm (tap-hold 0 $ht (layer-switch base) (layer-while-held numsym))
-  ;; Tapping cancels mouse, holding goes to symbols and leaves mouse active when you release. Always safe to *tap* even if you don't remember if you are in the mousing layer.
-
-  ;; wheel-accel variants cause crashing on Windows. Non-accel variant until fixed (and similar anyway)
-  whllft (mwheel-left $mw-interval $mw-distance)
-  whlrgt (mwheel-right $mw-interval $mw-distance)
-  whlup (mwheel-up $mw-interval $mw-distance)
-  whldn (mwheel-down $mw-interval $mw-distance)
-  ;; Sometimes you only want to scroll the view without changing your input focus. Useful for scrolling a document while inputting some of its data elsewhere.
+(include mouse.kbd)
 
 
-  slow (movemouse-speed 10)
-  ;; Less fatiguing than mouse precision 
-  fast (movemouse-speed 280)
-  ;; For throwing your cursor to the edge of a screen, or onto another one.
-  ;; (Combining fast and slow results in 28% speed)
-  
-  ;; Diagonal route velocities are *sqrt(2); this logic adjusts diagonal speed to match cardinal directions.
-  vert (multi (on-press press-vkey vert-movement?) (on-release release-vkey vert-movement?))
-  hori (multi (on-press press-vkey hori-movement?) (on-release release-vkey hori-movement?))
 
-  mouse-up (multi @vert (movemouse-accel-up $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
-  mouse-down (multi @vert (movemouse-accel-down $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
-  mouse-left (multi @hori (movemouse-accel-left $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
-  mouse-right (multi @hori (movemouse-accel-right $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
-
-  msup (switch 
-    ((input virtual hori-movement?)) (multi (movemouse-speed 71) @mouse-up) break
-    () @mouse-up break
-  )
-
-  msdown (switch
-    ((input virtual hori-movement?)) (multi (movemouse-speed 71) @mouse-down) break
-    () @mouse-down break
-  )
-
-  msleft (switch
-    ((input virtual vert-movement?)) (multi (movemouse-speed 71) @mouse-left) break
-    () @mouse-left break
-  )
-
-  msright (switch
-    ((input virtual vert-movement?)) (multi (movemouse-speed 71) @mouse-right) break
-    () @mouse-right break
-  )
-)
-
-;; While in this layer, tap for control+alt+meta+Key or hold for control+alt+meta+SHIFT+Key. Both of these are almost never used in apps.
+;; ===================================================
+;;   ULTRA LAYER
+;; ===================================================
 
 (deftemplate ultra (lkey rkey)
   $rkey (tap-hold 0 $ht (concat "C-A-M-" $rkey) (concat "C-A-M-S-" $rkey))
@@ -615,6 +236,12 @@ Let's get into it!
 
 ;; {id: tab-ultra} The Tab key is set to tab when tapped and the Ultra modifier (Ctrl+Alt+Meta: like "hyper", get it?...) when held. This key is allows as many shortcuts as possible for workspace and app management. We don't use Hyper here because while holding Ultra, all other keys become tap for Ultra+key and Hold for Ultra+Shift+key. So Ultra+(Alpha/Num/Fkey) and Ultra+(AlphaHold,NumHold,FkeyHold) are six full sets of shortcuts that you can define in your operating system or apps. Tab is one row higher than your home row, meaning reaching your number row and even quite a few F-keys while holding it remains comfortable. {layer: base} {highlight: @tabultra}
 
+
+
+;; ===================================================
+;;   GAMING LAYER
+;; ===================================================
+
 (deflayermap (gaming)
   ;; Remove tap-hold but leave mirroring:
   (t! mirror 1 1 0 0)
@@ -628,7 +255,6 @@ Let's get into it!
 
   ; (tap-hold 0 500 ; (layer-switch base)) 
   ;; For columnar keyboards that only have two thumb keys per side, the Gaming layer needs this workaround. You'll have to replace Caps Lock's Escape/Extend with Control within the gaming layer to have all your modifiers, but this leaves no way to get out of the gaming layer. I've left this alias here as a solution for some specific physical layouts (ZSA Voyager comes to mind), but haven't needed it myself.
-
 
   (t! mouse-buttons)
 )
@@ -645,21 +271,18 @@ Let's get into it!
 
 ;; {play-sequence: go-to-gaming, go-to-gaming-2, gaming-summary, exit-gaming, layers-outro}
 
-
+;; ===================================================
+;;   SPECIAL CHAR LAYERS (see include for details)
+;; ===================================================
 
 (include special-char-layers.kbd)
 
 
-;; ---------- WINDOWS META FIX ----------
-;; Since Windows' Start menu shortcut can't be easily changed we use Kanata for it. Set PowerToys' Run (or your preferred launcher) to Win+Space to avoid the awful Start menu.
-
-(platform (win winiov2 wintercept) (defalias lmet (tap-hold-press-timeout 0 $hold-timeout M-spc lmet lmet)))
-  ;; If tapped (125ms or less), sends M-spc for PowerToys shortcut. Sends lmet instantaneously when used as a modifier. Sends just lmet when releasing after the 125ms expires. Using timeout variant of tap-hold-press prevents lmet spam upon timer expiration.
-
-(platform (linux macos) (defalias lmet lmet))
-  ;; Meta is left alone on Linux/Mac but still must be defined
 
 
+;; ===================================================
+;;   MIRRORING
+;; ===================================================
 
   #| ### Mirroring {id: mirroring} {layer: base} {highlight: nop0}
 
@@ -673,6 +296,11 @@ While using a trackpad on a laptop, the keys to the right of right alt perform t
 
 
 
+
+;; ===================================================
+;;   WIDE MOD
+;; ===================================================
+
  #| ### Wide Mod {id: wide-mod} {layer: base} {highlight: @.> @/alt @delrsft}
 
 But what about the physical layout of a board? And that thumb tucking, can we fix that? Actually, yes, with no new hardware required! One option for a laptop running Linux is setting up https://github.com/brandonbeaumia/touchpad-thumbkeys to put the thumb keys at the top of your trackpad instead of the side of the space bar. At least an 8/10 for comfort, though a little interesting just *touching* these keys while *pressing* others. For Windows or Mac, I very much like this setup as well:
@@ -685,3 +313,17 @@ This still leaves some thumb tucking for the left control key. There is an addit
 ;; {id: wrap-up} Wrapping up! I really hope you came away with some new ideas for your own layout, or maybe even decide to branch from this config! Thanks for looking, and toss me a star on Github if you enjoyed the read! {layer: base}
 
 ;; {play-sequence: mirroring, wide-mid, wrap-up}
+
+
+
+
+;; ===================================================
+;;   WINDOWS META FIX
+;; ===================================================
+;; Since Windows' Start menu shortcut can't be easily changed we use Kanata for it. Set PowerToys' Run (or your preferred launcher) to Win+Space to avoid the awful Start menu.
+
+(platform (win winiov2 wintercept) (defalias lmet (tap-hold-press-timeout 0 $hold-timeout M-spc lmet lmet)))
+  ;; If tapped (125ms or less), sends M-spc for PowerToys shortcut. Sends lmet instantaneously when used as a modifier. Sends just lmet when releasing after the 125ms expires. Using timeout variant of tap-hold-press prevents lmet spam upon timer expiration.
+
+(platform (linux macos) (defalias lmet lmet))
+  ;; Meta is left alone on Linux/Mac but still must be defined

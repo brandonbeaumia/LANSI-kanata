@@ -1,0 +1,67 @@
+(defvar ;; mouse
+  ;; cursor speed settings
+  mouse-move-interval 5 mouse-accel-time 220 mouse-speed-min 1 mouse-speed-max 8
+
+  ;; accel scroll speed settings
+  mwa-initial-v 10 mwa-maximum-v 50 mwa-accel 1.15 mwa-decel 0.93
+
+  ;; static scroll speed settings
+  mw-interval 5 mw-distance 15
+)
+
+(defvirtualkeys ;; mouse
+  vert-movement? XX
+  hori-movement? XX
+)
+
+(defalias ;; mouse
+  mouse (tap-hold 0 $ht (layer-switch mouse) (layer-while-held mouse))
+  ;; Tap to toggle mouse layer until exited, or hold for temporary mouse layer
+  msexit (multi (layer-switch base) (layer-while-held extend))
+  ;; Exclude the usual Esc tap behavior from @escext: it feels natural for exiting the layer to "consume" this Esc if just tapped.
+  msnmsm (tap-hold 0 $ht (layer-switch base) (layer-while-held numsym))
+  ;; Tapping cancels mouse, holding goes to symbols and leaves mouse active when you release. Always safe to *tap* even if you don't remember if you are in the mousing layer.
+
+  ;; wheel-accel variants cause crashing on Windows. Non-accel variant until fixed (and similar anyway)
+  whllft (mwheel-left $mw-interval $mw-distance)
+  whlrgt (mwheel-right $mw-interval $mw-distance)
+  whlup (mwheel-up $mw-interval $mw-distance)
+  whldn (mwheel-down $mw-interval $mw-distance)
+  ;; Sometimes you only want to scroll the view without changing your input focus. Useful for scrolling a document while inputting some of its data elsewhere.
+
+
+  slow (movemouse-speed 10)
+  ;; Less fatiguing than mouse precision 
+  fast (movemouse-speed 280)
+  ;; For throwing your cursor to the edge of a screen, or onto another one.
+  ;; (Combining fast and slow results in 28% speed)
+  
+  ;; Diagonal route velocities are *sqrt(2); this logic adjusts diagonal speed to match cardinal directions.
+  vert (multi (on-press press-vkey vert-movement?) (on-release release-vkey vert-movement?))
+  hori (multi (on-press press-vkey hori-movement?) (on-release release-vkey hori-movement?))
+
+  mouse-up (multi @vert (movemouse-accel-up $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+  mouse-down (multi @vert (movemouse-accel-down $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+  mouse-left (multi @hori (movemouse-accel-left $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+  mouse-right (multi @hori (movemouse-accel-right $mouse-move-interval $mouse-accel-time $mouse-speed-min $mouse-speed-max))
+
+  msup (switch 
+    ((input virtual hori-movement?)) (multi (movemouse-speed 71) @mouse-up) break
+    () @mouse-up break
+  )
+
+  msdown (switch
+    ((input virtual hori-movement?)) (multi (movemouse-speed 71) @mouse-down) break
+    () @mouse-down break
+  )
+
+  msleft (switch
+    ((input virtual vert-movement?)) (multi (movemouse-speed 71) @mouse-left) break
+    () @mouse-left break
+  )
+
+  msright (switch
+    ((input virtual vert-movement?)) (multi (movemouse-speed 71) @mouse-right) break
+    () @mouse-right break
+  )
+)

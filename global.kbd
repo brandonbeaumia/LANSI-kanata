@@ -1,0 +1,110 @@
+
+(defcfg
+  ;; some boilerplate'ish stuff:
+  process-unmapped-keys yes
+  delegate-to-first-layer yes
+  movemouse-smooth-diagonals yes
+  movemouse-inherit-accel-state yes
+  concurrent-tap-hold yes
+
+  ;; Because we only chord on keys of ,./ (which virtually never roll), we can process chords all the time. If you add riskier chords (alpha pairs, for example), divide 12000 (milliseconds in a minute) by the lowest end of your WPM for this value:
+  chords-v2-min-idle 5
+
+  ;; Kanata captures too much on Linux by default, so we give it these device names as to ignore the rest:
+  linux-dev-names-include (
+    "AT Translated Set 2 keyboard"
+    "Razer Orochi V2"
+    "Touchpad Thumbkeys Keyboard" ;; https://github.com/brandonbeaumia/touchpad-thumbkeys - adds two thumb keys to the top of your touchpad.
+  )
+)
+
+(defvar
+  ;; regular timeouts
+  tap-timeout 150
+  hold-timeout 150
+  tt $tap-timeout
+  ht $hold-timeout
+
+  ;; longer timeouts (for rare keys or slow pinkies)
+  long-tap-timeout 200
+  long-hold-timeout 200
+  ltt $long-tap-timeout
+  lht $long-hold-timeout
+
+  ;; This is how long it takes for Kanata to give up on waiting for a different key that might match your chord. It is therefore also the INPUT DELAY of the first keytap of any chorded keys that don't happen inside a typing streak (typing streak being defined by your `chords-v2-min-idle` variable in defcfg):
+  chord-timeout 36
+  hrm-chord-timeout 36
+
+  ;; required for some macros to ensure modifiers fire first
+  delay-fix 5
+  df $delay-fix
+)
+
+(defvirtualkeys
+  mirror? XX ;; flag used to check if a key should be mirrored.
+)
+
+;; Template to define mirrors within a (defalias) block
+(deftemplate mirror (left-key left-action right-key right-action)
+  $right-key $right-action
+  
+  $left-key
+  (switch
+    ((input virtual mirror?)) $right-action break
+    () $left-action break
+  )
+)
+
+;; Template to define mirrors within a (deflayermap) block
+(deftemplate reg-mir (left-action right-action)
+  (switch
+    ((input virtual mirror?)) $right-action break
+    () $left-action break
+  )
+)
+
+(deftemplate special-typing-layer (char layer)
+  (multi
+    $char
+    (tap-hold-release-timeout 0 500 ;; tap-repress set to 0 since default holding works to repeat as normal
+      XX ;; we already output $char so don't do it again
+      (layer-while-held $layer) ;; if other key is pressed+released, output from that layer instead
+      XX ;; if timeout of 500ms, (about when your $char begins repeating by default in most OSs)
+      ;; then we no longer consider switching layers
+    )
+  )
+)
+
+;; 'tap-hold-shift' - sets a key to char on press, or different char on hold/shift.
+
+(deftemplate slower-t-hsft (tap hold-or-shift)
+  (fork (tap-hold $ltt $lht $tap $hold-or-shift) $hold-or-shift (lsft rsft))
+)
+(deftemplate t-hsft (tap hold-or-shift)
+  (fork (tap-hold $tt $ht $tap $hold-or-shift) $hold-or-shift (lsft rsft))
+)
+
+;; For filling in (deflayermap) blocks so that `_ XX` doesn't disable mouse buttons
+(deftemplate mouse-buttons ()
+  mlft mlft   mmid mmid   mrgt mrgt
+  mfwd @func-numsym
+  mbck @mirror
+)
+
+
+
+;; Despite putting a laptop-sized keyboard into (defsrc), this layout is compatible with keyboards as small as 3x6 (Corne-like). Keys outside that internal 3x6 grid are set up as slightly more convenient duplicates if you're comfortable stretching for them.
+
+(defsrc
+  esc       f1      f2     f3       f4      f5       f6     f7     f8     f9     f10    f11  f12
+
+  `         1       2      3        4       5        6      7      8      9      0      -    =    bspc
+  tab       q       w      e        r       t        y      u      i      o      p      [    ]    \
+  caps      a       s      d        f       g        h      j      k      l      ;      '    enter
+  lsft      z       x      c        v       b        n      m      ,      .      /      rsft
+  lctl      lmet    lalt   spc      ralt
+
+  mlft mmid mrgt mfwd mbck
+
+  muhenkan henkan
+)
