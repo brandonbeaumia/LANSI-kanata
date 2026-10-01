@@ -16,6 +16,12 @@ My only use case is holding the A key to type arrows that communicate key sequen
     () $action break
   )
 )
+(deftemplate backspaced-2 (layer-key action1 action2)
+  (switch
+    ((key-history $layer-key 1)) (macro bspc $action1 $action2) break
+    () (macro $action1 $action2) break
+  )
+)
 
 ;; Any shortcuts that complete a word you want to be able apply Shift to the shift character instead of just deleting it.
 (deftemplate unmod2 (char1 char2) (unmod $char1) (unmod $char2))
@@ -51,12 +57,53 @@ My only use case is holding the A key to type arrows that communicate key sequen
 (deflayermap (r) _ _)
 (deflayermap (t) _ _)
 
-(deflayermap a ;; arrows
-  spc spc
+;;       
+
+(deflayermap a ;; Nav symbols, same as Extend layer and matching Kanata defsrc options.
+  spc (t! backspaced a (unicode ◆))
+
+
+
+  caps (t! backspaced a (unicode ⎋))
+
+  t (t! backspaced a (unicode ⌦))
+
+  rsft (t! backspaced a (unicode ⇧))
+  lsft (t! backspaced a (unicode ⌫))
+  enter (t! backspaced a (unicode ↩))
+  tab (t! backspaced a (unicode ⭾))
+  lctl (t! backspaced a (unicode ⎈))
+  a XX ;; already being held
+  s (t! backspaced a (unicode ⎇))
+  d (t! backspaced a (unicode ⎈))
+  f (t! backspaced a (unicode ⇧))
+  g XX ;; gaming layer
+  z (t! backspaced a (unicode ⎇))
+  x XX ;; run macro
+  c (t! backspaced a (unicode ⎙))
+  v (t! backspaced a (unicode ⎀))
+  b (t! backspaced a (unicode ⇪))
+  y (t! backspaced-2 a (unicode ◀) (unicode ◀))
+  u (t! backspaced a (unicode 🔉))
+  i (t! backspaced a (unicode 🔊))
+  o (t! backspaced-2 a (unicode ▶) (unicode ▶))
+  p (t! backspaced-2 a (unicode ▶) (unicode ⏸))
   h (t! backspaced a (unicode ←))
-  j (t! backspaced a (unicode ↓))
+  j (t! backspaced a (unicode ↓)) 
   k (t! backspaced a (unicode ↑))
   l (t! backspaced a (unicode →))
+  ; (t! backspaced a (unicode 🔅))
+  ' (t! backspaced a (unicode 🔆))
+  n (t! backspaced a (unicode ↖))
+  m (t! backspaced a (unicode ⇟))
+  , (t! backspaced a (unicode ⇞))
+  . (t! backspaced a (unicode ↘))
+
+  mlft (t! backspaced-2 a (unicode 🖰) kp1)
+  mrgt (t! backspaced-2 a (unicode 🖰) kp2)
+  mmid (t! backspaced-2 a (unicode 🖰) kp3)
+  mfwd (t! backspaced-2 a (unicode 🖰) kp4)
+  mbck (t! backspaced-2 a (unicode 🖰) kp5)
 )
 
 (deflayermap (s) _ _)
@@ -64,7 +111,7 @@ My only use case is holding the A key to type arrows that communicate key sequen
 (deflayermap (f) _ _)
 (deflayermap (g) _ _)
 
-;; no Z as that is already alt 
+;; no Z as that key is already alt
 (deflayermap (x) _ _)
 (deflayermap (c) _ _)
 (deflayermap (v) _ _)
