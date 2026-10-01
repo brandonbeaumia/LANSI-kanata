@@ -70,7 +70,7 @@ My only use case is holding the A key to type arrows that communicate key sequen
 
   rsft (t! backspaced a (unicode ⇧))
   lsft (t! backspaced a (unicode ⌫))
-  enter (t! backspaced a (unicode ↩))
+  enter (t! backspaced a (unicode ↵))
   tab (t! backspaced a (unicode ⭾))
   lctl (t! backspaced a (unicode ⎈))
   a XX ;; already being held
@@ -84,8 +84,8 @@ My only use case is holding the A key to type arrows that communicate key sequen
   v (t! backspaced a (unicode ⎀))
   b (t! backspaced a (unicode ⇪))
   y (t! backspaced-2 a (unicode ◀) (unicode ◀))
-  u (t! backspaced a (unicode 🔉))
-  i (t! backspaced a (unicode 🔊))
+  u (t! backspaced-2 a (unicode 🔈) -)
+  i (t! backspaced-2 a (unicode 🔈) S-=)
   o (t! backspaced-2 a (unicode ▶) (unicode ▶))
   p (t! backspaced-2 a (unicode ▶) (unicode ⏸))
   h (t! backspaced a (unicode ←))
