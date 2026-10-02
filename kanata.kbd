@@ -181,9 +181,9 @@ Let's get into it!
   XX        XX      XX     XX       XX      XX       XX     XX     XX     XX     XX     XX   XX
 
   _         XX      XX     XX       XX      XX       XX     XX     XX     XX     XX     XX   XX   XX
-  _         XX      XX     @msup    @whlup  XX       XX     mmid   mmid   XX     XX     XX   XX   XX
+  _         XX      XX     @msup    @whlup  XX       XX     @whlup mmid   XX     XX     XX   XX   XX
   _         @whllft @mslft @msdown  @msrght @whlrgt  XX     mlft   mrgt   @slow  @fast  XX   XX
-  _         lalt    XX     XX       @whldn  XX       XX     XX     XX     XX     ralt   rsft
+  _         lalt    XX     XX       @whldn  XX       XX     @whldn XX     XX     ralt   rsft
   XX        XX      lctl   lmet     @msnmsm
 
   _    _    _    _    _
