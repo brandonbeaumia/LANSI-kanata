@@ -9,6 +9,22 @@
   (one-shot-press 500 $mod)
 )
 
+(deftemplate hrm-shot (char hold)
+  (switch
+    ((key-timing 3 less-than 300)) $char break
+    () (tap-hold-release-timeout 150 150
+      $char ;; if tapped, output char
+      $hold ;; if held and another key is pressed+released, $mod that key
+      (tap-hold-order 0 0 ;; if held until $ht timeout...
+        (one-shot 500 $hold) ;; and no keys are pressed before mod is released: begin one-shot timeout when released
+        (one-shot 500 $hold) ;; or, if a key is pressed and released, apply the $mod as normal.
+        ;; even though we just want a regular mod, we use one-shot for both actions.
+        ;; This ensures we do not consume other simultaneous one-shots.
+      )
+    ) break
+  )
+)
+
 (deftemplate hrm-chords-left (signal lmet lalt lctl lsft)
   ;; Pass in your "intent signal" (likely space bar), and
   ;; Pass in each character you want to chord with that intent signal for that modifier.
@@ -56,8 +72,8 @@
 )
 
 (defchordsv2
-  (t! hrm-chords-left spc a s d f)
-  (t! hrm-chords-right spc j k l ;)
+  ;; (t! hrm-chords-left spc a s d f)
+  ;; (t! hrm-chords-right spc j k l ;)
   
   ;; vkeys required here so that our lsft "hold" action is activated when tapping the chord (see https://jtroo.github.io/config.html#chordsv2-processing-order)
   (, .) (multi (on-press press-vkey !?) (on-release release-vkey !?)) $chord-timeout all-released (ultra extend mouse func)
@@ -92,23 +108,41 @@
   n1 (t! reg-mir (tap-hold 0 $ht 1 S-1) @n0) n2 (t! reg-mir (tap-hold 0 $ht 2 S-2) @n7) n3 (t! reg-mir (tap-hold 0 $ht 3 S-3) @n8)
   n4 (t! reg-mir (tap-hold 0 $ht 4 S-4) @n7) n5 (t! reg-mir (tap-hold 0 $ht 5 S-5) @n6)
 
+
   ;; Alpha with special typing layers
-  y (t! special-typing-layer y y)
-  u (t! special-typing-layer u u)
-  i (t! special-typing-layer i i)
-  o (t! special-typing-layer o o)
-  p (t! special-typing-layer p p)
-  h (t! special-typing-layer h h)
-  j (t! special-typing-layer j j)
-  k (t! special-typing-layer k k)
-  l (t! special-typing-layer l l)
-  ; (t! special-typing-layer ; ;)
-  ' (t! special-typing-layer ' ')
-  n (t! special-typing-layer n n)
-  m (t! special-typing-layer m m)
-  , (t! special-typing-layer , ,)
-  . (t! special-typing-layer . .)
+  ytype (t! special-typing-layer y y)
+  y @ytype
+  utype (t! special-typing-layer u u)
+  u @utype
+  itype (t! special-typing-layer i i)
+  i @itype
+  otype (t! special-typing-layer o o)
+  o @otype
+  ptype (t! special-typing-layer p p)
+  p @ptype
+  htype (t! special-typing-layer h h)
+  h @htype
+
+  jtype (t! special-typing-layer j j)
+  j (t! hrm-shot j rsft)
+  ktype (t! special-typing-layer k k)
+  k (t! hrm-shot k rctl)
+  ltype (t! special-typing-layer l l)
+  l (t! hrm-shot l ralt)
+  ;type (t! special-typing-layer ; ;)
+  ; (t! hrm-shot ; rmet)
+  'type (t! special-typing-layer ' ')
+  ' @'type
   
+  ntype (t! special-typing-layer n n)
+  n @ntype
+  mtype (t! special-typing-layer m m)
+  m @mtype
+  ,type (t! special-typing-layer , ,)
+  , @,type
+  .type (t! special-typing-layer . .)
+  . @.type
+
   ;; Alpha with special typing layers *and* mirrors
   qtype (t! special-typing-layer q q)
   q (t! reg-mir @qtype @p)
@@ -121,15 +155,17 @@
   ttype (t! special-typing-layer t t)
   t (t! reg-mir @ttype @y)
   atype (t! special-typing-layer a a)
-  a (t! reg-mir @atype @;)
+
+  a (t! reg-mir (t! hrm-shot a lmet) @;)
   stype (t! special-typing-layer s s)
-  s (t! reg-mir @stype @l)
+  s (t! reg-mir (t! hrm-shot s lalt) @l)
   dtype (t! special-typing-layer d d)
-  d (t! reg-mir @dtype @k)
+  d (t! reg-mir (t! hrm-shot d lctl) @k)
   ftype (t! special-typing-layer f f)
-  f (t! reg-mir @ftype @j)
+  f (t! reg-mir (t! hrm-shot f lsft) @j)
   gtype (t! special-typing-layer g g)
   g (t! reg-mir @gtype @h)
+
   ;; z already mirrored via zalt alias
   xtype (t! special-typing-layer x x)
   x (t! reg-mir @xtype .)
@@ -141,11 +177,13 @@
   b (t! reg-mir @btype n)
 
   ;; Modifiers
-  bspclsft (tap-hold-press 0 $ht (macro bspc) lsft) ;; see https://github.com/jtroo/kanata/discussions/733 for reason this is in a macro
-  delrsft (tap-hold-press 0 $ht (macro del) rsft) ;; see https://github.com/jtroo/kanata/discussions/733 for reason this is in a macro
-  /alt (tap-hold-release $lht $lht / ralt)
-  .alt (tap-hold-release $lht $lht . ralt) ;; redundant for future ergonomic reasons (explained at end of tour)
-  zalt (t! reg-mir (tap-hold-release $lht $lht z ralt) @/alt)
+  bspclsft (multi (layer-while-held spcmeta) (tap-hold-press 0 $ht (macro bspc) lsft)) ;; see https://github.com/jtroo/kanata/discussions/733 for reason this is in a macro
+  delrsft (multi (layer-while-held spcmeta) (tap-hold-press 0 $ht (macro del) rsft)) ;; see https://github.com/jtroo/kanata/discussions/733 for reason this is in a macro
+  /alt (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht / ralt))
+  .alt (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht . ralt)) ;; redundant for future ergonomic reasons (explained at end of tour)
+  zalt (t! reg-mir (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht z ralt)) @/alt)
+  lctl (multi (layer-while-held spcmeta) lctl)
+  ;; spc (t! hrm-shot spc lmet)
 
   ;; Mouse mirroring button
   mirror (multi (one-shot-pause-processing 1000) (on-press press-vkey mirror?) (on-release release-vkey mirror?)) ;; pause one-shots so we don't consume them

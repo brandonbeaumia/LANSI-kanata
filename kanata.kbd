@@ -39,14 +39,20 @@ Let's get into it!
   XX        @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @rf11 @rf12
 
   XX        @n1     @n2    @n3      @n4     @n5      @n6    @n7    @n8    @n9    @n0    @nr- @nr= bspc
-  @tabultra @q      @w     @e       @r      @t       y      u      i      o      p      enter XX   XX
-  @escext   @a      @s     @d       @f      @g       h      j      k      l      ;      '    enter
-  @bspclsft @zalt   @x     @c       @v      @b       n      m      ,      @.alt  @/alt  @delrsft
-  XX        mmid    lctl   spc      @func-numsym
+  @tabultra @q      @w     @e       @r      @t       @y     @u     @i     @o     @p     enter XX   XX
+  @escext   @a      @s     @d       @f      @g       @h     @j     @k     @l     @;     @'   enter
+  @bspclsft @zalt   @x     @c       @v      @b       @n     @m     @,     @.alt  @/alt  @delrsft
+  XX        mmid    @lctl  spc      @func-numsym
 
   mlft mmid mrgt @func-numsym @mirror
 
-  lctl     @func-numsym
+  @lctl    @func-numsym
+)
+
+;; If any other modifier is already pressed, space bar becomes tap-hold-press for meta.
+(deflayermap (spcmeta)
+  spc (tap-hold-press $tt $ht spc lmet)
+  _ _
 )
 
 ;; {id: base-summary} The base layer is (almost) plain QWERTY. It's easy to grow in to as the extra features should not add latency or interfere with old muscle memory. {layer: base}
