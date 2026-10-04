@@ -192,7 +192,11 @@
   /alt (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht / ralt))
   .alt (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht . ralt)) ;; redundant for future ergonomic reasons (explained at end of tour)
   zalt (t! reg-mir (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht z ralt)) @/alt)
-  lctl (multi (layer-while-held spcmeta) lctl)
+  lctl (tap-dance-eager 150 (
+      (multi (layer-while-held spcmeta) lctl)
+      (multi (layer-while-held spcmeta) lctl (on-press press-vkey mirror?) (on-release press-vkey mirror?))
+    )
+  )
   ;; spc (t! hrm-shot spc lmet)
 
   ;; Mouse mirroring button

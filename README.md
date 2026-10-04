@@ -1,22 +1,13 @@
 
 
 # LANSI
-Welcome to the LANSI Kanata configuration! This layout...
-* is broadly compatible: ANSI, 60%, 75%, 6-column ortholinear? As long as you have a number row, it will work great.
-* is easy to learn and grow in to: matches QWERTY and avoids sticky modes.
-* allows responsive 130+ WPM by not overloading alpha keys.
-* has good data entry characteristics via a home row number layer.
-* prioritizes fast and accessible modifier & shortcut combos.
-* allows right-handed shortcuts without leaving the mouse.
+Welcome to the LANSI keyboard layout, built in Kanata! LANSI is broadly compatible, configured to improve most keys found on laptops while remaining fully functional with as few as 39 keys.
 
-The config itself is commented with paragraphs of explainers (even for as simple as it is) and the below diagram is a good overview. For easier digestion, you may visit the [Oryx Configurator tour](https://configure.zsa.io/voyager/layouts/5qRME/latest/0/intro). That layout is extremely similar, though not always updated perfectly in tandem. 
+* Almost all QWERTY defaults remain, and additional functionality should not interfere with current muscle memory.
+* It features ultra-fast latency-free typing without misfires by avoiding alpha key overloading. Death to home row mods!
+* It leans away from timing pressure and timing dependency for all but the most rarely used keys and features.
+* It prioritizes fast and accessible modifier & shortcut combos, especially from the left hand for simultaneous mousing.
+* It allows what would otherwise be right-handed shortcuts without leaving the mouse via mirroring (sounds harder than it is!).
 
-## Diagram
-* White: output when tapped
-* Pink: output when held
-* Blue: output when mirrored via mouse button
-* Red: being held to enable the current layer
-* Blank & dark: transparent (falls through to base layer)
-* Blank & very dark: no action
-
-<img width="956" height="2016" alt="8-14" src="https://github.com/user-attachments/assets/3e9af0e5-405f-4452-94ff-e98f66aec12c" />
+## Walkthrough
+TODO
