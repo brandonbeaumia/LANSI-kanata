@@ -2,9 +2,9 @@
 
   ;; The right hand of the extend layer is directional, so exact mirroring would be confusing. Instead, horizontal directions always stay natural (left key is left, right key is right).
   escext (tap-hold-press 0 $ht esc (layer-while-held extend))
-  elsft (t! reg-mir lsft down)
-  elctl (t! reg-mir lctl up)
-  ealt (t! reg-mir lalt left)
+  elsft (t! reg-mir (t! os lsft) down)
+  elctl (t! reg-mir (t! os lctl) up)
+  ealt (t! reg-mir (t! os lalt) left)
   endalt (tap-hold-press 0 150 end ralt)
 
   accept enter

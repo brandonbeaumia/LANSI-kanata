@@ -152,7 +152,7 @@ Let's get into it!
   lrld      @ef1    @ef2   @ef3     @ef4    @ef5     @ef6   @ef7   @ef8   @ef9   @ef10  @ef11 @ef12
 
   lrld      XX      XX     XX       XX      XX       XX     XX     XX     XX     XX     XX   XX   _
-  lrld      @eq     @ew    @minus   @rename @trash   prev   vold   volu   next   pp     XX   XX   XX
+  lrld      @eq     bspc   del      S-tab   tab      prev   vold   volu   next   pp     XX   XX   XX
   _         @accept @ealt  @elctl   @elsft  @gaming  left   down   up     rght   brdn   brup _
   _         @rec    @run   @scsht   @clipb  @caps    home   pgdn   pgup   end    ralt   _
   _         lalt    _      @lmet    @mouse
@@ -328,8 +328,8 @@ This still leaves some thumb tucking for the left control key. There is an addit
 ;; ===================================================
 ;; Since Windows' Start menu shortcut can't be easily changed we use Kanata for it. Set PowerToys' Run (or your preferred launcher) to Win+Space to avoid the awful Start menu.
 
-(platform (win winiov2 wintercept) (defalias lmet (tap-hold-press-timeout 0 $hold-timeout M-spc lmet lmet)))
-  ;; If tapped (125ms or less), sends M-spc for PowerToys shortcut. Sends lmet instantaneously when used as a modifier. Sends just lmet when releasing after the 125ms expires. Using timeout variant of tap-hold-press prevents lmet spam upon timer expiration.
+(platform (win winiov2 wintercept) (defalias lmet (tap-hold-press-timeout 0 $hold-timeout A-spc lmet lmet)))
+  ;; If tapped (125ms or less), sends Alt-Space for PowerToys shortcut. Sends lmet instantaneously when used as a modifier. Sends just lmet when releasing after the 125ms expires. Using timeout variant of tap-hold-press prevents lmet spam upon timer expiration.
 
 (platform (linux macos) (defalias lmet lmet))
   ;; Meta is left alone on Linux/Mac but still must be defined

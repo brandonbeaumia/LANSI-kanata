@@ -9,7 +9,13 @@ My only use case is holding the A key to type arrows that communicate key sequen
   units/currencies
 |#
 
-;; To prevent delay, special-typing-layer keys always output their alpha character immediately. This checks if the layer-entering character needs to be deleted before outputting the special character(s). Use this template when your special input is not meant to complete a word.
+#|
+TODO:
+  Add 'ditto' mark
+  Add 'circled numbers'
+|#
+
+;; To prevent delay, special-typing-layer keys always output their alpha character immediately. This checks if the layer-entering character needs to be deleted before outputting the special character(s).
 (deftemplate backspaced (layer-key action)
   (switch
     ((key-history $layer-key 1)) (macro bspc $action) break
@@ -29,7 +35,7 @@ My only use case is holding the A key to type arrows that communicate key sequen
 (deftemplate unmod4 (char1 char2 char3 char4) (unmod $char1) (unmod $char2) (unmod $char3) (unmod $char4))
 (deftemplate unmod5 (char1 char2 char3 char4 char5) (unmod $char1) (unmod $char2) (unmod $char3) (unmod $char4) (unmod $char5))
 (deftemplate unmod6 (char1 char2 char3 char4 char5 char6) (unmod $char1) (unmod $char2) (unmod $char3) (unmod $char4) (unmod $char5) (unmod $char6))
-;; Start your macro with (release-key $layer-letter) if you use one of these unmod templates and repeat your $layer-letter as one of the $chars, e.g.
+;; Start your macro with (release-key $layer-letter) if you use one of these unmod templates and repeat your layer-char as one of the $chars, e.g.
 ;; (deflayermap (t) p (macro (release-key t) (unmod3 h a t)) ;; holding T for layer, so we must forcefully release it before the macro can "tap" it.
 
 (deflayermap (y) _ _)

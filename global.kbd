@@ -31,6 +31,8 @@
   ltt $long-tap-timeout
   lht $long-hold-timeout
 
+  os-timeout 500
+
   ;; This is how long it takes for Kanata to give up on waiting for a different key that might match your chord. It is therefore also the INPUT DELAY of the first keytap of any chorded keys that don't happen inside a typing streak (typing streak being defined by your `chords-v2-min-idle` variable in defcfg):
   chord-timeout 36
   hrm-chord-timeout 36
@@ -63,6 +65,7 @@
   )
 )
 
+
 (deftemplate special-typing-layer (char layer)
   (multi
     $char
@@ -82,6 +85,11 @@
 )
 (deftemplate t-hsft (tap hold-or-shift)
   (fork (tap-hold $tt $ht $tap $hold-or-shift) $hold-or-shift (lsft rsft))
+)
+
+;; shortened one-shot
+(deftemplate os (os)
+  (one-shot-press $os-timeout $os)
 )
 
 ;; For filling in (deflayermap) blocks so that `_ XX` doesn't disable mouse buttons

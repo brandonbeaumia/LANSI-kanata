@@ -15,16 +15,31 @@
     )
 
   6 6
-  7 (t! hrm-shot 7 rsft)
-  8 (t! hrm-shot 8 rctl)
-  9 (t! hrm-shot 9 ralt)
-  0 (t! hrm-shot 0 rmet)
-  
-  1 (t! reg-mir (t! hrm-shot 1 lmet) @0)
-  2 (t! reg-mir (t! hrm-shot 2 lalt) @9)
-  3 (t! reg-mir (t! hrm-shot 3 lctl) @8)
-  4 (t! reg-mir (t! hrm-shot 4 lsft) @7)
   5 (t! reg-mir 5 @6)
+
+  ;; Uncomment this first set of 7890 aliases to enable home row mods
+  ;; 7 (t! hrm-shot 7 rsft)
+  ;; 8 (t! hrm-shot 8 rctl)
+  ;; 9 (t! hrm-shot 9 ralt)
+  ;; 0 (t! hrm-shot 0 rmet)
+  
+  ;; And then comment out this second set of 7890 aliases:
+  7 7
+  8 8
+  9 9
+  0 0
+
+  ;; Uncomment this first set of 1234 aliases to enable home row mods
+  ;; 1 (t! reg-mir (t! hrm-shot 1 lmet) @0)
+  ;; 2 (t! reg-mir (t! hrm-shot 2 lalt) @9)
+  ;; 3 (t! reg-mir (t! hrm-shot 3 lctl) @8)
+  ;; 4 (t! reg-mir (t! hrm-shot 4 lsft) @7)
+
+  ;; And then comment out this second set of 1234 aliases:
+  1 (t! reg-mir 1 @0)
+  2 (t! reg-mir 2 @9)
+  3 (t! reg-mir 3 @8)
+  4 (t! reg-mir 4 @7)
 
   ] ]
   } S-]

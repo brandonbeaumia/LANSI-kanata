@@ -5,10 +5,6 @@
 
 ;; Per discussion at https://github.com/jtroo/kanata/discussions/2154
 
-(deftemplate hrm (mod)
-  (one-shot-press 500 $mod)
-)
-
 (deftemplate hrm-shot (char hold)
   (switch
     ((key-timing 3 less-than 300)) $char break
@@ -29,46 +25,46 @@
   ;; Pass in your "intent signal" (likely space bar), and
   ;; Pass in each character you want to chord with that intent signal for that modifier.
   ;; (t! hrm-chords-left spc a s d f) is a good place to start.
-  ($signal $lmet                  ) (t! hrm lmet) $hrm-chord-timeout all-released ()
-  ($signal       $lalt            ) (t! hrm lalt) $hrm-chord-timeout all-released ()
-  ($signal             $lctl      ) (t! hrm lctl) $hrm-chord-timeout all-released ()
-  ($signal                   $lsft) (t! hrm lsft) $hrm-chord-timeout all-released ()
+  ($signal $lmet                  ) (t! os lmet) $hrm-chord-timeout all-released ()
+  ($signal       $lalt            ) (t! os lalt) $hrm-chord-timeout all-released ()
+  ($signal             $lctl      ) (t! os lctl) $hrm-chord-timeout all-released ()
+  ($signal                   $lsft) (t! os lsft) $hrm-chord-timeout all-released ()
 
-  ($signal $lmet $lalt            ) (multi (t! hrm lmet) (t! hrm lalt)) $hrm-chord-timeout all-released ()
-  ($signal $lmet       $lctl      ) (multi (t! hrm lmet) (t! hrm lctl)) $hrm-chord-timeout all-released ()
-  ($signal $lmet             $lsft) (multi (t! hrm lmet) (t! hrm lsft)) $hrm-chord-timeout all-released ()
-  ($signal       $lalt $lctl      ) (multi (t! hrm lalt) (t! hrm lctl)) $hrm-chord-timeout all-released ()
-  ($signal       $lalt       $lsft) (multi (t! hrm lalt) (t! hrm lsft)) $hrm-chord-timeout all-released ()
-  ($signal             $lctl $lsft) (multi (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
+  ($signal $lmet $lalt            ) (multi (t! os lmet) (t! os lalt)) $hrm-chord-timeout all-released ()
+  ($signal $lmet       $lctl      ) (multi (t! os lmet) (t! os lctl)) $hrm-chord-timeout all-released ()
+  ($signal $lmet             $lsft) (multi (t! os lmet) (t! os lsft)) $hrm-chord-timeout all-released ()
+  ($signal       $lalt $lctl      ) (multi (t! os lalt) (t! os lctl)) $hrm-chord-timeout all-released ()
+  ($signal       $lalt       $lsft) (multi (t! os lalt) (t! os lsft)) $hrm-chord-timeout all-released ()
+  ($signal             $lctl $lsft) (multi (t! os lctl) (t! os lsft)) $hrm-chord-timeout all-released ()
 
-  ($signal $lmet $lalt $lctl      ) (multi (t! hrm lmet) (t! hrm lalt) (t! hrm lctl)) $hrm-chord-timeout all-released ()
-  ($signal $lmet $lalt       $lsft) (multi (t! hrm lmet) (t! hrm lalt) (t! hrm lsft)) $hrm-chord-timeout all-released ()
-  ($signal $lmet       $lctl $lsft) (multi (t! hrm lmet) (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
-  ($signal       $lalt $lctl $lsft) (multi (t! hrm lalt) (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
+  ($signal $lmet $lalt $lctl      ) (multi (t! os lmet) (t! os lalt) (t! os lctl)) $hrm-chord-timeout all-released ()
+  ($signal $lmet $lalt       $lsft) (multi (t! os lmet) (t! os lalt) (t! os lsft)) $hrm-chord-timeout all-released ()
+  ($signal $lmet       $lctl $lsft) (multi (t! os lmet) (t! os lctl) (t! os lsft)) $hrm-chord-timeout all-released ()
+  ($signal       $lalt $lctl $lsft) (multi (t! os lalt) (t! os lctl) (t! os lsft)) $hrm-chord-timeout all-released ()
 
-  ($signal $lmet $lalt $lctl $lsft) (multi (t! hrm lmet) (t! hrm lalt) (t! hrm lctl) (t! hrm lsft)) $hrm-chord-timeout all-released ()
+  ($signal $lmet $lalt $lctl $lsft) (multi (t! os lmet) (t! os lalt) (t! os lctl) (t! os lsft)) $hrm-chord-timeout all-released ()
 )
 
 (deftemplate hrm-chords-right (signal rsft rctl ralt rmet)
   ;; Pass in your "intent signal" (likely space bar), and
   ;; Pass in each character you want to chord with that intent signal for that modifier.
   ;; (t! hrm-chords-right spc j k l ;) is a good place to start.
-  ($signal $rsft                  ) (t! hrm rsft) $hrm-chord-timeout all-released ()
-  ($signal       $rctl            ) (t! hrm rctl) $hrm-chord-timeout all-released ()
-  ($signal             $ralt      ) (t! hrm ralt) $hrm-chord-timeout all-released ()
-  ($signal                   $rmet) (t! hrm rmet) $hrm-chord-timeout all-released ()
+  ($signal $rsft                  ) (t! os rsft) $hrm-chord-timeout all-released ()
+  ($signal       $rctl            ) (t! os rctl) $hrm-chord-timeout all-released ()
+  ($signal             $ralt      ) (t! os ralt) $hrm-chord-timeout all-released ()
+  ($signal                   $rmet) (t! os rmet) $hrm-chord-timeout all-released ()
 
-  ($signal $rsft $rctl            ) (multi (t! hrm rsft) (t! hrm rctl)) $hrm-chord-timeout all-released ()
-  ($signal $rsft       $ralt      ) (multi (t! hrm rsft) (t! hrm ralt)) $hrm-chord-timeout all-released ()
-  ($signal $rsft             $rmet) (multi (t! hrm rsft) (t! hrm rmet)) $hrm-chord-timeout all-released ()
-  ($signal       $rctl $ralt      ) (multi (t! hrm rctl) (t! hrm ralt)) $hrm-chord-timeout all-released ()
-  ($signal       $rctl       $rmet) (multi (t! hrm rctl) (t! hrm rmet)) $hrm-chord-timeout all-released ()
-  ($signal             $ralt $rmet) (multi (t! hrm ralt) (t! hrm rmet)) $hrm-chord-timeout all-released ()
+  ($signal $rsft $rctl            ) (multi (t! os rsft) (t! os rctl)) $hrm-chord-timeout all-released ()
+  ($signal $rsft       $ralt      ) (multi (t! os rsft) (t! os ralt)) $hrm-chord-timeout all-released ()
+  ($signal $rsft             $rmet) (multi (t! os rsft) (t! os rmet)) $hrm-chord-timeout all-released ()
+  ($signal       $rctl $ralt      ) (multi (t! os rctl) (t! os ralt)) $hrm-chord-timeout all-released ()
+  ($signal       $rctl       $rmet) (multi (t! os rctl) (t! os rmet)) $hrm-chord-timeout all-released ()
+  ($signal             $ralt $rmet) (multi (t! os ralt) (t! os rmet)) $hrm-chord-timeout all-released ()
 
-  ($signal $rsft $rctl $ralt      ) (multi (t! hrm rsft) (t! hrm rctl) (t! hrm ralt)) $hrm-chord-timeout all-released ()
-  ($signal $rsft $rctl       $rmet) (multi (t! hrm rsft) (t! hrm rctl) (t! hrm rmet)) $hrm-chord-timeout all-released ()
-  ($signal $rsft       $ralt $rmet) (multi (t! hrm rsft) (t! hrm ralt) (t! hrm rmet)) $hrm-chord-timeout all-released ()
-  ($signal       $rctl $ralt $rmet) (multi (t! hrm rctl) (t! hrm ralt) (t! hrm rmet)) $hrm-chord-timeout all-released ()
+  ($signal $rsft $rctl $ralt      ) (multi (t! os rsft) (t! os rctl) (t! os ralt)) $hrm-chord-timeout all-released ()
+  ($signal $rsft $rctl       $rmet) (multi (t! os rsft) (t! os rctl) (t! os rmet)) $hrm-chord-timeout all-released ()
+  ($signal $rsft       $ralt $rmet) (multi (t! os rsft) (t! os ralt) (t! os rmet)) $hrm-chord-timeout all-released ()
+  ($signal       $rctl $ralt $rmet) (multi (t! os rctl) (t! os ralt) (t! os rmet)) $hrm-chord-timeout all-released ()
 )
 
 (defchordsv2
@@ -111,69 +107,83 @@
 
   ;; Alpha with special typing layers
   ytype (t! special-typing-layer y y)
-  y @ytype
   utype (t! special-typing-layer u u)
-  u @utype
   itype (t! special-typing-layer i i)
-  i @itype
   otype (t! special-typing-layer o o)
-  o @otype
   ptype (t! special-typing-layer p p)
-  p @ptype
   htype (t! special-typing-layer h h)
-  h @htype
-
   jtype (t! special-typing-layer j j)
-  j (t! hrm-shot j rsft)
   ktype (t! special-typing-layer k k)
-  k (t! hrm-shot k rctl)
   ltype (t! special-typing-layer l l)
-  l (t! hrm-shot l ralt)
   ;type (t! special-typing-layer ; ;)
-  ; (t! hrm-shot ; rmet)
   'type (t! special-typing-layer ' ')
+  ntype (t! special-typing-layer n n)
+  mtype (t! special-typing-layer m m)
+  ,type (t! special-typing-layer , ,)
+  .type (t! special-typing-layer . .)
+  qtype (t! special-typing-layer q q)
+  wtype (t! special-typing-layer w w)
+  etype (t! special-typing-layer e e)
+  rtype (t! special-typing-layer r r)
+  ttype (t! special-typing-layer t t)
+  atype (t! special-typing-layer a a)
+  stype (t! special-typing-layer s s)
+  dtype (t! special-typing-layer d d)
+  ftype (t! special-typing-layer f f)
+  gtype (t! special-typing-layer g g)
+  xtype (t! special-typing-layer x x)
+  ctype (t! special-typing-layer c c)
+  vtype (t! special-typing-layer v v)
+  btype (t! special-typing-layer b b)
+
+  y @ytype
+  u @utype
+  i @itype
+  o @otype
+  p @ptype
+  h @htype
+  
+  ;; Uncomment this first set of jkl; aliases to enable home row mods
+  ;; j (t! hrm-shot j rsft)
+  ;; k (t! hrm-shot k rctl)
+  ;; l (t! hrm-shot l ralt)
+  ;; ; (t! hrm-shot ; rmet)
+  ;; and then comment out this second set of jkl; aliases
+  j @jtype
+  k @ktype
+  l @ltype
+  ; @;type
+
   ' @'type
   
-  ntype (t! special-typing-layer n n)
   n @ntype
-  mtype (t! special-typing-layer m m)
   m @mtype
-  ,type (t! special-typing-layer , ,)
   , @,type
-  .type (t! special-typing-layer . .)
   . @.type
 
-  ;; Alpha with special typing layers *and* mirrors
-  qtype (t! special-typing-layer q q)
   q (t! reg-mir @qtype @p)
-  wtype (t! special-typing-layer w w)
   w (t! reg-mir @wtype @o)
-  etype (t! special-typing-layer e e)
   e (t! reg-mir @etype @i)
-  rtype (t! special-typing-layer r r)
   r (t! reg-mir @rtype @u)
-  ttype (t! special-typing-layer t t)
   t (t! reg-mir @ttype @y)
-  atype (t! special-typing-layer a a)
 
-  a (t! reg-mir (t! hrm-shot a lmet) @;)
-  stype (t! special-typing-layer s s)
-  s (t! reg-mir (t! hrm-shot s lalt) @l)
-  dtype (t! special-typing-layer d d)
-  d (t! reg-mir (t! hrm-shot d lctl) @k)
-  ftype (t! special-typing-layer f f)
-  f (t! reg-mir (t! hrm-shot f lsft) @j)
-  gtype (t! special-typing-layer g g)
+  ;; Uncomment this first set of asdf aliases to enable home row mods
+  ;; a (t! reg-mir (t! hrm-shot a lmet) @;)
+  ;; s (t! reg-mir (t! hrm-shot s lalt) @l)
+  ;; d (t! reg-mir (t! hrm-shot d lctl) @k)
+  ;; f (t! reg-mir (t! hrm-shot f lsft) @j)
+  ;; and then comment out this second set of asdf aliases
+  a (t! reg-mir @atype @;)
+  s (t! reg-mir @stype @l)
+  d (t! reg-mir @dtype @k)
+  f (t! reg-mir @ftype @j)
+
   g (t! reg-mir @gtype @h)
 
   ;; z already mirrored via zalt alias
-  xtype (t! special-typing-layer x x)
   x (t! reg-mir @xtype .)
-  ctype (t! special-typing-layer c c)
   c (t! reg-mir @ctype ,)
-  vtype (t! special-typing-layer v v)
   v (t! reg-mir @vtype m)
-  btype (t! special-typing-layer b b)
   b (t! reg-mir @btype n)
 
   ;; Modifiers
