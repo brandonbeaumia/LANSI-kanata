@@ -181,17 +181,18 @@
   g (t! reg-mir @gtype @h)
 
   ;; z already mirrored via zalt alias
-  x (t! reg-mir @xtype .)
-  c (t! reg-mir @ctype ,)
-  v (t! reg-mir @vtype m)
-  b (t! reg-mir @btype n)
+  x (t! reg-mir @xtype @.)
+  c (t! reg-mir @ctype @,)
+  v (t! reg-mir @vtype @m)
+  b (t! reg-mir @btype @n)
 
   ;; Modifiers
   bspclsft (multi (layer-while-held spcmeta) (tap-hold-press 0 $ht (macro bspc) lsft)) ;; see https://github.com/jtroo/kanata/discussions/733 for reason this is in a macro
   delrsft (multi (layer-while-held spcmeta) (tap-hold-press 0 $ht (macro del) rsft)) ;; see https://github.com/jtroo/kanata/discussions/733 for reason this is in a macro
   /alt (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht / ralt))
   .alt (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht . ralt)) ;; redundant for future ergonomic reasons (explained at end of tour)
-  zalt (t! reg-mir (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht z ralt)) @/alt)
+  zalt (t! reg-mir (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht z lalt)) @/alt)
+  xalt (t! reg-mir (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht x lalt)) @.alt)
   lctl (tap-dance-eager 150 (
       (multi (layer-while-held spcmeta) lctl)
       (multi (layer-while-held spcmeta) lctl (on-press press-vkey mirror?) (on-release release-vkey mirror?))

@@ -41,7 +41,7 @@ Let's get into it!
   XX        @n1     @n2    @n3      @n4     @n5      @n6    @n7    @n8    @n9    @n0    @nr- @nr= bspc
   @tabultra @q      @w     @e       @r      @t       @y     @u     @i     @o     @p     enter XX   XX
   @escext   @a      @s     @d       @f      @g       @h     @j     @k     @l     @'     @;   enter
-  @bspclsft @zalt   @x     @c       @v      @b       @n     @m     @,     @.alt  @/alt  @delrsft
+  @bspclsft @zalt   @x     @c       @v      @b       @n     @m     @,     @.alt  @delrsft  @delrsft
   XX        mmid    @lctl  spc      @func-numsym
 
   mlft mmid mrgt @func-numsym @mirror

@@ -110,6 +110,10 @@ TODO:
 
 ;; no Z as that key is already alt
 (deflayermap (x) _ _)
-(deflayermap (c) _ _)
+(deflayermap (c)
+  ; (t! backspaced c (unicode 〃))
+  
+
+)
 (deflayermap (v) _ _)
 (deflayermap (b) _ _)
