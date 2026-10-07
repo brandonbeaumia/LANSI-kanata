@@ -112,7 +112,8 @@ TODO:
 (deflayermap (x) _ _)
 (deflayermap (c)
   ; (t! backspaced c (unicode 〃))
-  
+  m (t! backspaced c (unicode —))
+  n (t! backspaced c (unicode –))
 
 )
 (deflayermap (v) _ _)
