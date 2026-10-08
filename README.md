@@ -10,4 +10,7 @@ Welcome to the LANSI keyboard layout, built in Kanata! LANSI is broadly compatib
 * It allows what would otherwise be right-handed shortcuts without leaving the mouse via mirroring (sounds harder than it is!).
 
 ## Walkthrough
-TODO
+(Hold Function)
+Tap Shifted-tap
+.
+![Diagram showing base layer of LANSI layout](/images/base.png)
