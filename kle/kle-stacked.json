@@ -118,21 +118,20 @@
             "w": 1.5,
             "h": 1.5
         },
-        "↵\n\n(ULTRA)",
+        "↵\n{  [ {  }\n(ULTRA)",
         {
             "ta": "",
             "g": true,
-            "a": 0,
             "fa": [],
             "w": 1.5,
             "h": 1.5
         },
-        "",
+        "]  }",
         {
             "w": 2,
             "h": 1.5
         },
-        ""
+        "\\  |"
     ],
     [
         {
@@ -242,21 +241,19 @@
         },
         "; :\n\n\nb+",
         {
-            "ta": "",
+            "ta": "\n\n#be10e0",
             "g": true,
-            "a": 0,
             "fa": [],
             "w": 3,
             "h": 1.5
         },
-        ""
+        "↵\n\n(ULTRA)"
     ],
     [
         {
             "y": 0.5,
             "ta": "#f7f7f2\n\n\n\n#8be8fc\n\n\n#6272a3\n#f7f7f2",
             "g": false,
-            "a": 4,
             "fa": [
                 6,
                 0,
@@ -286,7 +283,7 @@
             "w": 1.5,
             "h": 1.5
         },
-        "Z⎇\n⎇\n&\n●macro\n⎇⏸\n\n\n(+Space◆)",
+        "Z (⎇)\n⎇\n&\n●macro\n⎇⏸\n\n\n(+Space◆)",
         {
             "ta": "#f7f7f2\n\n#ffb86b\n#50fa7a",
             "fa": [
@@ -388,16 +385,15 @@
             "w": 1.5,
             "h": 1.5
         },
-        "⌦\n\n(⇧)\n\n⇧⏸\n\n\n(+Space◆)",
+        "⌦\n{ / ? }\n(⇧)\n\n⇧⏸\n\n\n(+Space◆)",
         {
             "ta": "",
             "g": true,
-            "a": 0,
             "fa": [],
             "w": 4,
             "h": 1.5
         },
-        ""
+        "⌦\n\n(⇧)"
     ],
     [
         {
@@ -408,6 +404,9 @@
             "g": false,
             "a": 7,
             "f": 3,
+            "fa": [
+                9
+            ],
             "d": true
         },
         "[!?]"
@@ -438,14 +437,18 @@
             "ta": "#f7f7f2\n#ff5454\n#ffb86b\n#50fa7a\n#8be8fc\n\n\n#6272a3",
             "fa": [
                 6,
-                9,
+                6,
+                6,
+                6,
+                0,
+                0,
                 0,
                 6
             ],
             "w": 7.5,
             "h": 1.5
         },
-        "Space\n◆\nSpace (◆)\n◆\n◆⏸\n\n\nSpace (◆)",
+        "Space\n◆\nSpace (◆)\n◆ \n◆⏸\n\n\nSpace (◆)",
         {
             "ta": "\n\n\n#ff5454\n\n\n\n\n#ffb86b\n#8be8fc\n#50fa7a",
             "fa": [
@@ -464,6 +467,24 @@
             "w": 1.5,
             "h": 1.5
         },
-        "\n\n\n🖰\n\n\n\n\n(NSYM)\n⏱FUNC\nExtend:"
+        "\n\n\n🖰\n\n\n\n\n(NSYM)\n⏱FUNC\nExtend:",
+        {
+            "x": 3.25,
+            "ta": "",
+            "fa": [
+                0,
+                4,
+                0,
+                4,
+                0,
+                0,
+                0,
+                2,
+                4
+            ],
+            "w": 3,
+            "h": 1.5
+        },
+        "\n{alternate}\n\n⏱One-Shot\n\n\n[Combo]\n(Additional Hold)\nTapped Shifted (Held)"
     ]
 ]
