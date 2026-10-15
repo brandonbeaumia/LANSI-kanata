@@ -15,12 +15,8 @@
 )
 
 (defalias ;; mouse
-  mouse (tap-hold 0 $ht (layer-switch mouse) (layer-while-held mouse))
+  mouse (tap-hold 0 $ht C-S-c (layer-while-held mouse))
   ;; Tap to toggle mouse layer until exited, or hold for temporary mouse layer
-  msexit (multi (layer-switch base) (layer-while-held extend))
-  ;; Exclude the usual Esc tap behavior from @escext: it feels natural for exiting the layer to "consume" this Esc if just tapped.
-  msnmsm (tap-hold 0 $ht (layer-switch base) (layer-while-held numsym))
-  ;; Tapping cancels mouse, holding goes to symbols and leaves mouse active when you release. Always safe to *tap* even if you don't remember if you are in the mousing layer.
 
   ;; wheel-accel variants cause crashing on Windows. Non-accel variant until fixed (and similar anyway)
   whllft (mwheel-left $mw-interval $mw-distance)
