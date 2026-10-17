@@ -23,7 +23,7 @@ Holding the key to the right of the space bar activates the `numsym` layer; let'
 
 ### Numbers + Symbols Layer
 ![Diagram showing numsym layer of LANSI layout](/images/numsym.png)
-* The numsym layer manages to combine all data entry and programming tasks.
+#### The numsym layer manages to combine all data entry and programming tasks.
 * Only the `^%|~` characters require an additional keypress (shift) or timer (holding) to activate.
 * No modifiers, symbols, or other control characters are overwritten from the base layer.
 * In this layer, tapping `_-` (`we`) sends `@`. The `!?` combo also still works.
@@ -34,7 +34,7 @@ Let go of the numsym key and hold `caps` for the Extend layer.
 ![Diagram showing extend layer of LANSI layout](/images/extend.png)
 * Navigation and media clusters on the right hand, laid out in three matching `HJKL` rows.
 * Callum-style "sticky" modifiers are on home row here because your pinky is already holding this layer on.
-* Having modifiers and `Arrow/Nav` keys together upgrades text editing anywhere Vim motions aren't supported.
+* Having modifiers and `Arrow/Nav` keys together dramatically upgrades text editing.
 * The `Meta` key is found on the space bar here, often paired with arrow keys for window management.
 * The `game` key swaps between LANSI and ANSI, leaving this extend layer available via Caps.
 * The Extend layer's left side keys are useful when your right hand is on the mouse (enter, delete, etc).
@@ -43,7 +43,7 @@ Instead of letting go of caps lock, hold the right thumb key while in the Extend
 
 ### Mouse Layer
 ![Diagram showing mouse layer of LANSI layout](/images/mouse.png)
-* The mouse layer allows you to do some quick mousing without taking your hands off the keyboard.
+#### The mouse layer allows you to do some quick mousing without taking your hands off the keyboard.
 * Mouse directions are on the ESDF keys. This leaves your regular Ctrl and Shift fingers available.
 * Mouse clicks are on the right hand, lined up with a regular mouse.
 * Scrolling sideways is to the side, and scrolling up and down are on the index fingers' up/down. 
@@ -53,12 +53,12 @@ Let go of the right thumb key to go back to the base layer.
 
 ### Function Layer
 ![Diagram showing function layer of LANSI layout](/images/func.png)
-From the base layer, instead of holding the right thumb key, *tap* it instead. This will enable the function layer for 1000ms.
+#### From the base layer, instead of holding the right thumb key, *tap* it instead. This enables the function layer for 1000ms.
 * Holding any of these Fkeys sends `alt+Fkey`.
 * All modifiers on the function layer stop the timer.
 
 ### Ultra "Layer"
-Hold `tab` or the (new) `enter` key to activate Ultra.
+#### Hold `tab` or the (new) `enter` key to activate Ultra.
 * Adds `Ctrl+Alt+Meta` to all alphanumeric keys, and *also* adds `Shift` if the alphanumeric key is held.
 * Results in two full sets of user-definable shortcuts for app launching, window management, pro apps, etc.
 
