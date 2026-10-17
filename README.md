@@ -64,3 +64,12 @@ Hold `tab` or the (new) `enter` key to activate Ultra.
 
 ### Mirroring
 If the mouse back button is held, all alphanumeric keys on the left half of the board send their *mirrored* output instead. So f becomes j, d becomes k, etc. Next time you need to Ctrl+Y, Ctrl+O, Ctrl+H, etc, give it a shot. Eventually that grows into short keywords, app launcher searches, or the first few characters of a dropdown box: it's really flowy to not have to leave the mouse for just a couple presses, no matter where they are on the keyboard. There are also some non-standard "mirrors" (tab becoming shift-tab, for example) that solve other ergonomics issues.
+
+### Wide Mod
+There is a full column of keys unused to the far right (enter, right shift, and ] key). Instead of leaving this unused, we can instead slide the right hand keys over by one full key. This puts your right thumb closer to the `ralt` thumb key. You can also avoid using the `lalt` thumb key by using the Extend mods.
+
+### Special Character Typing
+All alpha keys output their character immediately and repeat when held, just as they always have. However, if you hold an alpha key *and* press+release another key before 500ms ends, Kanata will backspace that alpha character and output a new character. This can be used to type non-ASCII characters such as ↑↓ or ḓìàċṙïtíčș.
+
+### Outro
+That's all there is to it! Three very accessible layers that cover all ASCII characters, and bonuses elsewhere.
