@@ -1,0 +1,208 @@
+(defvirtualkeys
+  !? (fork S-1 S-/ (lsft rsft))
+  at S-2
+)
+
+;; Per discussion at https://github.com/jtroo/kanata/discussions/2154
+
+(deftemplate hrm-shot (char hold)
+  (switch
+    ((key-timing 3 less-than 300)) $char break
+    () (tap-hold-release-timeout 150 150
+      $char ;; if tapped, output char
+      $hold ;; if held and another key is pressed+released, $mod that key
+      (tap-hold-order 0 0 ;; if held until $ht timeout...
+        (one-shot 500 $hold) ;; and no keys are pressed before mod is released: begin one-shot timeout when released
+        (one-shot 500 $hold) ;; or, if a key is pressed and released, apply the $mod as normal.
+        ;; even though we just want a regular mod, we use one-shot for both actions.
+        ;; This ensures we do not consume other simultaneous one-shots.
+      )
+    ) break
+  )
+)
+
+(deftemplate hrm-chords-left (signal lmet lalt lctl lsft)
+  ;; Pass in your "intent signal" (likely space bar), and
+  ;; Pass in each character you want to chord with that intent signal for that modifier.
+  ;; (t! hrm-chords-left spc a s d f) is a good place to start.
+  ($signal $lmet                  ) (t! os lmet) $hrm-chord-timeout all-released ()
+  ($signal       $lalt            ) (t! os lalt) $hrm-chord-timeout all-released ()
+  ($signal             $lctl      ) (t! os lctl) $hrm-chord-timeout all-released ()
+  ($signal                   $lsft) (t! os lsft) $hrm-chord-timeout all-released ()
+
+  ($signal $lmet $lalt            ) (multi (t! os lmet) (t! os lalt)) $hrm-chord-timeout all-released ()
+  ($signal $lmet       $lctl      ) (multi (t! os lmet) (t! os lctl)) $hrm-chord-timeout all-released ()
+  ($signal $lmet             $lsft) (multi (t! os lmet) (t! os lsft)) $hrm-chord-timeout all-released ()
+  ($signal       $lalt $lctl      ) (multi (t! os lalt) (t! os lctl)) $hrm-chord-timeout all-released ()
+  ($signal       $lalt       $lsft) (multi (t! os lalt) (t! os lsft)) $hrm-chord-timeout all-released ()
+  ($signal             $lctl $lsft) (multi (t! os lctl) (t! os lsft)) $hrm-chord-timeout all-released ()
+
+  ($signal $lmet $lalt $lctl      ) (multi (t! os lmet) (t! os lalt) (t! os lctl)) $hrm-chord-timeout all-released ()
+  ($signal $lmet $lalt       $lsft) (multi (t! os lmet) (t! os lalt) (t! os lsft)) $hrm-chord-timeout all-released ()
+  ($signal $lmet       $lctl $lsft) (multi (t! os lmet) (t! os lctl) (t! os lsft)) $hrm-chord-timeout all-released ()
+  ($signal       $lalt $lctl $lsft) (multi (t! os lalt) (t! os lctl) (t! os lsft)) $hrm-chord-timeout all-released ()
+
+  ($signal $lmet $lalt $lctl $lsft) (multi (t! os lmet) (t! os lalt) (t! os lctl) (t! os lsft)) $hrm-chord-timeout all-released ()
+)
+
+(deftemplate hrm-chords-right (signal rsft rctl ralt rmet)
+  ;; Pass in your "intent signal" (likely space bar), and
+  ;; Pass in each character you want to chord with that intent signal for that modifier.
+  ;; (t! hrm-chords-right spc j k l ;) is a good place to start.
+  ($signal $rsft                  ) (t! os rsft) $hrm-chord-timeout all-released ()
+  ($signal       $rctl            ) (t! os rctl) $hrm-chord-timeout all-released ()
+  ($signal             $ralt      ) (t! os ralt) $hrm-chord-timeout all-released ()
+  ($signal                   $rmet) (t! os rmet) $hrm-chord-timeout all-released ()
+
+  ($signal $rsft $rctl            ) (multi (t! os rsft) (t! os rctl)) $hrm-chord-timeout all-released ()
+  ($signal $rsft       $ralt      ) (multi (t! os rsft) (t! os ralt)) $hrm-chord-timeout all-released ()
+  ($signal $rsft             $rmet) (multi (t! os rsft) (t! os rmet)) $hrm-chord-timeout all-released ()
+  ($signal       $rctl $ralt      ) (multi (t! os rctl) (t! os ralt)) $hrm-chord-timeout all-released ()
+  ($signal       $rctl       $rmet) (multi (t! os rctl) (t! os rmet)) $hrm-chord-timeout all-released ()
+  ($signal             $ralt $rmet) (multi (t! os ralt) (t! os rmet)) $hrm-chord-timeout all-released ()
+
+  ($signal $rsft $rctl $ralt      ) (multi (t! os rsft) (t! os rctl) (t! os ralt)) $hrm-chord-timeout all-released ()
+  ($signal $rsft $rctl       $rmet) (multi (t! os rsft) (t! os rctl) (t! os rmet)) $hrm-chord-timeout all-released ()
+  ($signal $rsft       $ralt $rmet) (multi (t! os rsft) (t! os ralt) (t! os rmet)) $hrm-chord-timeout all-released ()
+  ($signal       $rctl $ralt $rmet) (multi (t! os rctl) (t! os ralt) (t! os rmet)) $hrm-chord-timeout all-released ()
+)
+
+(defchordsv2
+  ;; (t! hrm-chords-left spc a s d f)
+  ;; (t! hrm-chords-right spc j k l ;)
+  
+  ;; vkeys required here so that our lsft "hold" action is activated when tapping the chord (see https://jtroo.github.io/config.html#chordsv2-processing-order)
+  (, .) (multi (on-press press-vkey !?) (on-release release-vkey !?)) $chord-timeout all-released (ultra extend mouse func)
+  (w e) (multi (on-press press-vkey at) (on-release release-vkey at)) $chord-timeout all-released (base ultra extend mouse func spcmeta)
+)
+
+(defalias ;; base
+
+  ;; Tap for Fkey, hold for Alt+Fkey:
+  f6 (tap-hold $ltt $lht f6 A-f6)
+  f7 (tap-hold $ltt $lht f7 A-f7)
+  f8 (tap-hold $ltt $lht f8 A-f8)
+  f9 (tap-hold $ltt $lht f9 A-f9)
+  f10 (tap-hold $ltt $ht f10 A-f10)
+
+  ;; Mirroring works differently depending on where the F key is, so we define the left and right-handed versions separately:
+  rf11 (tap-hold $ltt $lht f11 A-f11)
+  rf12 (tap-hold $tt $lht f12 A-f12)
+  lf11 (t! reg-mir @rf11 @rf12)
+  lf12 @rf12
+  
+  f1 (t! reg-mir (tap-hold $ltt $lht f1 A-f1) @f10)
+  f2 (t! reg-mir (tap-hold $ltt $lht f2 A-f2) @f9)
+  f3 (t! reg-mir (tap-hold $ltt $lht f3 A-f3) @f8)
+  f4 (t! reg-mir (tap-hold $ltt $lht f4 A-f4) @f7)
+  f5 (t! reg-mir (tap-hold $ltt $lht f5 A-f5) @f6)
+  f12 (t! reg-mir (tap-hold $ltt $lht f12 A-f12) @lf12)
+
+  ;; Number row
+  n6 (tap-hold 0 $ht 6 S-6) n7 (tap-hold 0 $ht 7 S-7) n8 (tap-hold 0 $ht 8 S-8)
+  n9 (tap-hold 0 $ht 9 S-9) n0 (tap-hold 0 $ht 0 S-0) nr- (tap-hold 0 $ht -   S--) nr= (tap-hold 0 $ht =   S-=)
+  n1 (t! reg-mir (tap-hold 0 $ht 1 S-1) @n0) n2 (t! reg-mir (tap-hold 0 $ht 2 S-2) @n7) n3 (t! reg-mir (tap-hold 0 $ht 3 S-3) @n8)
+  n4 (t! reg-mir (tap-hold 0 $ht 4 S-4) @n7) n5 (t! reg-mir (tap-hold 0 $ht 5 S-5) @n6)
+
+
+  ;; Alpha with special typing layers
+  ytype (t! special-typing-layer y y)
+  utype (t! special-typing-layer u u)
+  itype (t! special-typing-layer i i)
+  otype (t! special-typing-layer o o)
+  ptype (t! special-typing-layer p p)
+  htype (t! special-typing-layer h h)
+  jtype (t! special-typing-layer j j)
+  ktype (t! special-typing-layer k k)
+  ltype (t! special-typing-layer l l)
+  ;type (t! special-typing-layer ; ;)
+  'type (t! special-typing-layer ' ')
+  ntype (t! special-typing-layer n n)
+  mtype (t! special-typing-layer m m)
+  ,type (t! special-typing-layer , ,)
+  .type (t! special-typing-layer . .)
+  qtype (t! special-typing-layer q q)
+  wtype (t! special-typing-layer w w)
+  etype (t! special-typing-layer e e)
+  rtype (t! special-typing-layer r r)
+  ttype (t! special-typing-layer t t)
+  atype (t! special-typing-layer a a)
+  stype (t! special-typing-layer s s)
+  dtype (t! special-typing-layer d d)
+  ftype (t! special-typing-layer f f)
+  gtype (t! special-typing-layer g g)
+  xtype (t! special-typing-layer x x)
+  ctype (t! special-typing-layer c c)
+  vtype (t! special-typing-layer v v)
+  btype (t! special-typing-layer b b)
+
+  y @ytype
+  u @utype
+  i @itype
+  o @otype
+  p @ptype
+  h @htype
+  
+  ;; Uncomment this first set of jkl; aliases to enable home row mods
+  ;; j (t! hrm-shot j rsft)
+  ;; k (t! hrm-shot k rctl)
+  ;; l (t! hrm-shot l ralt)
+  ;; ; (t! hrm-shot ; rmet)
+  ;; and then comment out this second set of jkl; aliases
+  j @jtype
+  k @ktype
+  l @ltype
+  ; @;type
+
+  ' @'type
+  
+  n @ntype
+  m @mtype
+  , @,type
+  . @.type
+
+  q (t! reg-mir @qtype @p)
+  w (t! reg-mir @wtype @o)
+  e (t! reg-mir @etype @i)
+  r (t! reg-mir @rtype @u)
+  t (t! reg-mir @ttype @y)
+
+  ;; Uncomment this first set of asdf aliases to enable home row mods
+  ;; a (t! reg-mir (t! hrm-shot a lmet) @;)
+  ;; s (t! reg-mir (t! hrm-shot s lalt) @l)
+  ;; d (t! reg-mir (t! hrm-shot d lctl) @k)
+  ;; f (t! reg-mir (t! hrm-shot f lsft) @j)
+  ;; and then comment out this second set of asdf aliases
+  a (t! reg-mir @atype @;)
+  s (t! reg-mir @stype @l)
+  d (t! reg-mir @dtype @k)
+  f (t! reg-mir @ftype @j)
+
+  g (t! reg-mir @gtype @h)
+
+  ;; z already mirrored via zalt alias
+  x (t! reg-mir @xtype @.)
+  c (t! reg-mir @ctype @,)
+  v (t! reg-mir @vtype @m)
+  b (t! reg-mir @btype @n)
+
+  ;; Modifiers
+  bspclsft (multi (layer-while-held spcmeta) (tap-hold-press 0 $ht (macro bspc) lsft)) ;; see https://github.com/jtroo/kanata/discussions/733 for reason this is in a macro
+  delrsft (multi (layer-while-held spcmeta) (tap-hold-press 0 $ht (macro del) rsft)) ;; see https://github.com/jtroo/kanata/discussions/733 for reason this is in a macro
+  /alt (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht / ralt))
+  .alt (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht . ralt)) ;; redundant for future ergonomic reasons (explained at end of tour)
+  zalt (t! reg-mir (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht z lalt)) @/alt)
+  xalt (t! reg-mir (multi (layer-while-held spcmeta) (tap-hold-release $lht $lht x lalt)) @.alt)
+  lctl (tap-dance-eager 150 (
+      (multi (layer-while-held spcmeta) lctl)
+      (multi (layer-while-held spcmeta) lctl (on-press press-vkey mirror?) (on-release release-vkey mirror?))
+    )
+  )
+  ;; spc (t! hrm-shot spc lmet)
+
+  ;; Mouse mirroring button
+  mirror (multi (one-shot-pause-processing 1000) (on-press press-vkey mirror?) (on-release release-vkey mirror?)) ;; pause one-shots so we don't consume them
+
+  ;; {id:mirror-tab} Tab is an exception to standard mirroring. Instead of mirroring, it "reverses" the tab key by changing its tap function to shift-tab. For left-hand-only use, this makes an otherwise impossible shortcut of (leftpinky + leftpinky) an easy (mousethumb + leftpinky). Holding remains Ultra. {layer: base} {highlight: @tabultra}
+  tabultra (t! reg-mir (tap-hold-press 0 $ht tab (layer-while-held ultra)) (tap-hold-press 0 $ht S-tab (layer-while-held ultra)))
+)
