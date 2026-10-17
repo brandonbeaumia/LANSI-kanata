@@ -3,11 +3,11 @@
 # LANSI
 Welcome to the LANSI keyboard layout, built in Kanata! LANSI is broadly compatible, configured to improve most keys found on laptops while remaining fully functional with as few as 39 keys.
 
-* Nearly all QWERTY defaults remain, and additional functionality should not interfere with current muscle memory.
-* It features ultra-fast latency-free typing without misfires by avoiding alpha key overloading. No home row mods.
-* It leans away from timing pressure and timing dependency for all but the most rarely used keys and features.
-* It prioritizes fast and accessible modifier & shortcut combos, especially from the left hand for simultaneous mousing.
-* It allows what would otherwise be right-handed shortcuts without leaving the mouse via mirroring (sounds harder than it is!).
+* Nearly all QWERTY defaults remain, and extra functionality won't interfere with current muscle memory.
+* latency-free typing without misfires by avoiding alpha key overloading. No home row mods.
+* leans away from timing dependency for all but the most rarely used keys and features.
+* prioritizes fast and accessible modifier combos, especially from the left hand for simultaneous mousing.
+* allows right-handed shortcuts without leaving the mouse via mirroring (sounds harder than it is!).
 
 ## Walkthrough
 ### Base Layer
@@ -33,11 +33,11 @@ Let go of the numsym key and hold `caps` for the Extend layer.
 ### Extend Layer
 ![Diagram showing extend layer of LANSI layout](/images/extend.png)
 * Navigation and media clusters on the right hand, laid out in three matching `HJKL` rows.
-* Modifiers are featured on home row here because your left pinky is already holding this layer on.
-* Having `Control, Shift, Alt` and `Arrow/Nav` keys so easily combined with each other takes text editing to a new level anywhere Vim motions aren't supported.
-* The `Meta` key is found on the space bar here in the Extend layer, where it is often paired with arrow keys for window management.
-* The `game` layer key makes the keyboard regular ANSI again, but leaves this extend layer available via Caps.
-* Most of the other shortcuts on the left hand are optional, but are nice to have available on the left hand while mousing with the right (enter key, delete, tab combos, etc).
+* Callum-style "sticky" modifiers are on home row here because your pinky is already holding this layer on.
+* Having modifiers and `Arrow/Nav` keys together takes text editing to a new level where Vim motions aren't supported.
+* The `Meta` key is found on the space bar here, often paired with arrow keys for window management.
+* The `game` layer key swaps the keyboard between LANSI and ANSI, leaving this extend layer available via Caps.
+* The Extend layer's left side shortcuts are useful when your right hand is on the mouse (enter, delete, tab combos).
 
 Instead of letting go of caps lock, hold the right thumb key while in the Extend layer to activate the Mouse layer. You can then safely let go of caps lock.
 
