@@ -36,6 +36,7 @@
 
   eq (t! reg-mir XX pp)
   ew (t! reg-mir XX prev)
+  ee (t! reg-mir XX volu)
   ;; Despite no primary function, we need aliases for these keys in the extend layer so they mirror.
 
   ;; To work around f-keys not being reliable on Linux for newer laptop hardware, you can bind these to relevant hardware functions. Alternatively, it's a full set of shortcuts ready for whatever purpose you need.

@@ -34,10 +34,10 @@ Let go of the numsym key and hold `caps` for the Extend layer.
 ![Diagram showing extend layer of LANSI layout](/images/extend.png)
 * Navigation and media clusters on the right hand, laid out in three matching `HJKL` rows.
 * Callum-style "sticky" modifiers are on home row here because your pinky is already holding this layer on.
-* Having modifiers and `Arrow/Nav` keys together takes text editing to a new level where Vim motions aren't supported.
+* Having modifiers and `Arrow/Nav` keys together upgrades text editing anywhere Vim motions aren't supported.
 * The `Meta` key is found on the space bar here, often paired with arrow keys for window management.
-* The `game` layer key swaps the keyboard between LANSI and ANSI, leaving this extend layer available via Caps.
-* The Extend layer's left side shortcuts are useful when your right hand is on the mouse (enter, delete, tab combos).
+* The `game` key swaps between LANSI and ANSI, leaving this extend layer available via Caps.
+* The Extend layer's left side keys are useful when your right hand is on the mouse (enter, delete, etc).
 
 Instead of letting go of caps lock, hold the right thumb key while in the Extend layer to activate the Mouse layer. You can then safely let go of caps lock.
 
@@ -72,4 +72,4 @@ There is a full column of keys unused to the far right (enter, right shift, and 
 All alpha keys output their character immediately and repeat when held, just as they always have. However, if you hold an alpha key *and* press+release another key before 500ms ends, Kanata will backspace that alpha character and output a new character. This can be used to type non-ASCII characters such as ↑↓ or ḓìàċṙïtíčș.
 
 ### Outro
-That's all there is to it! Three very accessible layers that cover all ASCII characters, and bonuses elsewhere.
+That's all there is to it! Three very accessible layers that cover all ASCII characters, and bonuses elsewhere. Those three layers is where most of the design (and benefit) were poured, but Ultra, Mirroring, and Special Character Typing are nice bonuses that still don't interfere with any regular keyboard activities. Hope you found some ideas you liked! There is an extended version of this readme within `kanata.kbd` that covers more of the "why" for many of the decisions that were made.

@@ -150,8 +150,8 @@ Let's get into it!
   lrld      @ef1    @ef2   @ef3     @ef4    @ef5     @ef6   @ef7   @ef8   @ef9   @ef10  @ef11 @ef12
 
   lrld      XX      XX     XX       XX      XX       XX     XX     XX     XX     XX     XX   XX   _
-  lrld      @eq     bspc   del      S-tab   tab      prev   vold   volu   next   pp     XX   XX   XX
-  _         @accept @ealt  @elctl   @elsft  @gaming  left   down   up     rght   brdn   brup _
+  lrld      @gaming @ew    @ee      S-tab   tab      prev   vold   volu   next   pp     XX   XX   XX
+  _         @accept @ealt  @elctl   @elsft  del      left   down   up     rght   brdn   brup _
   _         @rec    @run   @scsht   @clipb  @caps    home   pgdn   pgup   end    ralt   _
   _         lalt    _      @lmet    @mouse
 
