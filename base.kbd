@@ -73,7 +73,7 @@
   
   ;; vkeys required here so that our lsft "hold" action is activated when tapping the chord (see https://jtroo.github.io/config.html#chordsv2-processing-order)
   (, .) (multi (on-press press-vkey !?) (on-release release-vkey !?)) $chord-timeout all-released (ultra extend mouse func)
-  (w e) (multi (on-press press-vkey at) (on-release release-vkey at)) $chord-timeout all-released (base ultra extend mouse func)
+  (w e) (multi (on-press press-vkey at) (on-release release-vkey at)) $chord-timeout all-released (base ultra extend mouse func spcmeta)
 )
 
 (defalias ;; base

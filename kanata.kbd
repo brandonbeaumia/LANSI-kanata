@@ -1,7 +1,7 @@
-;; You may ignore comment {handlebars}; these are for eventual processing into an interactive tour.
+;; You may ignore comment handlebars; these are for eventual processing into an interactive tour.
 ;; For comment readability, you may need to turn on word wrap at ~160 characters (or window wrap and shrink your window).
 
-#|
+#| {id: intro}
 
 #####    Welcome to Lean ANSI!    #####
 
@@ -14,7 +14,7 @@ It allows what would otherwise be right-handed shortcuts without leaving the mou
 
 Let's get into it!
 
-{id: intro} {layer:base}
+{layer:base}
 |#
 
 ;; {play-sequence: intro}
@@ -41,7 +41,7 @@ Let's get into it!
   XX        @n1     @n2    @n3      @n4     @n5      @n6    @n7    @n8    @n9    @n0    @nr- @nr= bspc
   @tabultra @q      @w     @e       @r      @t       @y     @u     @i     @o     @p     enter XX   XX
   @escext   @a      @s     @d       @f      @g       @h     @j     @k     @l     @'     @;   enter
-  @bspclsft @zalt   @x     @c       @v      @b       @n     @m     @,     @.alt  @delrsft  @delrsft
+  @bspclsft @zalt   @x     @c       @v      @b       @n     @m     @,     @.alt  @delrsft @delrsft
   XX        mmid    @lctl  spc      @func-numsym
 
   mlft mmid mrgt @func-numsym @mirror
@@ -84,8 +84,8 @@ Let's get into it!
   _         _       _      _        _       _        _      _      _      _      _      _    _
 
   @f12      @f1     @f2    @f3      @f4     @f5      @f6    @f7    @f8    @f9    @f10   @rf11 @rf12 _
-  _         @`~     @_     @-       @{      [        ]      @}     @+±    @=≈    @|\    _      XX   XX
-  _         @1      @2     @3       @4      @5       6      7      8      9      0      @:•    _
+  _         @`~     @_     @-       @{      [        ]      @}     @+±    @=≈    @|\    _    XX   XX
+  _         @1      @2     @3       @4      @5       6      7      8      9      0      @:•  _
   _         @&alt   @*^    @/%      @lftP   S-4      @#     @rgtP  @,<    @.>    _      _
   _         _       _      @spcmet  _
 
@@ -95,8 +95,6 @@ Let's get into it!
 )
 
 ;; {id: numsym-summary} The NumSym layer handles programming, symbols, and also data entry (calculator/accounting, times, dates, etc.) It's faster to use 8 fingers across home row than 3 or 4 fingers in a numpad arrangement. The symbols needed more regularly are duplicated within the layer to prevent stretching during data entry flow. {layer: numsym}
-
-;; {id: colon} The semi-colon key is overwritten by a zero, but we often need a colon for time entry so it's moved over one slot and replaces the apostrophe (which is needed almost exclusively for text entry, not data entry). {layer: numsym} {highlight: S-;}
 
 ;; {id: numsym-transparency} No other symbols, modifiers, or control characters are overwritten from the base layer. {layer: numsym} {highlight: _} #|
 
@@ -167,6 +165,8 @@ Let's get into it!
 ;; {id: extend-hrms} A super comfy set of modifiers is featured here, because your left pinky is already busy holding this layer on. Having Control, Shift, Alt and Arrow/Nav keys so easily combined with each other takes text editing to a new level anywhere Vim motions aren't supported. {layer: extend} {highlight: @elsft @elctl @ealt}
 
 ;; {id: meta} The Meta key is found on the space bar in the Extend layer. For Meta+Alpha and Meta+Num combinations, this is still a very good spot despite being one layer deep. A quick roll of Extend+Meta, then press your character. If you still need to combine it with Control you can use your right thumb for Meta and left thumb for Control. Meta is also vital to pair with arrows for a lot of window managers, so it makes sense for it to exist in the same layer. And don't forget that anything that feels too awkward using plain Meta can just be bound to Ultra/Hyper shortcuts instead (coming up shortly). {layer: extend} {highlight: @lmet}
+
+;; {id: tabs} Tab and shift-tab feature in a location that allows you to combine either with control and/or alt. {layer: extend} {highlight: S-tab tab}
 
 ;; {id: extend-personalization} Pretty much all the other shortcuts on the left hand here are optional, they're just things that I happen to use a lot or wanted more comfortable access to. You can look at the config file definitions for rationale. {layer: extend} {highlight: @minus, @scshot, @clipb}
 
@@ -298,7 +298,7 @@ If nop0 (mouse back button) is held, all alphanumeric keys on the left half of t
 
 If you do not have a back button on your mouse, this will be completely invisible to you. I would strongly recommend investing, though! Change mfwd to nop0 if that is more comfortable on your mouse; the opposite mouse button remains open if you need a good spot to put another layer.
 
-While using a trackpad on a laptop, the keys to the right of right alt perform the same nop0 function as the mouse back button. |#
+While using a trackpad on a laptop, the keys to the right of right alt perform the same nop0 function as the mouse back button for simultaneous trackpadding. |#
 
 
 
@@ -313,12 +313,12 @@ But what about the physical layout of a board? And that thumb tucking, can we fi
 
 Once you have gotten used to this layout (or just start with these adjustments made; I'm not your mom), we're going to make one TINY change. On the base layer, @/alt goes away. / is already in the numsym layer and ? is already available via the Shift+,. combo. Then, we move alt to the hold of our `.>` key (this does remove the "hold for >" functionality). Now we have the room to slide our hand over by one key and all those keys with it, leaving an empty column in the MIDDLE of the board instead of most of an empty column on the right side of the board. Besides losing /, this change is invisible unless you look down at the board. However, it makes right shift much more comforable by putting it below your pinky just like left shift, and it brings our right thumb over next to the right alt key as well for more comfortable layer switching.
 
-This still leaves some thumb tucking for the left control key. There is an additional way around this problem. Using this layout day-to-day you wouldn't have noticed (unless you break typing speed records) that there is another full set of combos set up in here. If you tap space at the SAME TIME as A, S, D, or F, it results in Meta/Alt/Control/Shift (same layout as the Extend layer). Because this is a one-shot you can then release all the keys and hit your shorcut key (so for control-d you can ↓SpcD↓ ↑SpcD↑ D↓). Alternatively, if you hold at least ONE of those chord keys, the chord stays active and "pinned" by that last key (usually space bar). So for duplicating a browser tab, you could do (↓SpcD↓ D↑ [keep holding spc] L C T V). And now we have our entire layout available with no thumb tucking or pinky stretches beyond 1U of distance!
+This still leaves some thumb tucking for the left control key, but you may also avoid it by using the Extend layer's Control key instead. This results in a fully featured layout with no thumb tucking or pinky stretches beyond 1U of distance, and without the use of homerow mods.
 |#
 
 ;; {id: wrap-up} Wrapping up! I really hope you came away with some new ideas for your own layout, or maybe even decide to branch from this config! Thanks for looking, and toss me a star on Github if you enjoyed the read! {layer: base}
 
-;; {play-sequence: mirroring, wide-mid, wrap-up}
+;; {play-sequence: mirroring, wide-mod, wrap-up}
 
 
 
