@@ -1,5 +1,3 @@
-
-
 # LANSI
 Welcome to the LANSI keyboard layout, built in Kanata! LANSI is broadly compatible, configured to improve most keys found on laptops while remaining fully functional with as few as 39 keys.
 
@@ -73,3 +71,6 @@ All alpha keys output their character immediately and repeat when held, just as 
 
 ### Outro
 That's all there is to it! Three very accessible layers that cover all ASCII characters, and bonuses elsewhere. Those three layers is where most of the design (and benefit) were poured, but Ultra, Mirroring, and Special Character Typing are nice bonuses that still don't interfere with any regular keyboard activities. Hope you found some ideas you liked! There is an extended version of this readme within `kanata.kbd` that covers more of the "why" for many of the decisions that were made.
+
+### Installing
+It is not recommended to "just run this config." Keyboards are hyper personal, and I've tried to make this repo a showcase for my configuration, but it's not as generic as it could be because I *also* treat it like a dotfile repo: there may be some small changes that no longer match the readme, and the special character typing layers are also very personal and apt to change without any notice. My strong recommendation is to fork this repo, feel your way around the `.kbd` files, and go from there with making them your own. Take the ideas, not necessarily this exact configuration.
