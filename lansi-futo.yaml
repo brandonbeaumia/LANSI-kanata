@@ -1,0 +1,119 @@
+# Slightly different goals for LANSI on a phone keyboard.
+# All ASCII symbols are available via hold. You do not ever *have* to change layers.
+# Switching to symbol layer does not move those Hold symbols, only brings them forward.
+# Additional Non-ASCII (°, ≈, ±, etc) characters are behind the Hold of Symbol layer keys.
+
+name: "LANSI"
+imeHint: "qwerty"
+attributes:
+  moreKeyMode: OnlyExplicit
+  shiftable: true
+rows:
+  - splittable: true
+    numbers: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+  - letters:
+      - ["q", "~"]
+      - ["w", "_"]
+      - ["e", "-"]
+      - ["r", "["]
+      - ["t", "]"]
+      - { type: base, spec: "y", moreKeys: ["{", "!icon/action_redo|!code/action_redo"], hint: "{" }
+      - ["u", "}"]
+      - ["i", "+"]
+      - ["o", "="]
+      - ["p", "\u007C"]
+  - letters:
+      - { type: base, spec: "a", moreKeys: ["`", "!icon/action_select_all|!code/action_select_all"], hint: "`" }
+      - { type: base, spec: "s", moreKeys: ["@", "!icon/action_settings|!code/action_settings"], hint: "@" }
+      - ["d", "#"]
+      - ["f", "$"]
+      - { type: base, spec: "g", moreKeys: ["%|%"], hint: "%" }
+      - ["h", "^"]
+      - ["j", "\u005C"]
+      - ["k", ":"]
+      - ["l", ";"]
+      - ["'", '"']
+  - letters:
+      - $shift
+      - { type: base, spec: "z", moreKeys: ["&", "!icon/action_undo|!code/action_undo"], hint: "&" }
+      - { type: base, spec: "x", moreKeys: ["*", "!icon/action_cut|!code/action_cut"], hint: "*" }
+      - { type: base, spec: "c", moreKeys: ["/", "!icon/action_copy|!code/action_copy"], hint: "/" }
+      - { type: base, spec: "v", moreKeys: ["(", "!icon/action_paste|!code/action_paste", "!icon/action_clipboard_history|!code/action_clipboard_history"], hint: "(" }
+      - ["b", ")"]
+      - ["n", "<"]
+      - ["m", ">"]
+      - $delete
+  - bottom:
+      - $symbols
+      - { type: base, spec: ",", moreKeys: ["..."], hint: "...", attributes: { moreKeyMode: OnlyExplicit } }
+      - $action
+      - type: space
+        attributes: { width: Grow }
+      - type: flick
+        label: "!.?"
+        primary: "."
+        left: "!"
+        right: "?"
+        up: "⌃|!code/action_up"
+        down: "⌄|!code/action_down"
+        attributes:
+          labelFlags:
+            hasHintLabel: true
+            autoXScale: true
+      - $enter
+
+subKeyboards:
+  Symbols:
+    attributes:
+      moreKeyMode: OnlyExplicit
+    rows:
+      - letters:
+          - { type: base, spec: "~", moreKeys: ["≈"], hint: "≈" }
+          - "_"
+          - { type: base, spec: "-", moreKeys: ["—"], hint: "—" }
+          - "["
+          - "]"
+          - "{"
+          - "}"
+          - { type: base, spec: "+", moreKeys: ["±"], hint: "±" }
+          - { type: base, spec: "=", moreKeys: ["≠"], hint: "≠" }
+          - "\u007C"
+      - letters:
+          - "`"
+          - "@"
+          - "#"
+          - { type: base, spec: "$", moreKeys: ["¢", "€", "£", "¥"], hint: "¢"}
+          - "%|%"
+          - { type: base, spec: "^", moreKeys: ["™", "©", "®"], hint: "™"}
+          - "\u005C"
+          - { type: base, spec: ":", moreKeys: ["•"], hint: "•"}
+          - ";"
+          - '"'
+      - letters:
+          - $gap
+          - { type: base, spec: "&", moreKeys: ["§"], hint: "§" }
+          - { type: base, spec: "*", moreKeys: ["°"], hint: "°" }
+          - "/"
+          - "("
+          - ")"
+          - { type: base, spec: "<", moreKeys: ["≤"], hint: "≤" }
+          - { type: base, spec: ">", moreKeys: ["≥"], hint: "≥" }
+          - $delete
+      - bottom:
+          - $alphabet
+          - { type: base, spec: ",", moreKeys: ["..."], hint: "...", attributes: { moreKeyMode: OnlyExplicit } }
+          - $action
+          - type: space
+            attributes: { width: Grow }
+          - type: flick
+            label: "!.?"
+            primary: "."
+            left: "!"
+            right: "?"
+            up: "⌃|!code/action_up"
+            down: "⌄|!code/action_down"
+            attributes:
+              labelFlags:
+                hasHintLabel: true
+                autoXScale: true
+          - $enter
