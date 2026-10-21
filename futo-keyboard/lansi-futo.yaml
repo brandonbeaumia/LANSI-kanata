@@ -85,7 +85,7 @@ subKeyboards:
           - ";"
           - '"'
       - letters:
-          - $gap
+          - { type: base, spec: "⇥|!code/key_tab", attributes: { width: FunctionalKey, style: Functional } }
           - { type: base, spec: "&", moreKeys: ["§"], hint: "§" }
           - { type: base, spec: "*", moreKeys: ["°"], hint: "°" }
           - "/"
