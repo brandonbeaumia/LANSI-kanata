@@ -11,7 +11,7 @@ rows:
       - ["w", "_"]
       - { type: base, spec: "e", moreKeys: ["-", "!icon/action_text_edit|!code/action_text_edit"], hint: "-" }
       - ["r", "["]
-      - ["t", "]"]
+      - { type: base, spec: "t", moreKeys: ["]", "!icon/tab_key|!code/key_tab"], hint: "]" }
       - { type: base, spec: "y", moreKeys: ["{", "!icon/action_redo|!code/action_redo"], hint: "{" }
       - ["u", "}"]
       - ["i", "+"]
@@ -85,7 +85,7 @@ subKeyboards:
           - ";"
           - '"'
       - letters:
-          - { type: base, spec: "⇥|!code/key_tab", attributes: { width: FunctionalKey, style: Functional } }
+          - { type: base, spec: "!icon/next_key|!code/key_action_next", moreKeys: ["!icon/previous_key|!code/key_action_previous"], attributes: { width: FunctionalKey, style: Functional } }
           - { type: base, spec: "&", moreKeys: ["§"], hint: "§" }
           - { type: base, spec: "*", moreKeys: ["°"], hint: "°" }
           - "/"
