@@ -8,12 +8,12 @@ name: "LANSI"
 numberRowMode: AlwaysEnabled
 imeHint: "qwerty"
 attributes:
-  moreKeyMode: OnlyExplicit
   shiftable: true
 rows:
   - splittable: true
-    numbers: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-  - letters:
+    numbers: "1 2 3 4 5 6 7 8 9 0"
+  - attributes: { moreKeyMode: OnlyExplicit }
+    letters:
       - ["q", "~"]
       - ["w", "_"]
       - { type: base, spec: "e", moreKeys: ["-", "!icon/action_text_edit|!code/action_text_edit"], hint: "-" }
@@ -24,7 +24,8 @@ rows:
       - ["i", "+"]
       - ["o", "="]
       - ["p", "\u007C"]
-  - letters:
+  - attributes: { moreKeyMode: OnlyExplicit }
+    letters:
       - { type: base, spec: "a", moreKeys: ["`", "!icon/action_select_all|!code/action_select_all"], hint: "`" }
       - { type: base, spec: "s", moreKeys: ["@", "!icon/action_settings|!code/action_settings"], hint: "@" }
       - ["d", "#"]
@@ -35,7 +36,8 @@ rows:
       - { type: base, spec: "k", moreKeys: [":", "!icon/action_keyboard_modes|!code/action_keyboard_modes"], hint: ":" }
       - { type: base, spec: "l", moreKeys: [";", "!icon/action_switch_language|!code/action_switch_language"], hint: ";" }
       - ["'", '"']
-  - letters:
+  - attributes: { moreKeyMode: OnlyExplicit }
+    letters:
       - $shift
       - { type: base, spec: "z", moreKeys: ["&", "!icon/action_undo|!code/action_undo"], hint: "&" }
       - { type: base, spec: "x", moreKeys: ["*", "!icon/action_cut|!code/action_cut"], hint: "*" }
@@ -66,10 +68,11 @@ rows:
 
 subKeyboards:
   Symbols:
-    attributes:
-      moreKeyMode: OnlyExplicit
     rows:
-      - letters:
+      - splittable: true
+        numbers: "1 2 3 4 5 6 7 8 9 0"
+      - attributes: { moreKeyMode: OnlyExplicit }
+        letters:
           - { type: base, spec: "~", moreKeys: ["≈"], hint: "≈" }
           - "_"
           - { type: base, spec: "-", moreKeys: ["—"], hint: "—" }
@@ -80,7 +83,8 @@ subKeyboards:
           - { type: base, spec: "+", moreKeys: ["±"], hint: "±" }
           - { type: base, spec: "=", moreKeys: ["≠"], hint: "≠" }
           - "\u007C"
-      - letters:
+      - attributes: { moreKeyMode: OnlyExplicit }
+        letters:
           - "`"
           - { type: base, spec: "@", moreKeys: ["©", "®", "™"], hint: "©"}
           - "#"
@@ -91,7 +95,8 @@ subKeyboards:
           - { type: base, spec: ":", moreKeys: ["•"], hint: "•"}
           - ";"
           - '"'
-      - letters:
+      - attributes: { moreKeyMode: OnlyExplicit }
+        letters:
           - { type: base, spec: "!icon/next_key|!code/key_action_next", moreKeys: ["!icon/previous_key|!code/key_action_previous"], attributes: { width: FunctionalKey, style: Functional } }
           - { type: base, spec: "&", moreKeys: ["§"], hint: "§" }
           - { type: base, spec: "*", moreKeys: ["°"], hint: "°" }
