@@ -1,8 +1,3 @@
-# Slightly different goals for LANSI on a phone keyboard.
-# All ASCII symbols are available via hold. You do not ever *have* to change layers.
-# Switching to symbol layer does not move those Hold symbols, only brings them forward.
-# Additional Non-ASCII (°, ≈, ±, etc) characters are behind the Hold of Symbol layer keys.
-
 name: "LANSI"
 imeHint: "qwerty"
 attributes:
@@ -14,7 +9,7 @@ rows:
   - letters:
       - ["q", "~"]
       - ["w", "_"]
-      - ["e", "-"]
+      - { type: base, spec: "e", moreKeys: ["-", "!icon/action_text_edit|!code/action_text_edit"], hint: "-" }
       - ["r", "["]
       - ["t", "]"]
       - { type: base, spec: "y", moreKeys: ["{", "!icon/action_redo|!code/action_redo"], hint: "{" }
@@ -30,8 +25,8 @@ rows:
       - { type: base, spec: "g", moreKeys: ["%|%"], hint: "%" }
       - ["h", "^"]
       - ["j", "\u005C"]
-      - ["k", ":"]
-      - ["l", ";"]
+      - { type: base, spec: "k", moreKeys: [":", "!icon/action_keyboard_modes|!code/action_keyboard_modes"], hint: ":" }
+      - { type: base, spec: "l", moreKeys: [";", "!icon/action_switch_language|!code/action_switch_language"], hint: ";" }
       - ["'", '"']
   - letters:
       - $shift
@@ -41,7 +36,7 @@ rows:
       - { type: base, spec: "v", moreKeys: ["(", "!icon/action_paste|!code/action_paste", "!icon/action_clipboard_history|!code/action_clipboard_history"], hint: "(" }
       - ["b", ")"]
       - ["n", "<"]
-      - ["m", ">"]
+      - { type: base, spec: "m", moreKeys: [">", "!icon/action_voice_input|!code/action_voice_input"], hint: ">" }
       - $delete
   - bottom:
       - $symbols
