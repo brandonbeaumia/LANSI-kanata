@@ -1,4 +1,11 @@
+# Slightly different goals for LANSI on a phone keyboard.
+# All ASCII symbols are available via hold. You do not ever *have* to change layers.
+# Switching to symbol layer does not move those Hold symbols, only brings them forward.
+# Additional Non-ASCII (°, ≈, ±, etc) characters are behind the Hold of Symbol layer keys.
+# Adding apostrophe to base layer allows swiping for contractions without relying on autocorrect.
+
 name: "LANSI"
+numberRowMode: AlwaysEnabled
 imeHint: "qwerty"
 attributes:
   moreKeyMode: OnlyExplicit
@@ -75,7 +82,7 @@ subKeyboards:
           - "\u007C"
       - letters:
           - "`"
-          - "@"
+          - { type: base, spec: "@", moreKeys: ["©", "®", "™"], hint: "™"}
           - "#"
           - { type: base, spec: "$", moreKeys: ["¢", "€", "£", "¥"], hint: "¢"}
           - "%|%"
