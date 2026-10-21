@@ -82,11 +82,11 @@ subKeyboards:
           - "\u007C"
       - letters:
           - "`"
-          - { type: base, spec: "@", moreKeys: ["©", "®", "™"], hint: "™"}
+          - { type: base, spec: "@", moreKeys: ["©", "®", "™"], hint: "©"}
           - "#"
           - { type: base, spec: "$", moreKeys: ["¢", "€", "£", "¥"], hint: "¢"}
           - "%|%"
-          - { type: base, spec: "^", moreKeys: ["™", "©", "®"], hint: "™"}
+          - "^"
           - "\u005C"
           - { type: base, spec: ":", moreKeys: ["•"], hint: "•"}
           - ";"
