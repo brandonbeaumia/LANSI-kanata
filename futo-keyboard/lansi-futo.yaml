@@ -10,12 +10,27 @@ languages: ["en_US", "en_UK", "es", "pt", "id", "it", "tr", "de", "fr"]
 # SINGLE LANGUAGE: For English, use "en_US" or "en_UK" in the "Language" field of the app (right above the YAML definition).
 # For other languages, use the two-character code in the above list. % symbols in the layout indicate automatic FUTO insertions
 # based on language preferences, so should allow this layout to automatically adapt to any language that uses
-# a plain QWERTY keyboard with holds for accented characters. Diacritic hints will replace symbol hints on keys
-# that have them, so you may want to disable hints to prevent inconsistencies.
+# a plain QWERTY keyboard with holds for accented characters.
 
 # MULTILINGUAL: you must duplicate this layout and use a different language code and layout name for each copy, even if one keyboard
 # covers all the *characters* you would need for both languages. Then, check the `Multilingual Typing` box for every language.
-# See https://docs.keyboard.futo.tech/settings/languagesmodels#enable-multilingual-typing for a more complete explanation.
+# See https://docs.keyboard.futo.tech/settings/languagesmodels#enable-multilingual-typing for a more complete explanation as to why.
+
+# HOLD ORDERING: this layout will overwrite the Long-Press Keys Ordering setting due to some FUTO limitations. It will always be...
+# 1: Autoinsert 1: such as..."Language Keys" (auto-inserted *if* your language has them *and* they are enabled in this part of the app's preferences).
+#        Recommended: on for any non-English language.
+# 1: Autoinsert 2: such as..."Misc. letters from common languages" (auto-inserted *if* enabled in this part of the app's preferences.
+#        Recommended: off for most people, this is a lot of clutter for long-pressing.
+# 3: "Symbols" (but not the auto-added ones, specifically the symbols from this layout)
+# 4: "Quick actions" (but not the auto-added ones, specifically the symbols from this l
+
+# On keys that have Language Keys or "Misc. letters from common languages", those hints will replace the symbol hints on keys (FUTO limitation).
+# You may decide to work around this limitation by baking hints into the layout. This prevents the layout from respecting the "Show hints" preference
+# (FUTO limitation), BUT would let you keep the symbol hints consistent while keeping your language keys as the primary hold (since those
+# should be easier to remember anyway). The format for that changeover would take something like ["n", "%", "<"] to...
+# { type: base, spec: "n", moreKeys: ["%", "<"], hint: "<" }
+# This respects the auto-insert language characters as being the default popup (%) but still *shows* the symbol hint.
+
 
 numberRowMode: AlwaysEnabled
 imeHint: "qwerty"
