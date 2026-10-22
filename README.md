@@ -1,5 +1,5 @@
 # LANSI
-Welcome to the LANSI keyboard layout, built in Kanata! LANSI is broadly compatible, configured to improve most keys found on laptops while remaining fully functional with as few as 39 keys.
+Welcome to the LANSI keyboard layout, built in Kanata! LANSI is broadly compatible, configured to improve most keys found on laptops while condensing the layout to as few as 39 keys for ergonomics.
 
 * Nearly all QWERTY defaults remain, and extra functionality won't interfere with current muscle memory.
 * latency-free typing without misfires by avoiding alpha key overloading. No home row mods.
