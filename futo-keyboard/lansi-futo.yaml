@@ -17,19 +17,17 @@ languages: ["en_US", "en_UK", "es", "pt", "id", "it", "tr", "de", "fr"]
 # See https://docs.keyboard.futo.tech/settings/languagesmodels#enable-multilingual-typing for a more complete explanation as to why.
 
 # HOLD ORDERING: this layout will overwrite the Long-Press Keys Ordering setting due to some FUTO limitations. It will always be...
-# 1: Autoinsert 1: such as..."Language Keys" (auto-inserted *if* your language has them *and* they are enabled in this part of the app's preferences).
-#        Recommended: on for any non-English language.
-# 1: Autoinsert 2: such as..."Misc. letters from common languages" (auto-inserted *if* enabled in this part of the app's preferences.
-#        Recommended: off for most people, this is a lot of clutter for long-pressing.
-# 3: "Symbols" (but not the auto-added ones, specifically the symbols from this layout)
-# 4: "Quick actions" (but not the auto-added ones, specifically the symbols from this l
+# 1: IF ENABLED: Any autoinserted "language keys" or "misc language keys", respecting the FUTO app setting.
+#        Find this at Keyboards & Typing -> Long-Press Keys to enable, disable, and reorder your language keys.
+# 3: "Symbols" (specifically the symbols from this layout, no auto-inserts)
+# 4: "Quick actions" (specifically the actions from this layout, no auto-inserts)
 
-# On keys that have Language Keys or "Misc. letters from common languages", those hints will replace the symbol hints on keys (FUTO limitation).
-# You may decide to work around this limitation by baking hints into the layout. This prevents the layout from respecting the "Show hints" preference
-# (FUTO limitation), BUT would let you keep the symbol hints consistent while keeping your language keys as the primary hold (since those
+# On keys that have Language Keys or "Misc. letters from common languages", those language hints will replace the symbol hints (FUTO limitation).
+# You may decide to work around this by baking hints into the layout. This prevents the layout from respecting the "Show hints" preference
+# (FUTO limitation again), BUT would let you keep the symbol hints consistent while keeping your language keys as the primary hold (since those
 # should be easier to remember anyway). The format for that changeover would take something like ["n", "%", "<"] to...
 # { type: base, spec: "n", moreKeys: ["%", "<"], hint: "<" }
-# This respects the auto-insert language characters as being the default popup (%) but still *shows* the symbol hint.
+# This respects the auto-insert language characters as being the default hold (%) but still *shows* the symbol hint.
 
 
 numberRowMode: AlwaysEnabled
