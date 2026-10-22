@@ -5,6 +5,18 @@
 # Adding apostrophe to base layer allows swiping for contractions without relying on autocorrect.
 
 name: "LANSI"
+languages: ["en_US", "en_UK", "es", "pt", "id", "it", "tr", "de", "fr"]
+
+# SINGLE LANGUAGE: For English, use "en_US" or "en_UK" in the "Language" field of the app (right above the YAML definition).
+# For other languages, use the two-character code in the above list. % symbols in the layout indicate automatic FUTO insertions
+# based on language preferences, so should allow this layout to automatically adapt to any language that uses
+# a plain QWERTY keyboard with holds for accented characters. Diacritic hints will replace symbol hints on keys
+# that have them, so you may want to disable hints to keep the look cleaner.
+
+# MULTILINGUAL: you must duplicate this layout and use a different language code and layout name for each copy, even if one keyboard
+# covers all the *characters* you would need for both languages. Then, check the `Multilingual Typing` box for every language.
+# See https://docs.keyboard.futo.tech/settings/languagesmodels#enable-multilingual-typing for a more complete explanation.
+
 numberRowMode: AlwaysEnabled
 imeHint: "qwerty"
 attributes:
@@ -12,44 +24,48 @@ attributes:
 rows:
   - splittable: true
     numbers: "1 2 3 4 5 6 7 8 9 0"
-  - attributes: { moreKeyMode: OnlyExplicit }
+  - attributes: { moreKeyMode: OnlyFromLetter }
     letters:
-      - ["q", "~"]
-      - ["w", "_"]
-      - { type: base, spec: "e", moreKeys: ["-", "!icon/action_text_edit|!code/action_text_edit"] }
-      - ["r", "["]
-      - { type: base, spec: "t", moreKeys: ["]", "!icon/tab_key|!code/key_tab"] }
-      - { type: base, spec: "y", moreKeys: ["{", "!icon/action_redo|!code/action_redo"] }
-      - ["u", "}"]
-      - ["i", "+"]
-      - ["o", "="]
-      - ["p", "\u007C"]
-  - attributes: { moreKeyMode: OnlyExplicit }
+      - ["q", "%", "~"]
+      - ["w", "%", "_"]
+      - ["e", "%", "-", "!icon/action_text_edit|!code/action_text_edit"]
+      - ["r", "%", "["]
+      - ["t", "%", "]", "!icon/tab_key|!code/key_tab"]
+      - ["y", "%", "{", "!icon/action_redo|!code/action_redo"]
+      - ["u", "%", "}"]
+      - ["i", "%", "+"]
+      - ["o", "%", "="]
+      - ["p", "%", "\u007C"]
+  - attributes: { moreKeyMode: OnlyFromLetter }
     letters:
-      - { type: base, spec: "a", moreKeys: ["`", "!icon/action_select_all|!code/action_select_all"] }
-      - { type: base, spec: "s", moreKeys: ["@", "!icon/action_settings|!code/action_settings"] }
-      - ["d", "#"]
-      - ["f", "$"]
-      - { type: base, spec: "g", moreKeys: ["%|%"] }
-      - ["h", "^"]
-      - ["j", "\u005C"]
-      - { type: base, spec: "k", moreKeys: [":", "!icon/action_keyboard_modes|!code/action_keyboard_modes"] }
-      - { type: base, spec: "l", moreKeys: [";", "!icon/action_switch_language|!code/action_switch_language"] }
-      - ["'", '"']
-  - attributes: { moreKeyMode: OnlyExplicit }
+      - ["a", "%", "`", "!icon/action_select_all|!code/action_select_all"]
+      - ["s", "%", "@", "!icon/action_settings|!code/action_settings"]
+      - ["d", "%", "#"]
+      - ["f", "%", "$"]
+      - ["g", "%", "%|%"]
+      - ["h", "%", "^"]
+      - ["j", "%", "\u005C"]
+      - ["k", "%", ":", "!icon/action_keyboard_modes|!code/action_keyboard_modes"]
+      - ["l", "%", ";", "!icon/action_switch_language|!code/action_switch_language"]
+      - type: case
+        normal: ["'", "%", '"']
+        shifted: ['"', "%", "'"]
+        shiftedManually: ['"', "%", "'"]
+        shiftLocked: ["'", "%", '"']
+  - attributes: { moreKeyMode: OnlyFromLetter }
     letters:
       - $shift
-      - { type: base, spec: "z", moreKeys: ["&", "!icon/action_undo|!code/action_undo"] }
-      - { type: base, spec: "x", moreKeys: ["*", "!icon/action_cut|!code/action_cut"] }
-      - { type: base, spec: "c", moreKeys: ["/", "!icon/action_copy|!code/action_copy"] }
-      - { type: base, spec: "v", moreKeys: ["(", "!icon/action_paste|!code/action_paste", "!icon/action_clipboard_history|!code/action_clipboard_history"] }
-      - ["b", ")"]
-      - ["n", "<"]
-      - { type: base, spec: "m", moreKeys: [">", "!icon/action_voice_input|!code/action_voice_input"] }
+      - ["z", "%", "&", "!icon/action_undo|!code/action_undo"]
+      - ["x", "%", "*", "!icon/action_cut|!code/action_cut"]
+      - ["c", "%", "/", "!icon/action_copy|!code/action_copy"]
+      - ["v", "%", "(", "!icon/action_paste|!code/action_paste", "!icon/action_clipboard_history|!code/action_clipboard_history"]
+      - ["b", "%", ")"]
+      - ["n", "%", "<"]
+      - ["m", "%", ">", "!icon/action_voice_input|!code/action_voice_input"]
       - $delete
   - bottom:
       - $symbols
-      - { type: base, spec: ",", moreKeys: ["..."], attributes: { moreKeyMode: OnlyExplicit } }
+      - { type: base, spec: ",", moreKeys: ["%", "..."], attributes: { moreKeyMode: OnlyExplicit } }
       - $action
       - type: space
         attributes: { width: Grow }
@@ -73,42 +89,42 @@ subKeyboards:
         numbers: "1 2 3 4 5 6 7 8 9 0"
       - attributes: { moreKeyMode: OnlyExplicit }
         letters:
-          - { type: base, spec: "~", moreKeys: ["≈"] }
+          - ["~", "≈"]
           - "_"
-          - { type: base, spec: "-", moreKeys: ["—"] }
+          - ["-", "—"]
           - "["
           - "]"
           - "{"
           - "}"
-          - { type: base, spec: "+", moreKeys: ["±"] }
-          - { type: base, spec: "=", moreKeys: ["≠"] }
+          - ["+", "±"]
+          - ["=", "≠"]
           - "\u007C"
       - attributes: { moreKeyMode: OnlyExplicit }
         letters:
           - "`"
-          - { type: base, spec: "@", moreKeys: ["©", "®", "™"] }
+          - ["@", "©", "®", "™"]
           - "#"
-          - { type: base, spec: "$", moreKeys: ["¢", "€", "£", "¥"] }
+          - ["$", "¢", "€", "£", "¥"]
           - "%|%"
           - "^"
           - "\u005C"
-          - { type: base, spec: ":", moreKeys: ["•"] }
+          - [":", "•"]
           - ";"
           - '"'
       - attributes: { moreKeyMode: OnlyExplicit }
         letters:
-          - { type: base, spec: "!icon/next_key|!code/key_action_next", moreKeys: ["!icon/previous_key|!code/key_action_previous"], attributes: { width: FunctionalKey, style: Functional } }
-          - { type: base, spec: "&", moreKeys: ["§"] }
-          - { type: base, spec: "*", moreKeys: ["°"] }
+          - { type: base, spec: "!icon/next_key|!code/key_action_next", moreKeys: ["%", "!icon/previous_key|!code/key_action_previous"], attributes: { width: FunctionalKey, style: Functional } }
+          - ["&", "§"]
+          - ["*", "°"]
           - "/"
           - "("
           - ")"
-          - { type: base, spec: "<", moreKeys: ["≤"] }
-          - { type: base, spec: ">", moreKeys: ["≥"] }
+          - ["<", "≤"]
+          - [">", "≥"]
           - $delete
       - bottom:
           - $alphabet
-          - { type: base, spec: ",", moreKeys: ["..."], attributes: { moreKeyMode: OnlyExplicit } }
+          - { type: base, spec: ",", moreKeys: ["%", "..."], attributes: { moreKeyMode: OnlyExplicit } }
           - $action
           - type: space
             attributes: { width: Grow }
