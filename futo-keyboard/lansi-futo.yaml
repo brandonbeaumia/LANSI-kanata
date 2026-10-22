@@ -16,40 +16,40 @@ rows:
     letters:
       - ["q", "~"]
       - ["w", "_"]
-      - { type: base, spec: "e", moreKeys: ["-", "!icon/action_text_edit|!code/action_text_edit"], hint: "-" }
+      - { type: base, spec: "e", moreKeys: ["-", "!icon/action_text_edit|!code/action_text_edit"] }
       - ["r", "["]
-      - { type: base, spec: "t", moreKeys: ["]", "!icon/tab_key|!code/key_tab"], hint: "]" }
-      - { type: base, spec: "y", moreKeys: ["{", "!icon/action_redo|!code/action_redo"], hint: "{" }
+      - { type: base, spec: "t", moreKeys: ["]", "!icon/tab_key|!code/key_tab"] }
+      - { type: base, spec: "y", moreKeys: ["{", "!icon/action_redo|!code/action_redo"] }
       - ["u", "}"]
       - ["i", "+"]
       - ["o", "="]
       - ["p", "\u007C"]
   - attributes: { moreKeyMode: OnlyExplicit }
     letters:
-      - { type: base, spec: "a", moreKeys: ["`", "!icon/action_select_all|!code/action_select_all"], hint: "`" }
-      - { type: base, spec: "s", moreKeys: ["@", "!icon/action_settings|!code/action_settings"], hint: "@" }
+      - { type: base, spec: "a", moreKeys: ["`", "!icon/action_select_all|!code/action_select_all"] }
+      - { type: base, spec: "s", moreKeys: ["@", "!icon/action_settings|!code/action_settings"] }
       - ["d", "#"]
       - ["f", "$"]
-      - { type: base, spec: "g", moreKeys: ["%|%"], hint: "%" }
+      - { type: base, spec: "g", moreKeys: ["%|%"] }
       - ["h", "^"]
       - ["j", "\u005C"]
-      - { type: base, spec: "k", moreKeys: [":", "!icon/action_keyboard_modes|!code/action_keyboard_modes"], hint: ":" }
-      - { type: base, spec: "l", moreKeys: [";", "!icon/action_switch_language|!code/action_switch_language"], hint: ";" }
+      - { type: base, spec: "k", moreKeys: [":", "!icon/action_keyboard_modes|!code/action_keyboard_modes"] }
+      - { type: base, spec: "l", moreKeys: [";", "!icon/action_switch_language|!code/action_switch_language"] }
       - ["'", '"']
   - attributes: { moreKeyMode: OnlyExplicit }
     letters:
       - $shift
-      - { type: base, spec: "z", moreKeys: ["&", "!icon/action_undo|!code/action_undo"], hint: "&" }
-      - { type: base, spec: "x", moreKeys: ["*", "!icon/action_cut|!code/action_cut"], hint: "*" }
-      - { type: base, spec: "c", moreKeys: ["/", "!icon/action_copy|!code/action_copy"], hint: "/" }
-      - { type: base, spec: "v", moreKeys: ["(", "!icon/action_paste|!code/action_paste", "!icon/action_clipboard_history|!code/action_clipboard_history"], hint: "(" }
+      - { type: base, spec: "z", moreKeys: ["&", "!icon/action_undo|!code/action_undo"] }
+      - { type: base, spec: "x", moreKeys: ["*", "!icon/action_cut|!code/action_cut"] }
+      - { type: base, spec: "c", moreKeys: ["/", "!icon/action_copy|!code/action_copy"] }
+      - { type: base, spec: "v", moreKeys: ["(", "!icon/action_paste|!code/action_paste", "!icon/action_clipboard_history|!code/action_clipboard_history"] }
       - ["b", ")"]
       - ["n", "<"]
-      - { type: base, spec: "m", moreKeys: [">", "!icon/action_voice_input|!code/action_voice_input"], hint: ">" }
+      - { type: base, spec: "m", moreKeys: [">", "!icon/action_voice_input|!code/action_voice_input"] }
       - $delete
   - bottom:
       - $symbols
-      - { type: base, spec: ",", moreKeys: ["..."], hint: "...", attributes: { moreKeyMode: OnlyExplicit } }
+      - { type: base, spec: ",", moreKeys: ["..."], attributes: { moreKeyMode: OnlyExplicit } }
       - $action
       - type: space
         attributes: { width: Grow }
@@ -73,42 +73,42 @@ subKeyboards:
         numbers: "1 2 3 4 5 6 7 8 9 0"
       - attributes: { moreKeyMode: OnlyExplicit }
         letters:
-          - { type: base, spec: "~", moreKeys: ["≈"], hint: "≈" }
+          - { type: base, spec: "~", moreKeys: ["≈"] }
           - "_"
-          - { type: base, spec: "-", moreKeys: ["—"], hint: "—" }
+          - { type: base, spec: "-", moreKeys: ["—"] }
           - "["
           - "]"
           - "{"
           - "}"
-          - { type: base, spec: "+", moreKeys: ["±"], hint: "±" }
-          - { type: base, spec: "=", moreKeys: ["≠"], hint: "≠" }
+          - { type: base, spec: "+", moreKeys: ["±"] }
+          - { type: base, spec: "=", moreKeys: ["≠"] }
           - "\u007C"
       - attributes: { moreKeyMode: OnlyExplicit }
         letters:
           - "`"
-          - { type: base, spec: "@", moreKeys: ["©", "®", "™"], hint: "©"}
+          - { type: base, spec: "@", moreKeys: ["©", "®", "™"] }
           - "#"
-          - { type: base, spec: "$", moreKeys: ["¢", "€", "£", "¥"], hint: "¢"}
+          - { type: base, spec: "$", moreKeys: ["¢", "€", "£", "¥"] }
           - "%|%"
           - "^"
           - "\u005C"
-          - { type: base, spec: ":", moreKeys: ["•"], hint: "•"}
+          - { type: base, spec: ":", moreKeys: ["•"] }
           - ";"
           - '"'
       - attributes: { moreKeyMode: OnlyExplicit }
         letters:
           - { type: base, spec: "!icon/next_key|!code/key_action_next", moreKeys: ["!icon/previous_key|!code/key_action_previous"], attributes: { width: FunctionalKey, style: Functional } }
-          - { type: base, spec: "&", moreKeys: ["§"], hint: "§" }
-          - { type: base, spec: "*", moreKeys: ["°"], hint: "°" }
+          - { type: base, spec: "&", moreKeys: ["§"] }
+          - { type: base, spec: "*", moreKeys: ["°"] }
           - "/"
           - "("
           - ")"
-          - { type: base, spec: "<", moreKeys: ["≤"], hint: "≤" }
-          - { type: base, spec: ">", moreKeys: ["≥"], hint: "≥" }
+          - { type: base, spec: "<", moreKeys: ["≤"] }
+          - { type: base, spec: ">", moreKeys: ["≥"] }
           - $delete
       - bottom:
           - $alphabet
-          - { type: base, spec: ",", moreKeys: ["..."], hint: "...", attributes: { moreKeyMode: OnlyExplicit } }
+          - { type: base, spec: ",", moreKeys: ["..."], attributes: { moreKeyMode: OnlyExplicit } }
           - $action
           - type: space
             attributes: { width: Grow }
